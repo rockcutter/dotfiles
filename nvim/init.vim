@@ -1,7 +1,6 @@
 set number
 
 call plug#begin()
-Plug 'lambdalisue/fern.vim'
 Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'sheerun/vim-polyglot'
