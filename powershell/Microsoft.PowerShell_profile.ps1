@@ -1,5 +1,6 @@
 Set-Alias ll ls
 Set-Alias  touch New-Item
+Set-Alias grep findstr
 $myprofile_optional_username = $false
 $myprofile_hide_username = $true
 
