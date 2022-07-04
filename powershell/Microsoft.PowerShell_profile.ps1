@@ -7,6 +7,8 @@ $myprofile_hide_username = $true
 Set-PSReadLineOption -PredictionSource History
 Set-PSReadLineOption -PredictionViewStyle ListView
 Set-PSReadLineOption -EditMode Windows
+
+
 function prompt {
 	$last_return = $?
 	if(-Not($env:WT_PROFILE_ID)){
@@ -19,9 +21,9 @@ function prompt {
 	$principal = [Security.Principal.WindowsPrincipal] $identity
 	$adminRole = [Security.Principal.WindowsBuiltInRole]::Administrator
 	#definition
-	$my_color_1 = "Magenta"
+	$my_color_1 = "DarkRed"
 
-	$shell_wallpaper_color = "Black"
+	$shell_wallpaper_color = "DarkCyan"
 	$shell_background_color = $my_color_1
 	$shell_foreground_color = "Black"
 	$user_background_color = "White"
@@ -30,7 +32,10 @@ function prompt {
 	$path_foreground_color = "Black"
 	$time_background_color = "DarkGray"
 	$time_foreground_color = "White"
+	$return_code_success_color = "Yellow"
+	$return_code_failed_color = "Red"
 	$return_foreground_color = "Black"
+
 	
 	Write-Host("┌─") -NoNewline -ForegroundColor Green
 	#shell
@@ -68,11 +73,10 @@ function prompt {
 	$last_return_color = ""
 	$last_return_value = ""
 	if($last_return){
-		$last_return_color = "Green"
+		$last_return_color = $return_code_success_color
 		$last_return_value = "`u{fb0c} `u{f62b} "
 	}else{
-		$last_return_color = "DarkRed"
-		
+		$last_return_color = $return_code_failed_color
 		$last_return_value = "`u{fb0c} `u{f467} "
 	}
 	
