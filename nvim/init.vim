@@ -6,7 +6,6 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'sheerun/vim-polyglot'
 Plug 'ajmwagar/vim-deus'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'machakann/vim-sandwich'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'vim-airline/vim-airline'
 call plug#end()
