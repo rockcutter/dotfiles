@@ -23,7 +23,7 @@ function prompt {
 	#definition
 	$my_color_1 = "DarkRed"
 
-	$shell_wallpaper_color = "DarkCyan"
+	$shell_wallpaper_color = "Black"
 	$shell_background_color = $my_color_1
 	$shell_foreground_color = "Black"
 	$user_background_color = "White"
