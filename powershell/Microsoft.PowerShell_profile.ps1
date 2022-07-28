@@ -8,6 +8,11 @@ Set-PSReadLineOption -PredictionSource History
 Set-PSReadLineOption -PredictionViewStyle ListView
 Set-PSReadLineOption -EditMode Windows
 
+$StartPath = Convert-Path .
+if($StartPath -eq "C:\Windows\System32"){
+	cd
+}
+
 
 function prompt {
 	$last_return = $?
