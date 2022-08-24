@@ -58,7 +58,7 @@ try
 :wqa
 :endfunction
 
-nnoremap <C-f> <C-v> 
+nnoremap vv <C-v> 
 nnoremap <Space> :bn<CR>
 nnoremap <C-j> <C-w><C-j>
 nnoremap <C-k> <C-w><C-k>
@@ -68,7 +68,9 @@ tnoremap <ESC> <C-\><C-n>
 
 
 inoremap { {}<Left>
+inoremap {} {}
 inoremap {<Enter> {}<Left><CR><ESC><S-o>
 inoremap ( ()<ESC>i
+inoremap () ()
 inoremap (<Enter> ()<Left><CR><ESC><S-o>
 
