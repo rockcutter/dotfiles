@@ -10,7 +10,14 @@ Set-PSReadLineOption -EditMode Windows
 
 $StartPath = Convert-Path .
 if($StartPath -eq "C:\Windows\System32"){
-	cd
+	Set-Location
+}
+
+function get_git_branch{
+  if (git branch) {
+    return ((git branch | select-string "^\*").ToString()).trim() -replace "^\* *", ""
+  }
+	return ""
 }
 
 
