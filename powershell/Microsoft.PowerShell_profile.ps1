@@ -20,9 +20,10 @@ function get_git_branch{
 	return ""
 }
 
-
 function prompt {
 	$last_return = $?
+
+	# Windows Terminalで表示していない時
 	if(-Not($env:WT_PROFILE_ID)){
 		"PS $($executionContext.SessionState.Path.CurrentLocation)$('>' * ($nestedPromptLevel + 1)) "
 		return 
@@ -34,6 +35,7 @@ function prompt {
 	$adminRole = [Security.Principal.WindowsBuiltInRole]::Administrator
 	#definition
 	$my_color_1 = "DarkRed"
+
 
 	$shell_wallpaper_color = "Black"
 	$shell_background_color = $my_color_1
@@ -47,6 +49,8 @@ function prompt {
 	$return_code_success_color = "Yellow"
 	$return_code_failed_color = "Red"
 	$return_foreground_color = "Black"
+	$git_branch_foreground_color = "Black"
+	$git_branch_background_color = "White"
 
 	
 	Write-Host("┌─") -NoNewline -ForegroundColor Green
@@ -72,8 +76,24 @@ function prompt {
 	Write-Host($username + "`u{e79b} " + $env:COMPUTERNAME + " ") -NoNewline -BackgroundColor $user_background_color -ForegroundColor $user_foreground_color
 	#user-path separator
 	Write-Host("") -NoNewline -ForegroundColor $user_background_color -BackgroundColor $shell_wallpaper_color
-	Write-Host("") -NoNewline -ForegroundColor $shell_wallpaper_color -BackgroundColor $path_background_color
+
+	#
+	# Write git branch -------------------------------------------------------------------------
+	#
+
+	if("" -ne $(get_git_branch)){
+		Write-Host("") -NoNewline -ForegroundColor $shell_wallpaper_color -BackgroundColor $git_branch_background_color
+		Write-Host("") -NoNewline -ForegroundColor $git_branch_foreground_color -BackgroundColor $git_branch_background_color
+		Write-Host(get_git_branch) -NoNewline -ForegroundColor $git_branch_foreground_color -BackgroundColor $git_branch_background_color
+		Write-Host("") -NoNewline -ForegroundColor $git_branch_background_color -BackgroundColor $shell_wallpaper_color
+	}
+
+	#
+	# git branch end -------------------------------------------------------------------------
+	#
+
 	#path
+	Write-Host("") -NoNewline -ForegroundColor $shell_wallpaper_color -BackgroundColor $path_background_color
 	Write-Host(" `u{f115} `u{f63d} ") -NoNewline -BackgroundColor $path_background_color -ForegroundColor $path_foreground_color
 	Write-Host("$($executionContext.SessionState.Path.CurrentLocation)".Replace("$env:HOMEDRIVE$env:HOMEPATH\source\repos", "`u{f121} ").Replace("$env:HOMEDRIVE$env:HOMEPATH", "`u{f015} ").Replace("\", "`u{e0bd} ").Replace(":", "")) -nonewline -ForegroundColor $path_foreground_color -BackgroundColor $path_background_color
 	#Write-Host("`u{e0b4}") -ForegroundColor $path_background_color #これは丸の右半分
