@@ -1,5 +1,5 @@
 Set-Alias ll ls
-Set-Alias  touch New-Item
+Set-Alias touch New-Item
 Set-Alias grep findstr
 $myprofile_optional_username = $false
 $myprofile_hide_username = $true
@@ -49,8 +49,8 @@ function prompt {
 	$return_code_success_color = "Yellow"
 	$return_code_failed_color = "Red"
 	$return_foreground_color = "Black"
-	$git_branch_foreground_color = "Black"
-	$git_branch_background_color = "White"
+	$git_branch_foreground_color = "White"
+	$git_branch_background_color = "Magenta"
 
 	
 	Write-Host("┌─") -NoNewline -ForegroundColor Green
@@ -98,6 +98,7 @@ function prompt {
 		Write-Host("") -NoNewline -ForegroundColor $git_branch_foreground_color -BackgroundColor $git_branch_background_color
 		Write-Host(get_git_branch) -NoNewline -ForegroundColor $git_branch_foreground_color -BackgroundColor $git_branch_background_color
 		Write-Host("") -NoNewline -ForegroundColor $git_branch_background_color -BackgroundColor $shell_wallpaper_color
+		#Write-Host("") -NoNewline -ForegroundColor $git_branch_background_color
 	}
 
 	#
@@ -108,7 +109,12 @@ function prompt {
 	# Write path -------------------------------------------------------------------------
 	#
 	
-	$path_string = "$($executionContext.SessionState.Path.CurrentLocation)".Replace("$env:HOMEDRIVE$env:HOMEPATH\source\repos", "`u{f121} ").Replace("$env:HOMEDRIVE$env:HOMEPATH", "`u{f015} ").Replace("\", "`u{e0bd} ").Replace(":", "")
+	$path_string = "$($executionContext.SessionState.Path.CurrentLocation)"
+	$path_string = $path_string.Replace("$env:HOMEDRIVE$env:HOMEPATH\source\repos", "`u{f121} ")
+	$path_string = $path_string.Replace("$env:HOMEDRIVE$env:HOMEPATH", "`u{f015} ")
+	$path_string = $path_string.Replace("$env:ONEDRIVE", " ")
+	$path_string = $path_string.Replace("\", "`u{e0bd} ")
+	$path_string = $path_string.Replace(":", "")
 	
 	Write-Host("") -NoNewline -ForegroundColor $shell_wallpaper_color -BackgroundColor $path_background_color
 	Write-Host("   ") -NoNewline -BackgroundColor $path_background_color -ForegroundColor $path_foreground_color
@@ -118,6 +124,7 @@ function prompt {
 	#
 	# Write path end -------------------------------------------------------------------------
 	#
+	
 	
 	Write-Host("".PadLeft(5)) -NoNewline
 
@@ -150,7 +157,8 @@ function prompt {
 	Write-Host("") -NoNewline -ForegroundColor $time_background_color
 	Write-Host(" ") -NoNewline -ForegroundColor $time_foreground_color -BackgroundColor $time_background_color
 	Write-Host((Get-Date -Format "hh:mm:ss")) -NoNewline -ForegroundColor $time_foreground_color -BackgroundColor $time_background_color
-	Write-Host("") -NoNewline -ForegroundColor $time_background_color
+	Write-Host("") -NoNewline -ForegroundColor $time_background_color
+	Write-Host("") -NoNewline -ForegroundColor $time_background_color
 
 	#
 	# write time end-----------------------------------------------------------------------
@@ -161,5 +169,7 @@ function prompt {
 	$prompt_color = "Gray"
 	Write-Host($("└─" * ($nestedPromptLevel + 1))) -NoNewline -ForegroundColor Green
 	Write-Host("") -NoNewline -ForegroundColor $prompt_color
+
+	
 	return " "
 }
