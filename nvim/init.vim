@@ -21,6 +21,10 @@ let g:neoterm_default_mod='belowright'
 let g:neoterm_size=10
 let g:neoterm_shell="pwsh"
 
+if(has('unix'))
+	g:neoterm_shell="bash"
+endif
+
 :colorscheme deus
 :command Tr NERDTree
 :command RET call SaveTempFiles()
