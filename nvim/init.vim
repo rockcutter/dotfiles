@@ -19,10 +19,13 @@ let g:airline_powerline_fonts = 1
 let g:deoplete#enable_at_startup = 1
 let g:neoterm_default_mod='belowright'
 let g:neoterm_size=10
-let g:neoterm_shell="pwsh"
+
+if(has('win32') || has('win64'))
+	let g:neoterm_shell="pwsh"
+endif
 
 if(has('unix'))
-	g:neoterm_shell="bash"
+	let g:neoterm_shell="bash"
 endif
 
 :colorscheme deus
