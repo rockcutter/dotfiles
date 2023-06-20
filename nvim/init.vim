@@ -71,7 +71,8 @@ nnoremap <C-j> <C-w><C-j>
 nnoremap <C-k> <C-w><C-k>
 nnoremap <C-h> <C-w><C-h>
 nnoremap <C-l> <C-w><C-l>
-tnoremap <ESC> <C-\><C-n>
+"tnoremap <ESC> <C-\><C-n>
+tnoremap <C-k> <C-\><C-n><C-w><C-k>
 
 
 inoremap { {}<Left>
@@ -80,4 +81,5 @@ inoremap {<Enter> {}<Left><CR><ESC><S-o>
 inoremap ( ()<ESC>i
 inoremap () ()
 inoremap (<Enter> ()<Left><CR><ESC><S-o>
+inoremap jj <Esc>
 
