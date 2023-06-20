@@ -12,22 +12,41 @@ Function CheckExecute(){
 	}
 }
 
+# powershell
+$configCurrentPath = "$PSScriptRoot\powershell\powershell7\Microsoft.PowerShell_profile.ps1"
+$configCopyDest = "$HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+$configCopyDestDir = Split-Path -Parent $configCopyDest
+
+Write-Host "$configCopyDestDir を作成し、$configCurrentPath を$configCopyDest にコピーします"
 $execute = CheckExecute
 if($execute){
-	mkdir $HOME\Documents\PowerShell\
-	Copy-Item $PSScriptRoot\powershell\powershell7\Microsoft.PowerShell_profile.ps1 $HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
+	mkdir $configCopyDestDir 
+	Copy-Item $configCurrentPath $configCopyDest
 }
 
-$execute = CheckExecute
+
 # powershell(old)
+$configCurrentPath = "$PSScriptRoot\powershell\PowerShell\Microsoft.PowerShell_profile.ps1"
+$configCopyDest = "$HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
+$configCopyDestDir = Split-Path -Parent $configCopyDest
+
+Write-Host "$configCopyDestDir を作成し、$configCurrentPath を$configCopyDest にコピーします"
+$execute = CheckExecute
 if($execute){
-	mkdir $HOME\Documents\WindowsPowerShell\
-	Copy-Item $PSScriptRoot\powershell\PowerShell\Microsoft.PowerShell_profile.ps1 $HOME\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
+	mkdir $configCopyDestDir 
+	Copy-Item $configCurrentPath $configCopyDest
 }
 
+
+# vim
+$configCurrentPath = "$PSScriptRoot\nvim\init.vim"
+$configCopyDest = "$HOME\AppData\Local\nvim\init.vim"
+$configCopyDestDir = Split-Path -Parent $configCopyDest
+
+Write-Host "$configCopyDestDir を作成し、$configCurrentPath を$configCopyDest にコピーします"
 $execute = CheckExecute
-# neovim
 if($execute){
-	mkdir $HOME\AppData\Local\nvim
-	Copy-Item $PSScriptRoot\nvim\init.vim $HOME\AppData\Local\nvim\init.vim
+	mkdir $configCopyDestDir 
+	Copy-Item $configCurrentPath $configCopyDest
 }
+
