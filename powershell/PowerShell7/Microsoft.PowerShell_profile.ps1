@@ -37,6 +37,9 @@ function prompt {
 	#definition
 	$my_color_1 = "DarkRed"
 
+	$shell_icon_color = "Black"
+	$sun_color = "DarkYellow"
+	$moon_color = "Yellow"
 	$shell_wallpaper_color = "Black"
 	$shell_background_color = $my_color_1
 	$shell_foreground_color = "Black"
@@ -46,7 +49,7 @@ function prompt {
 	$path_foreground_color = "Black"
 	$time_background_color = "DarkGray"
 	$time_foreground_color = "White"
-	$return_code_success_color = "Yellow"
+	$return_code_success_color = "Green"
 	$return_code_failed_color = "Red"
 	$return_foreground_color = "Black"
 	$git_branch_foreground_color = "White"
@@ -60,7 +63,8 @@ function prompt {
 	#
 	
 	Write-Host("`u{e0b6}") -ForegroundColor $shell_background_color -NoNewline
-	Write-Host ("`u{fab2} pwsh") -nonewline -ForegroundColor $shell_foreground_color -BackgroundColor $shell_background_color
+	Write-Host (" ") -nonewline -ForegroundColor $shell_icon_color -BackgroundColor $shell_background_color
+	Write-Host ("pwsh") -nonewline -ForegroundColor $shell_foreground_color -BackgroundColor $shell_background_color
 	Write-Host("") -NoNewline -ForegroundColor $shell_background_color -BackgroundColor $shell_wallpaper_color
 	
 	#
@@ -72,17 +76,17 @@ function prompt {
 	# 
 	
 	$username = if($principal.IsInRole($adminRole)){
-		" admin"
+		" admin"
 	}elseif($myprofile_optional_username){
-		" $myprofile_optional_username"
+		"$myprofile_optional_username"
 	}elseif($myprofile_hide_username) {
-		" <hidden>"	
+		"<hidden>"	
 	}else{
-		" $env:USERNAME"
+		"$env:USERNAME"
 	}
 
 	Write-Host("") -NoNewline -ForegroundColor $shell_wallpaper_color -BackgroundColor $user_background_color
-	Write-Host($username + " " + $env:COMPUTERNAME + " ") -NoNewline -BackgroundColor $user_background_color -ForegroundColor $user_foreground_color
+	Write-Host($username + "  " + $env:COMPUTERNAME + " ") -NoNewline -BackgroundColor $user_background_color -ForegroundColor $user_foreground_color
 	Write-Host("") -NoNewline -ForegroundColor $user_background_color -BackgroundColor $shell_wallpaper_color
 
 	#
@@ -112,12 +116,12 @@ function prompt {
 	$path_string = "$($executionContext.SessionState.Path.CurrentLocation)"
 	$path_string = $path_string.Replace("$env:HOMEDRIVE$env:HOMEPATH\source\repos", "`u{f121} ")
 	$path_string = $path_string.Replace("$env:HOMEDRIVE$env:HOMEPATH", "`u{f015} ")
-	$path_string = $path_string.Replace("$env:ONEDRIVE", " ")
+	$path_string = $path_string.Replace("$env:ONEDRIVE", " ")
 	$path_string = $path_string.Replace("\", "`u{e0bd} ")
 	$path_string = $path_string.Replace(":", "")
 	
 	Write-Host("") -NoNewline -ForegroundColor $shell_wallpaper_color -BackgroundColor $path_background_color
-	Write-Host("   ") -NoNewline -BackgroundColor $path_background_color -ForegroundColor $path_foreground_color
+	Write-Host("   ") -NoNewline -BackgroundColor $path_background_color -ForegroundColor $path_foreground_color
 	Write-Host($path_string) -nonewline -ForegroundColor $path_foreground_color -BackgroundColor $path_background_color
 	Write-Host("") -nonewline -ForegroundColor $path_background_color 
 	
@@ -136,10 +140,10 @@ function prompt {
 	$last_return_value = ""
 	if($last_return){
 		$last_return_color = $return_code_success_color
-		$last_return_value = "﬌  "
+		$last_return_value = "   "
 	}else{
 		$last_return_color = $return_code_failed_color
-		$last_return_value = "﬌  "
+		$last_return_value = "   "
 	}
 	
 	Write-Host("") -NoNewline -ForegroundColor $last_return_color
@@ -153,10 +157,19 @@ function prompt {
 	#
 	# write time -----------------------------------------------------------------------
 	#
+	
 
 	Write-Host("") -NoNewline -ForegroundColor $time_background_color
-	Write-Host(" ") -NoNewline -ForegroundColor $time_foreground_color -BackgroundColor $time_background_color
-	Write-Host((Get-Date -Format "hh:mm:ss")) -NoNewline -ForegroundColor $time_foreground_color -BackgroundColor $time_background_color
+	Write-Host("  ") -NoNewline -ForegroundColor $time_foreground_color -BackgroundColor $time_background_color
+	Write-Host((Get-Date -UFormat "%H:%M:%S")) -NoNewline -ForegroundColor $time_foreground_color -BackgroundColor $time_background_color
+
+	$currentHour = [int](Get-Date -UFormat "%H")
+	if(($currentHour -le 7) -Or ($currentHour -ge 19)){
+		Write-Host("  ") -NoNewline -ForegroundColor $moon_color -BackgroundColor $time_background_color
+	}else{
+		Write-Host("  ") -NoNewline -ForegroundColor $sun_color -BackgroundColor $time_background_color
+	}
+
 	Write-Host("") -NoNewline -ForegroundColor $time_background_color
 	Write-Host("") -NoNewline -ForegroundColor $time_background_color
 
