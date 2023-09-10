@@ -1,0 +1,9 @@
+[user]
+	name = rockcutter
+	email = rockcutter414@gmail.com
+[alias]
+	st = status
+	s = switch
+	cm = commit
+	b = branch
+
