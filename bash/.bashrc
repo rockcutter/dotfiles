@@ -1,4 +1,9 @@
+# historyのformat設定
+HISTTIMEFORMAT='%y/%m/%d %H:%M:%S '
+
+# promptにbranchを表示
 source ~/.git-prompt.sh
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
