@@ -2,9 +2,9 @@ ifeq ($(OS), Windows_NT)
 	SHELL := pwsh.exe
 endif
 
-.PHONY: nvimrc shellprofile
+.PHONY: nvimrc shellprofile git
 
-all: nvimrc shellprofile
+all: nvimrc shellprofile git
 
 nvimrc:;
 ifeq ($(OS), Windows_NT)
@@ -22,3 +22,6 @@ else
 	curl -o .git-prompt.sh -L https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
 	cp bash/.bashrc ~/.bashrc
 endif
+
+git:;
+	cp git/.gitconfig ~/.gitconfig
