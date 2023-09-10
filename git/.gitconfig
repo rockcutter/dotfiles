@@ -2,8 +2,8 @@
 	name = rockcutter
 	email = rockcutter414@gmail.com
 [alias]
-	st = status
-	sts = status -s
+	s = status
+	ss = status -s
 	s = switch
 	cm = commit
 	cmm = commit -m
