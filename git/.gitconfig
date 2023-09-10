@@ -6,5 +6,6 @@
 	sts = status -s
 	s = switch
 	cm = commit
+	cmm = commit -m
 	b = branch
 
