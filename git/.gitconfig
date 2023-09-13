@@ -2,6 +2,7 @@
 	name = rockcutter
 	email = rockcutter414@gmail.com
 [alias]
+	sw = switch
 	s = status
 	ss = status -s
 	s = switch
