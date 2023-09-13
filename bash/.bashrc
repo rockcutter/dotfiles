@@ -1,8 +1,23 @@
+# begin user definition 
 # historyのformat設定
 HISTTIMEFORMAT='%y/%m/%d %H:%M:%S '
-
-# promptにbranchを表示
+HISTIGNORE='&:ls:ll:pwd:history:hist'
+# source
 source ~/.git-prompt.sh
+source ~/.zellij.sh
+# alias
+alias lg='lazygit'
+alias zj='zellij'
+alias hist='history | tail -n20'
+# func
+
+# env
+PATH=$PATH:$HOME/.cargo/bin
+PROMPT_COMMAND="history -a;history -c;history -r"
+
+# run cmd
+shopt -u histappend
+# end user definition
 
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
@@ -125,3 +140,5 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+eval "$(zellij setup --generate-auto-start bash)"
