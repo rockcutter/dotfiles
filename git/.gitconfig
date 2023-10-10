@@ -9,4 +9,5 @@
 	cm = commit
 	cmm = commit -m
 	b = branch
+	diffc = diff --cached
 
