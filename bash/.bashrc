@@ -14,6 +14,7 @@ alias hist='history | tail -n20'
 # env
 PATH=$PATH:$HOME/.cargo/bin
 PROMPT_COMMAND="history -a;history -c;history -r"
+ZELLIJ_AUTO_ATTACH=true
 
 # run cmd
 shopt -u histappend
@@ -141,4 +142,16 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-eval "$(zellij setup --generate-auto-start bash)"
+# zellij 自動起動
+# $(zellij setup --generate-auto-start bash)
+if [[ -z "$ZELLIJ" ]]; then
+    if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
+        zellij attach -c main
+    else
+        zellij
+    fi
+
+    if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
+        exit
+    fi
+fi
