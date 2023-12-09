@@ -15,13 +15,15 @@ function ghq_fzf(){
 }
 
 # env
-GOPATH=$HOME/go
-GOBIN=$GOPATH/bin
 PATH=$PATH:$HOME/.cargo/bin
-PATH=$PATH:$HOME/go/bin
-PATH=$PATH:$GOBIN
 PROMPT_COMMAND="history -a;history -c;history -r"
 ZELLIJ_AUTO_ATTACH=true
+
+## go
+GOPATH=$HOME/go
+GOBIN=$GOPATH/bin
+PATH=$PATH:/usr/local/go/bin
+PATH=$PATH:$GOBIN
 
 # run cmd
 shopt -u histappend
@@ -162,3 +164,9 @@ if [[ -z "$ZELLIJ" ]]; then
         exit
     fi
 fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/rockcutter/tmp/google-cloud-sdk/path.bash.inc' ]; then . '/home/rockcutter/tmp/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/rockcutter/tmp/google-cloud-sdk/completion.bash.inc' ]; then . '/home/rockcutter/tmp/google-cloud-sdk/completion.bash.inc'; fi
