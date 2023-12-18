@@ -10,7 +10,7 @@ alias lg='lazygit'
 alias zj='zellij'
 alias hist='history | tail -n20'
 # func
-function ghq_fzf(){
+function repo(){
     cd $(ghq root)/$(ghq list | fzf --query="$LBUFFER")
 }
 
