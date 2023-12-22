@@ -14,8 +14,7 @@ all: nvimrc shellprofile git
 
 nvimrc:
 ifeq ($(OS), Windows_NT)
-	cp "nvim\init.lua" "~\AppData\Local\nvim\init.lua"
-	cp "nvim\lua" "~\AppData\Local\nvim\lua"
+	Copy-Item -Path nvim -Destination $${HOME}/AppData/Local -Recurse -Force
 else
 	cp -r nvim $${HOME}/.config
 endif
