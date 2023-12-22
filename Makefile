@@ -1,6 +1,10 @@
 COPY_CMD := cp
 
 ifeq ($(OS), Windows_NT)
+	SHELL := pwsh.exe
+endif
+
+ifeq ($(OS), Windows_NT)
 	COPY_CMD := cp
 endif
 
