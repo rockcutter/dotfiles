@@ -1,6 +1,8 @@
-ifeq ($(OS), Windows_NT)
-	SHELL := pwsh.exe
-endif
+COPY_CMD := cp
+
+ifeq ($(OS), Windows_NT){
+	COPY_CMD := cp
+}
 
 .PHONY: nvimrc shellprofile git
 
@@ -20,11 +22,10 @@ nvimrc/update:
 ifeq ($(OS), Windows_NT)
 	cp "~\AppData\Local\nvim\init.lua" "nvim\init.lua"
 else
+	cp 
 	cp ~/.config/nvim/init.lua nvim/init.lua
 	cp -r ~/.config/nvim/lua/ nvim/lua/
 endif
-
-
 
 
 shellprofile:
