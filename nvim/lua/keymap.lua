@@ -12,6 +12,13 @@ vim.api.nvim_set_keymap('i', '()', '()', {})
 vim.api.nvim_set_keymap('i', '(<Enter>', '()<Left><CR><ESC><S-o>', {})
 
 -- jj -> esc
+-- for vscode add ↓ keybindings.json
+--     {
+--         "command": "vscode-neovim.compositeEscape1",
+--         "key": "j",
+--         "when": "neovim.mode == insert && editorTextFocus",
+--         "args": "j"
+--     },
 vim.api.nvim_set_keymap('i', 'jj', '<Esc>', {})
 
 -- leader
