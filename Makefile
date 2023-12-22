@@ -23,7 +23,6 @@ nvimrc/update:
 ifeq ($(OS), Windows_NT)
 	cp "~\AppData\Local\nvim\init.lua" "nvim\init.lua"
 else
-	mkdir -p nvim
 	cp -r $${HOME}/.config/nvim .
 endif
 
