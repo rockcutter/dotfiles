@@ -16,9 +16,7 @@ ifeq ($(OS), Windows_NT)
 	cp "nvim\init.lua" "~\AppData\Local\nvim\init.lua"
 	cp "nvim\lua" "~\AppData\Local\nvim\lua"
 else
-	mkdir -p ~/.config/nvim
-	cp nvim/init.lua ~/.config/nvim/init.lua
-	cp -r nvim/lua ~/.config/nvim/lua
+	cp -r nvim $${HOME}/.config
 endif
 
 nvimrc/update:
