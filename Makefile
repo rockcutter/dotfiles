@@ -37,4 +37,8 @@ else
 endif
 
 git:;
+ifeq ($(OS), Windows_NT)
+	Copy-Item -Path git/.gitconfig -Destination $${HOME}/.gitconfig -Force
+else
 	cp git/.gitconfig ~/.gitconfig
+endif
