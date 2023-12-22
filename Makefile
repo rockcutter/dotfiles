@@ -6,9 +6,6 @@ endif
 
 .PHONY: nvimrc shellprofile git
 
-echo: 
-	echo $(VIMRC_PATH)
-
 all: nvimrc shellprofile git
 
 nvimrc:
