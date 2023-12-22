@@ -1,10 +1,13 @@
 COPY_CMD := cp
 
-ifeq ($(OS), Windows_NT){
+ifeq ($(OS), Windows_NT)
 	COPY_CMD := cp
-}
+endif
 
 .PHONY: nvimrc shellprofile git
+
+echo: 
+	echo $(VIMRC_PATH)
 
 all: nvimrc shellprofile git
 
@@ -22,9 +25,8 @@ nvimrc/update:
 ifeq ($(OS), Windows_NT)
 	cp "~\AppData\Local\nvim\init.lua" "nvim\init.lua"
 else
-	cp 
-	cp ~/.config/nvim/init.lua nvim/init.lua
-	cp -r ~/.config/nvim/lua/ nvim/lua/
+	mkdir -p nvim
+	cp -r $${HOME}/.config/nvim .
 endif
 
 
