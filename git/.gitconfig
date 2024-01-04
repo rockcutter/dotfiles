@@ -10,4 +10,5 @@
 	cmm = commit -m
 	b = branch
 	cdiff = diff --cached
+	p = push
 
