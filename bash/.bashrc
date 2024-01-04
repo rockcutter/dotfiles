@@ -13,6 +13,10 @@ alias hist='history | tail -n20'
 function repo(){
     cd $(ghq root)/$(ghq list | fzf --query="$LBUFFER")
 }
+function gadd(){
+    git add $(git status -s | awk '{print $2}' | fzf -m --query="$LBUFFER" | sed -e 's/\n/ /g');
+    git status -s
+}
 
 # env
 PATH=$PATH:$HOME/.cargo/bin
