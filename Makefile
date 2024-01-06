@@ -8,9 +8,9 @@ ifeq ($(OS), Windows_NT)
 	COPY_CMD := cp
 endif
 
-.PHONY: nvimrc shellprofile git
+.PHONY: nvimrc shellprofile git zellij 
 
-all: nvimrc shellprofile git
+all: nvimrc shellprofile git zellij
 
 nvimrc:
 ifeq ($(OS), Windows_NT)
@@ -36,9 +36,19 @@ else
 	cp bash/.bashrc ~/.bashrc
 endif
 
-git:;
+git:
 ifeq ($(OS), Windows_NT)
 	Copy-Item -Path git/.gitconfig -Destination $${HOME}/.gitconfig -Force
 else
 	cp git/.gitconfig ~/.gitconfig
 endif
+
+zellij:
+ifeq ($(OS), Windows_NT)
+else
+	mkdir -p $${HOME}/.config/zellij
+	cp zellij/config.kdl $${HOME}/.config/zellij/config.kdl
+endif
+
+zellij/update:
+	cp $${HOME}/.config/zellij/config.kdl zellij/config.kdl
