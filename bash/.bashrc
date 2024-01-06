@@ -5,7 +5,7 @@ HISTIGNORE='&:ls:ll:pwd:history:hist'
 HISTIGNORE=65535
 # source
 source ~/.git-prompt.sh
-source ~/.zellij.sh
+# source ~/.zellij.sh
 # alias
 alias lg='lazygit'
 alias zj='zellij'
