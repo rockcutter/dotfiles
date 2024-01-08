@@ -25,7 +25,9 @@ function cdd(){
 	fi
 }
 function hist(){
-	eval $(history | tac | tail -n 1000 | fzf --no-sort | awk '{$1=$2=$3=""; print $0}')
+	local COMMAND=$(history | tac | tail -n 1000 | fzf --no-sort | awk '{$1=$2=$3=""; print $0}')
+	echo $COMMAND
+	eval $COMMAND
 }
 
 # env
