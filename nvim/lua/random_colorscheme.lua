@@ -6,9 +6,9 @@ end
 choosed_theme = choose_random_theme({
         'tokyonight-moon',
         'tokyonight-storm',
-        'tokyonight-storm',
-        'deus',
-        'gruvbox'
+        'tokyonight-night',
+        --'deus',
+        'gruvbox',
 })
 
 vim.cmd('colorscheme ' .. choosed_theme)

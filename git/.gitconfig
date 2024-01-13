@@ -9,4 +9,7 @@
 	cm = commit
 	cmm = commit -m
 	b = branch
+	cdiff = diff --cached
 
+[core]
+	editor = nvim

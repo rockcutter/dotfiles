@@ -2,16 +2,32 @@
 # historyのformat設定
 HISTTIMEFORMAT='%y/%m/%d %H:%M:%S '
 HISTIGNORE='&:ls:ll:pwd:history:hist'
+HISTIGNORE=65535
 # source
 source ~/.git-prompt.sh
-source ~/.zellij.sh
+# source ~/.zellij.sh
 # alias
 alias lg='lazygit'
 alias zj='zellij'
-alias hist='history | tail -n20'
 # func
 function repo(){
     cd $(ghq root)/$(ghq list | fzf --query="$LBUFFER")
+}
+function gadd(){
+    git add $(git status -s | awk '{print $2}' | fzf -m --preview 'git diff -- {1}' | sed -e 's/\n/ /g');
+    git status -s
+}
+function cdd(){
+	if [ $# -eq 0 ]; then
+		pushd ~ > /dev/null
+	else
+		pushd "$1" > /dev/null
+	fi
+}
+function hist(){
+	local COMMAND=$(history | tac | tail -n 1000 | fzf --no-sort | awk '{$1=$2=$3=""; print $0}')
+	echo $COMMAND
+	eval $COMMAND
 }
 
 # env
