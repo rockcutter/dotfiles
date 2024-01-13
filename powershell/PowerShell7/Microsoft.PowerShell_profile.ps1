@@ -39,25 +39,25 @@ function prompt {
 	$adminRole = [Security.Principal.WindowsBuiltInRole]::Administrator
 
 	#definition
-	$my_color_1 = "DarkRed"
+	$my_color_1 = "DarkGray"
 
-	$shell_icon_color = "Black"
+	$shell_icon_color = "DarkRed"
 	$sun_color = "DarkYellow"
 	$moon_color = "Yellow"
 	$shell_wallpaper_color = "Black"
 	$shell_background_color = $my_color_1
-	$shell_foreground_color = "Black"
+	$shell_foreground_color = "White"
 	$user_background_color = "White"
 	$user_foreground_color = "Black"
 	$path_background_color = $my_color_1
-	$path_foreground_color = "Black"
+	$path_foreground_color = "Yellow"
 	$time_background_color = "DarkGray"
 	$time_foreground_color = "White"
 	$return_code_success_color = "Green"
 	$return_code_failed_color = "Red"
 	$return_foreground_color = "Black"
 	$git_branch_foreground_color = "White"
-	$git_branch_background_color = "Magenta"
+	$git_branch_background_color = "DarkRed"
 
 	
 	Write-Host("┌─") -NoNewline -ForegroundColor Green
