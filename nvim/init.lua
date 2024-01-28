@@ -10,6 +10,8 @@ require("random_colorscheme")
 
 -- etc setting
 vim.cmd('set number')
+vim.opt.mouse = ""
+vim.opt.clipboard = "unnamedplus"
 
 -- tab -> 4 space
 vim.opt.tabstop = 4
