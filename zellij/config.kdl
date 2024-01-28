@@ -36,6 +36,7 @@ keybinds {
         bind "w" { ToggleFloatingPanes; SwitchToMode "Normal"; }
         bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "Normal"; }
         bind "c" { SwitchToMode "RenamePane"; PaneNameInput 0;}
+        bind "Space" { NextSwapLayout; }
     }
     move {
         bind "Ctrl h" { SwitchToMode "Normal"; }
@@ -141,6 +142,7 @@ keybinds {
         bind "k" { MoveFocus "Up"; SwitchToMode "Normal"; }
         bind "o" { FocusNextPane; }
         bind "d" { Detach; }
+        bind "Space" { NextSwapLayout; }
         bind "Space" { NextSwapLayout; }
         bind "x" { CloseFocus; SwitchToMode "Normal"; }
     }
