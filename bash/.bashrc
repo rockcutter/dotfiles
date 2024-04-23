@@ -11,7 +11,7 @@ alias lg='lazygit'
 alias zj='zellij'
 # func
 function repo(){
-    cd $(ghq root)/$(ghq list | fzf --query="$LBUFFER")
+    cd $(ghq root)/$(ghq list | fzf --query="$LBUFFER" -e)
 }
 function gadd(){
     git add $(git status -s | awk '{print $2}' | fzf -m --preview 'git diff -- {1}' | sed -e 's/\n/ /g');
@@ -25,9 +25,15 @@ function cdd(){
 	fi
 }
 function hist(){
-	local COMMAND=$(history | tac | tail -n 1000 | fzf --no-sort | awk '{$1=$2=$3=""; print $0}')
+	local COMMAND=$(history | tac | tail -n 1000 | fzf --no-sort -e | awk '{$1=$2=$3=""; print $0}')
 	echo $COMMAND
+	history -s $COMMAND
 	eval $COMMAND
+}
+function histwc(){
+	local COMMAND=$(history | tac | tail -n 1000 | fzf --no-sort -e | awk '{$1=$2=$3=""; print $0}')
+	echo '$COMMAND | clip.exe'
+	echo $COMMAND | clip.exe
 }
 
 # env
