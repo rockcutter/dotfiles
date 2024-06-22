@@ -33,7 +33,6 @@ function prompt {
 		return 
 	}
 	
-	
 	$identity = [Security.Principal.WindowsIdentity]::GetCurrent()
 	$principal = [Security.Principal.WindowsPrincipal] $identity
 	$adminRole = [Security.Principal.WindowsBuiltInRole]::Administrator
@@ -47,146 +46,101 @@ function prompt {
 	$shell_wallpaper_color = "Black"
 	$shell_background_color = $my_color_1
 	$shell_foreground_color = "White"
-	$user_background_color = "White"
-	$user_foreground_color = "Black"
+	$user_background_color = ""
+	$user_foreground_color = "Green"
 	$path_background_color = $my_color_1
-	$path_foreground_color = "Yellow"
+	$path_foreground_color = "Blue"
 	$time_background_color = "DarkGray"
-	$time_foreground_color = "White"
+	$time_foreground_color = "Red"
 	$return_code_success_color = "Green"
 	$return_code_failed_color = "Red"
 	$return_foreground_color = "Black"
-	$git_branch_foreground_color = "White"
+	$git_branch_foreground_color = "Magenta"
 	$git_branch_background_color = "DarkRed"
 
 	
-	Write-Host("┌─") -NoNewline -ForegroundColor Green
+	Write-Host("┏ ") -NoNewline -ForegroundColor White
 
-	#
-	# write shell ----------------------------------------------------------------------------------
-	#
-	
-	Write-Host("`u{e0b6}") -ForegroundColor $shell_background_color -NoNewline
-	Write-Host (" ") -nonewline -ForegroundColor $shell_icon_color -BackgroundColor $shell_background_color
-	Write-Host ("pwsh") -nonewline -ForegroundColor $shell_foreground_color -BackgroundColor $shell_background_color
-	Write-Host("") -NoNewline -ForegroundColor $shell_background_color -BackgroundColor $shell_wallpaper_color
-	
-	#
-	# shell end ----------------------------------------------------------------------------------
-	#
-
-	#
-	# Write user	-------------------------------------------------------------------------------------
-	# 
-	
+	# write user and host -------------------------------------
 	$username = if($principal.IsInRole($adminRole)){
-		" admin"
+		"admin"
 	}elseif($myprofile_optional_username){
-		"$myprofile_optional_username"
+		"$myprofile_optional_username"
 	}elseif($myprofile_hide_username) {
-		"<hidden>"	
+		"<hidden>"	
 	}else{
 		"$env:USERNAME"
 	}
 
-	Write-Host("") -NoNewline -ForegroundColor $shell_wallpaper_color -BackgroundColor $user_background_color
-	Write-Host($username + "  " + $env:COMPUTERNAME + " ") -NoNewline -BackgroundColor $user_background_color -ForegroundColor $user_foreground_color
-	Write-Host("") -NoNewline -ForegroundColor $user_background_color -BackgroundColor $shell_wallpaper_color
+	Write-Host($username + "@" + $env:COMPUTERNAME + " ") -NoNewline -ForegroundColor $user_foreground_color
 
-	#
-	# Write user end -------------------------------------------------------------------------------------
-	# 
+
+	# write path -------------------------------------
+	Write-Host(">> ") -NoNewline -ForegroundColor White
+	
+	$path_string = "$($executionContext.SessionState.Path.CurrentLocation)"
+	$path_string = $path_string.Replace("$env:HOMEDRIVE$env:HOMEPATH", "~")
+	
+	Write-Host($path_string) -nonewline -ForegroundColor $path_foreground_color 
 
 	#
 	# Write git branch -------------------------------------------------------------------------
 	#
 
 	if("" -ne $(get_git_branch)){
-		Write-Host("") -NoNewline -ForegroundColor $shell_wallpaper_color -BackgroundColor $git_branch_background_color
-		Write-Host("") -NoNewline -ForegroundColor $git_branch_foreground_color -BackgroundColor $git_branch_background_color
-		Write-Host(get_git_branch) -NoNewline -ForegroundColor $git_branch_foreground_color -BackgroundColor $git_branch_background_color
-		Write-Host("") -NoNewline -ForegroundColor $git_branch_background_color -BackgroundColor $shell_wallpaper_color
-		#Write-Host("") -NoNewline -ForegroundColor $git_branch_background_color
+		Write-Host(" ") -nonewline
+		Write-Host("[[") -nonewline -ForegroundColor "White" 
+		Write-Host(get_git_branch) -NoNewline -ForegroundColor $git_branch_foreground_color 
+		Write-Host("]]") -nonewline -ForegroundColor "White" 
 	}
 
 	#
 	# git branch end -------------------------------------------------------------------------
 	#
 
-	#
-	# Write path -------------------------------------------------------------------------
-	#
-	
-	$path_string = "$($executionContext.SessionState.Path.CurrentLocation)"
-	$path_string = $path_string.Replace("$env:HOMEDRIVE$env:HOMEPATH\source\repos", "`u{f121} ")
-	$path_string = $path_string.Replace("$env:HOMEDRIVE$env:HOMEPATH", "`u{f015} ")
-	$path_string = $path_string.Replace("$env:ONEDRIVE", " ")
-	$path_string = $path_string.Replace("\", "`u{e0bd} ")
-	$path_string = $path_string.Replace(":", "")
-	
-	Write-Host("") -NoNewline -ForegroundColor $shell_wallpaper_color -BackgroundColor $path_background_color
-	Write-Host("   ") -NoNewline -BackgroundColor $path_background_color -ForegroundColor $path_foreground_color
-	Write-Host($path_string) -nonewline -ForegroundColor $path_foreground_color -BackgroundColor $path_background_color
-	Write-Host("") -nonewline -ForegroundColor $path_background_color 
-	
-	#
-	# Write path end -------------------------------------------------------------------------
-	#
-	
-	
-	Write-Host("".PadLeft(5)) -NoNewline
+	## #
+	## # write time -----------------------------------------------------------------------
+	## #
 
+	Write-Host("  ") -nonewline
+	Write-Host("(") -nonewline -ForegroundColor $time_foreground_color 
+	Write-Host((Get-Date -UFormat "%H:%M:%S")) -NoNewline -ForegroundColor $time_foreground_color 
+	Write-Host(")") -nonewline -ForegroundColor $time_foreground_color 
+ 
+
+	## #
+	## # write time end-----------------------------------------------------------------------
+	## #
+	
 	#
 	# check return val -----------------------------------------------------------------------
 	#
 	
+	Write-Host(" ") -nonewline
 	$last_return_color = ""
 	$last_return_value = ""
 	if($last_return){
 		$last_return_color = $return_code_success_color
-		$last_return_value = "   "
+		$last_return_value = "true"
 	}else{
 		$last_return_color = $return_code_failed_color
-		$last_return_value = "   "
+		$last_return_value = "false"
 	}
 	
-	Write-Host("") -NoNewline -ForegroundColor $last_return_color
-	Write-Host($last_return_value) -NoNewline -ForegroundColor $return_foreground_color -BackgroundColor $last_return_color
-	Write-Host("") -NoNewline -ForegroundColor $shell_wallpaper_color -BackgroundColor $last_return_color
+	Write-Host($last_return_value) -NoNewline -ForegroundColor $last_return_color
 
 	#
 	# check return val end -----------------------------------------------------------------------
 	#
-	
-	#
-	# write time -----------------------------------------------------------------------
-	#
-	
 
-	Write-Host("") -NoNewline -ForegroundColor $time_background_color
-	Write-Host("  ") -NoNewline -ForegroundColor $time_foreground_color -BackgroundColor $time_background_color
-	Write-Host((Get-Date -UFormat "%H:%M:%S")) -NoNewline -ForegroundColor $time_foreground_color -BackgroundColor $time_background_color
-
-	$currentHour = [int](Get-Date -UFormat "%H")
-	if(($currentHour -le 7) -Or ($currentHour -ge 19)){
-		Write-Host("  ") -NoNewline -ForegroundColor $moon_color -BackgroundColor $time_background_color
-	}else{
-		Write-Host("  ") -NoNewline -ForegroundColor $sun_color -BackgroundColor $time_background_color
-	}
-
-	Write-Host("") -NoNewline -ForegroundColor $time_background_color
-	Write-Host("") -NoNewline -ForegroundColor $time_background_color
-
-	#
-	# write time end-----------------------------------------------------------------------
-	#
-	
 	#prompt
 	Write-Host 
 	$prompt_color = "Gray"
-	Write-Host($("└─" * ($nestedPromptLevel + 1))) -NoNewline -ForegroundColor Green
-	Write-Host("") -NoNewline -ForegroundColor $prompt_color
-
+	Write-Host($("┗" * ($nestedPromptLevel + 1))) -NoNewline -ForegroundColor "White"
+	Write-Host(" ") -nonewline
+	Write-Host("$") -NoNewline -ForegroundColor $prompt_color
+	
+	## Write-Host("┌─") -NoNewline -ForegroundColor Green
 	
 	return " "
 }
