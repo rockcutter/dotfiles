@@ -24,6 +24,10 @@ function get_git_branch{
 	return ""
 }
 
+function aw{
+	aws-vault exec rockcutter -- aws $args
+}
+
 function prompt {
 	$last_return = $?
 
