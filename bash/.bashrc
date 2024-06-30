@@ -35,6 +35,9 @@ function histwc(){
 	echo '$COMMAND | clip.exe'
 	echo $COMMAND | clip.exe
 }
+function aw(){
+	aws-vault exec rockcutter -- aws "$@"
+}
 
 # env
 PATH=$PATH:$HOME/.cargo/bin
