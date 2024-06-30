@@ -3,6 +3,9 @@
 HISTTIMEFORMAT='%y/%m/%d %H:%M:%S '
 HISTIGNORE='&:ls:ll:pwd:history:hist'
 HISTIGNORE=65535
+AWS_VAULT_BACKEND=pass
+AWS_VAULT_PASS_PREFIX=aws-vault
+AWS_SESSION_TOKEN_TTL=3h
 # source
 source ~/.git-prompt.sh
 # source ~/.zellij.sh
@@ -36,7 +39,7 @@ function histwc(){
 	echo $COMMAND | clip.exe
 }
 function aw(){
-	aws-vault exec rockcutter -- aws "$@"
+	aws-vault --backend=$AWS_VAULT_BACKEND exec rockcutter -- aws "$@"
 }
 
 # env
