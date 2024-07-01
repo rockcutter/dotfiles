@@ -24,6 +24,13 @@ function cdd(){
 		pushd "$1" > /dev/null
 	fi
 }
+function hist_completion(){
+	local COMMAND=$(history | tac | tail -n 1000 | fzf --no-sort -e | awk '{$1=$2=$3=""; print $0}')
+	history -s $COMMAND
+	READLINE_LINE="${COMMAND}"
+	READLINE_POINT=${#COMMAND}
+}
+bind -x '"\C-r": hist_completion'
 function hist(){
 	local COMMAND=$(history | tac | tail -n 1000 | fzf --no-sort -e | awk '{$1=$2=$3=""; print $0}')
 	echo $COMMAND
