@@ -1,7 +1,7 @@
 # begin user definition 
 # historyのformat設定
 HISTTIMEFORMAT='%y/%m/%d %H:%M:%S '
-HISTIGNORE='&:ls:ll:pwd:history:hist'
+HISTIGNORE='&:ls:ll:pwd:history:hist:bash'
 HISTIGNORE=65535
 # source
 source ~/.git-prompt.sh
