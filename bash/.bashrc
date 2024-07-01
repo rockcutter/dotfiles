@@ -3,9 +3,6 @@
 HISTTIMEFORMAT='%y/%m/%d %H:%M:%S '
 HISTIGNORE='&:ls:ll:pwd:history:hist'
 HISTIGNORE=65535
-AWS_VAULT_BACKEND=pass
-AWS_VAULT_PASS_PREFIX=aws-vault
-AWS_SESSION_TOKEN_TTL=3h
 # source
 source ~/.git-prompt.sh
 # source ~/.zellij.sh
@@ -45,8 +42,12 @@ function aw(){
 # env
 PATH=$PATH:$HOME/.cargo/bin
 PROMPT_COMMAND="history -a;history -c;history -r"
-ZELLIJ_AUTO_ATTACH=true
+ZELLIJ_AUTO_ATTACH=false
 
+## aws
+AWS_VAULT_BACKEND=pass
+AWS_VAULT_PASS_PREFIX=aws-vault
+AWS_SESSION_TOKEN_TTL=3h
 ## go
 GOPATH=$HOME/go
 GOBIN=$GOPATH/bin
@@ -181,17 +182,17 @@ export NVM_DIR="$HOME/.nvm"
 
 # zellij 自動起動
 # $(zellij setup --generate-auto-start bash)
-if [[ -z "$ZELLIJ" ]]; then
-    if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
-        zellij attach -c main
-    else
-        zellij
-    fi
-
-    if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
-        exit
-    fi
-fi
+# if [[ -z "$ZELLIJ" ]]; then
+#     if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
+#         zellij attach -c main
+#     else
+#         zellij
+#     fi
+# 
+#     if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
+#         exit
+#     fi
+# fi
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/rockcutter/tmp/google-cloud-sdk/path.bash.inc' ]; then . '/home/rockcutter/tmp/google-cloud-sdk/path.bash.inc'; fi
