@@ -2,7 +2,8 @@
 # historyのformat設定
 HISTTIMEFORMAT='%y/%m/%d %H:%M:%S '
 HISTIGNORE='&:ls:ll:pwd:history:hist:bash'
-HISTIGNORE=65535
+HISTSIZE=65535
+HISTFILESIZE=65535
 # source
 source ~/.git-prompt.sh
 # source ~/.zellij.sh
@@ -25,23 +26,23 @@ function cdd(){
 	fi
 }
 function hist_completion(){
-	local COMMAND=$(history | tac | tail -n 1000 | fzf --no-sort -e | awk '{$1=$2=$3=""; print $0}')
+	local COMMAND=$(history | tail -n 1000 | fzf --no-sort -e | awk '{$1=$2=$3=""; print $0}')
 	history -s $COMMAND
 	READLINE_LINE="${COMMAND}"
 	READLINE_POINT=${#COMMAND}
 }
 bind -x '"\C-r": hist_completion'
 function hist(){
-	local COMMAND=$(history | tac | tail -n 1000 | fzf --no-sort -e | awk '{$1=$2=$3=""; print $0}')
+	local COMMAND=$(history | tail -n 1000 | fzf --no-sort -e | awk '{$1=$2=$3=""; print $0}')
 	echo $COMMAND
 	history -s $COMMAND
 	eval $COMMAND
 }
-function histwc(){
-	local COMMAND=$(history | tac | tail -n 1000 | fzf --no-sort -e | awk '{$1=$2=$3=""; print $0}')
-	echo '$COMMAND | clip.exe'
-	echo $COMMAND | clip.exe
-}
+# function histwc(){
+# 	local COMMAND=$(history | tac | tail -n 1000 | fzf --no-sort -e | awk '{$1=$2=$3=""; print $0}')
+# 	echo '$COMMAND | clip.exe'
+# 	echo $COMMAND | clip.exe
+# }
 function aw(){
 	aws-vault --backend=$AWS_VAULT_BACKEND exec rockcutter -- aws "$@"
 }
@@ -83,8 +84,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+# HISTSIZE=1000
+# HISTFILESIZE=2000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
