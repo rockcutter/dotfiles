@@ -12,6 +12,10 @@ endif
 
 all: nvimrc shellprofile git zellij
 
+.PHONY: install
+install: 
+	make -f install.mk all
+
 nvimrc:
 ifeq ($(OS), Windows_NT)
 	Copy-Item -Path nvim -Destination $${HOME}/AppData/Local -Recurse -Force
