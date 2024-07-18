@@ -194,7 +194,7 @@ export NVM_DIR="$HOME/.nvm"
 # $(zellij setup --generate-auto-start bash)
 if [[ -z "$ZELLIJ" ]]; then
     if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
-        zellij attach -c main
+        zellij attach -c mz
     else
         zellij
     fi
