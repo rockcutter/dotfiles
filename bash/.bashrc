@@ -192,17 +192,17 @@ export NVM_DIR="$HOME/.nvm"
 
 # zellij 自動起動
 # $(zellij setup --generate-auto-start bash)
-# if [[ -z "$ZELLIJ" ]]; then
-#     if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
-#         zellij attach -c main
-#     else
-#         zellij
-#     fi
-# 
-#     if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
-#         exit
-#     fi
-# fi
+if [[ -z "$ZELLIJ" ]]; then
+    if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
+        zellij attach -c main
+    else
+        zellij
+    fi
+
+    if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
+        exit
+    fi
+fi
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/rockcutter/tmp/google-cloud-sdk/path.bash.inc' ]; then . '/home/rockcutter/tmp/google-cloud-sdk/path.bash.inc'; fi
