@@ -50,7 +50,7 @@ function aw(){
 # env
 PATH=$PATH:$HOME/.cargo/bin
 PROMPT_COMMAND="history -a;history -c;history -r"
-ZELLIJ_AUTO_ATTACH=false
+ZELLIJ_AUTO_ATTACH=true
 
 ## aws
 AWS_VAULT_BACKEND=pass
