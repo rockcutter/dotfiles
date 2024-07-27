@@ -10,7 +10,7 @@ endif
 
 .PHONY: nvimrc shellprofile git zellij 
 
-all: nvimrc shellprofile git zellij
+all: nvimrc shellprofile git zellij tmux
 
 .PHONY: install
 install: 
@@ -30,6 +30,7 @@ else
 	cp -r $${HOME}/.config/nvim .
 endif
 
+.PHONY: tmux
 tmux:
 ifneq ($(OS), Windows_NT)
 	cp tmux/.tmux.conf $${HOME}/.tmux.conf
