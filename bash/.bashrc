@@ -46,11 +46,29 @@ function hist(){
 function aw(){
 	aws-vault --backend=$AWS_VAULT_BACKEND exec rockcutter -- aws "$@"
 }
+function pane(){
+	if [ $1 ]; then
+	  cnt_pane=1
+	  while [ $cnt_pane -lt $1 ]
+	  do
+		if [ $(( $cnt_pane & 1 )) ]; then
+			tmux split-window -h
+		else
+			tmux split-window -v
+		fi
+		if [ $1 -ne 2 ]; then
+			tmux select-layout tiled 1>/dev/null
+		fi
+		cnt_pane=$(( $cnt_pane + 1 ))
+	  done
+	fi
+}
 
 # env
 PATH=$PATH:$HOME/.cargo/bin
 PROMPT_COMMAND="history -a;history -c;history -r"
-ZELLIJ_AUTO_ATTACH=false
+ZELLIJ_AUTO_ATTACH=true
+force_color_prompt=yes
 
 ## aws
 AWS_VAULT_BACKEND=pass
@@ -192,7 +210,7 @@ export NVM_DIR="$HOME/.nvm"
 # $(zellij setup --generate-auto-start bash)
 # if [[ -z "$ZELLIJ" ]]; then
 #     if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
-#         zellij attach -c main
+#         zellij attach -c mz
 #     else
 #         zellij
 #     fi

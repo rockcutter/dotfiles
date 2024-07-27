@@ -30,6 +30,11 @@ else
 	cp -r $${HOME}/.config/nvim .
 endif
 
+tmux:
+ifneq ($(OS), Windows_NT)
+	cp tmux/.tmux.conf $${HOME}/.tmux.conf
+endif
+
 
 shellprofile:
 ifeq ($(OS), Windows_NT)
