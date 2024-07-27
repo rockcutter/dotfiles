@@ -80,6 +80,8 @@ GOBIN=$GOPATH/bin
 PATH=$PATH:/usr/local/go/bin
 PATH=$PATH:$GOBIN
 
+GPG_TTY=$(tty)
+
 # run cmd
 shopt -u histappend
 # end user definition
