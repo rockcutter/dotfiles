@@ -1,9 +1,9 @@
 # begin user definition 
 # historyのformat設定
-HISTTIMEFORMAT='%y/%m/%d %H:%M:%S '
-HISTIGNORE='&:ls:ll:pwd:history:hist:bash'
-HISTSIZE=65535
-HISTFILESIZE=65535
+export HISTTIMEFORMAT='%y/%m/%d %H:%M:%S '
+export HISTIGNORE='&:ls:ll:pwd:history:hist:bash'
+export HISTSIZE=65535
+export HISTFILESIZE=65535
 # source
 source ~/.git-prompt.sh
 # source ~/.zellij.sh
@@ -39,11 +39,11 @@ function hist(){
 	history -s $COMMAND
 	eval $COMMAND
 }
-# function histwc(){
-# 	local COMMAND=$(history | tac | tail -n 1000 | fzf --no-sort -e | awk '{$1=$2=$3=""; print $0}')
-# 	echo '$COMMAND | clip.exe'
-# 	echo $COMMAND | clip.exe
-# }
+function histwc(){
+	local COMMAND=$(history | tac | tail -n 1000 | fzf --no-sort -e | awk '{$1=$2=$3=""; print $0}')
+	echo '$COMMAND | clip.exe'
+	echo $COMMAND | clip.exe
+}
 function aw(){
 	aws-vault --backend=$AWS_VAULT_BACKEND exec rockcutter -- aws "$@"
 }
@@ -66,22 +66,22 @@ function pane(){
 }
 
 # env
-PATH=$PATH:$HOME/.cargo/bin
-PROMPT_COMMAND="history -a;history -c;history -r"
-ZELLIJ_AUTO_ATTACH=true
-force_color_prompt=yes
+export PATH=$PATH:$HOME/.cargo/bin
+export PROMPT_COMMAND="history -a;history -c;history -r"
+export ZELLIJ_AUTO_ATTACH=true
+export force_color_prompt=yes
 
 ## aws
-AWS_VAULT_BACKEND=pass
-AWS_VAULT_PASS_PREFIX=aws-vault
-AWS_SESSION_TOKEN_TTL=3h
+export AWS_VAULT_BACKEND=pass
+export AWS_VAULT_PASS_PREFIX=aws-vault
+export AWS_SESSION_TOKEN_TTL=3h
 ## go
-GOPATH=$HOME/go
-GOBIN=$GOPATH/bin
-PATH=$PATH:/usr/local/go/bin
-PATH=$PATH:$GOBIN
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$GOBIN
 
-GPG_TTY=$(tty)
+export GPG_TTY=$(tty)
 
 # run cmd
 shopt -u histappend
