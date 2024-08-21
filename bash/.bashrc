@@ -11,6 +11,7 @@ source ~/.git-prompt.sh
 alias lg='lazygit'
 alias zj='zellij'
 alias tm='tmux'
+alias cd='z'
 # func
 function repo(){
     cd $(ghq root)/$(ghq list | fzf --query="$LBUFFER" -e)
@@ -67,6 +68,7 @@ function pane(){
 
 # env
 export PATH=$PATH:$HOME/.cargo/bin
+export PATH=$PATH:$HOME/.local/bin
 export PROMPT_COMMAND="history -a;history -c;history -r"
 export ZELLIJ_AUTO_ATTACH=true
 export force_color_prompt=yes
@@ -222,5 +224,5 @@ export NVM_DIR="$HOME/.nvm"
 #         exit
 #     fi
 # fi
-
+eval "$(zoxide init bash)"
 tmux

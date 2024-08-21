@@ -1,9 +1,9 @@
-BINARY_PATH := /usr/local/bin
+BINARY_PATH := $${HOME}/.local/bin
 TEMP_FILE := "_make_install_temp_file"
 TEMP_DIR := "_make_install_temp_dir"
 
 .PHONY: all
-all: zellij ghq 
+all: zellij ghq zoxide
 
 .PHONY: zellij
 zellij:
@@ -22,4 +22,7 @@ clean:
 	-@rm $(TEMP_FILE)
 	-@rm -rf $(TEMP_DIR)
 
+.PHONY: zoxide
+zoxide: 
+	curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 
