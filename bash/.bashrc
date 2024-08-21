@@ -40,7 +40,7 @@ function hist(){
 	eval $COMMAND
 }
 function histwc(){
-	local COMMAND=$(history | tac | tail -n 1000 | fzf --no-sort -e | awk '{$1=$2=$3=""; print $0}')
+	local COMMAND=$(history | tac | fzf --no-sort -e | awk '{$1=$2=$3=""; print $0}')
 	echo '$COMMAND | clip.exe'
 	echo $COMMAND | clip.exe
 }
