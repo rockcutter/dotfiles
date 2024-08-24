@@ -7,7 +7,7 @@ export HISTFILESIZE=65535
 export DOTFILES_SOURCES_DIR=$HOME/dotfiles_sources
 # source
 source ~/.git-prompt.sh
-source $DOTFILES_SOURCES_DIR/zoxide.sh
+source $DOTFILES_SOURCES_DIR/*.sh
 # source ~/.zellij.sh
 # alias
 alias lg='lazygit'
