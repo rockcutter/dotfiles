@@ -4,7 +4,7 @@ ifeq ($(OS), Windows_NT)
 setup: neovim git
 
 else
-setup: bash tmux neovim git zoxide/setup
+setup: bash tmux neovim git zoxide
 
 endif
 
@@ -16,7 +16,7 @@ zoxide/install:
 	make -C zoxide install
 
 .PHONY: zoxide/setup
-zoxide/setup:
+zoxide:
 	make -C shell/zoxide setup
 
 .PHONY: bash
