@@ -1,4 +1,4 @@
 
-sync:
+setup:
 	cp .bashrc $${HOME}/.bashrc
 

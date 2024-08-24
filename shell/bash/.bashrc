@@ -4,14 +4,15 @@ export HISTTIMEFORMAT='%y/%m/%d %H:%M:%S '
 export HISTIGNORE='&:ls:ll:pwd:history:hist:bash'
 export HISTSIZE=65535
 export HISTFILESIZE=65535
+export DOTFILES_SOURCES_DIR=$HOME/dotfiles_sources
 # source
 source ~/.git-prompt.sh
+source $DOTFILES_SOURCES_DIR/zoxide.sh
 # source ~/.zellij.sh
 # alias
 alias lg='lazygit'
 alias zj='zellij'
 alias tm='tmux'
-alias cd='z'
 # func
 function repo(){
     cd $(ghq root)/$(ghq list | fzf --query="$LBUFFER" -e)
@@ -224,5 +225,4 @@ export NVM_DIR="$HOME/.nvm"
 #         exit
 #     fi
 # fi
-eval "$(zoxide init bash)"
 tmux
