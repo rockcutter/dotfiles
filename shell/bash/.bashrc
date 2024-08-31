@@ -225,4 +225,4 @@ export NVM_DIR="$HOME/.nvm"
 #         exit
 #     fi
 # fi
-tmux
+tmux a -t 0
