@@ -4,7 +4,7 @@ ifeq ($(OS), Windows_NT)
 setup: neovim git
 
 else
-setup: bash tmux neovim git zoxide
+setup: bash tmux neovim git zoxide zsh
 
 endif
 
@@ -22,6 +22,10 @@ zoxide:
 .PHONY: bash
 bash: 
 	make -C shell/bash setup
+
+.PHONY: zsh
+zsh: 
+	make -C shell/zsh setup
 
 .PHONY: tmux
 tmux:
