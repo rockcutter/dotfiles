@@ -212,17 +212,3 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# zellij 自動起動
-# $(zellij setup --generate-auto-start bash)
-# if [[ -z "$ZELLIJ" ]]; then
-#     if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
-#         zellij attach -c mz
-#     else
-#         zellij
-#     fi
-# 
-#     if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
-#         exit
-#     fi
-# fi
-tmux a -t 0
