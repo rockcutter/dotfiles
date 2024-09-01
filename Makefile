@@ -1,5 +1,5 @@
 .PHONY: setup
-# winの場合のみallを置き換える
+# winの場合のみsetupを置き換える
 ifeq ($(OS), Windows_NT)
 setup: neovim git
 
