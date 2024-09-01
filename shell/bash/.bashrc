@@ -17,6 +17,9 @@ alias tm='tmux'
 function repo(){
     cd $(ghq root)/$(ghq list | fzf --query="$LBUFFER" -e)
 }
+function ghu(){
+	gh repo view --json nameWithOwner,url
+}
 function gadd(){
     git add $(git status -s | awk '{print $2}' | fzf -m --preview 'git diff -- {1}' | sed -e 's/\n/ /g');
     git status -s
@@ -78,6 +81,7 @@ export force_color_prompt=yes
 export AWS_VAULT_BACKEND=pass
 export AWS_VAULT_PASS_PREFIX=aws-vault
 export AWS_SESSION_TOKEN_TTL=3h
+ export AWS_DEFAULT_OUTPUT="json"
 ## go
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
