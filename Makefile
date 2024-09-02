@@ -4,9 +4,11 @@ ifeq ($(OS), Windows_NT)
 setup: neovim git
 
 else
-setup: bash tmux neovim git zoxide zsh
+setup: bash tmux neovim git zoxide zsh opencommit
 
 endif
+
+
 
 .PHONY: install
 install: zoxide/install
@@ -14,6 +16,10 @@ install: zoxide/install
 .PHONY: zoxide/install
 zoxide/install:
 	make -C zoxide install
+
+.PHONY: opencommit
+opencommit: 
+	make -C opencommit setup
 
 .PHONY: zoxide
 zoxide:
