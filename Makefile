@@ -15,7 +15,7 @@ install: zoxide/install
 zoxide/install:
 	make -C zoxide install
 
-.PHONY: zoxide/setup
+.PHONY: zoxide
 zoxide:
 	make -C shell/zoxide setup
 
