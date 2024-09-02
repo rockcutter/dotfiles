@@ -9,13 +9,23 @@ setup: bash tmux neovim git zoxide zsh opencommit
 endif
 
 
-
 .PHONY: install
-install: zoxide/install
+ifeq ($(OS), Windows_NT)
+install: 
+
+else
+install: zoxide/install opencommit/install
+
+endif
 
 .PHONY: zoxide/install
 zoxide/install:
 	make -C zoxide install
+
+.PHONY: opencommit/install
+opencommit/install:
+	make -C opencommit install
+
 
 .PHONY: opencommit
 opencommit: 
