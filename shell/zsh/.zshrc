@@ -17,9 +17,6 @@ alias tm='tmux'
 function repo(){
     cd $(ghq root)/$(ghq list | fzf --query="$LBUFFER" -e)
 }
-function ghu(){
-	gh repo view --json nameWithOwner,url
-}
 function gadd(){
     git add $(git status -s | awk '{print $2}' | fzf -m --preview 'git diff -- {1}' | sed -e 's/\n/ /g');
     git status -s
@@ -81,7 +78,6 @@ export force_color_prompt=yes
 export AWS_VAULT_BACKEND=pass
 export AWS_VAULT_PASS_PREFIX=aws-vault
 export AWS_SESSION_TOKEN_TTL=3h
- export AWS_DEFAULT_OUTPUT="json"
 ## go
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
@@ -216,3 +212,17 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# zellij 自動起動
+# $(zellij setup --generate-auto-start bash)
+# if [[ -z "$ZELLIJ" ]]; then
+#     if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
+#         zellij attach -c mz
+#     else
+#         zellij
+#     fi
+# 
+#     if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
+#         exit
+#     fi
+# fi
+tmux a -t 0
