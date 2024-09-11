@@ -1,10 +1,22 @@
 # begin user definition 
+
 # historyのformat設定
 export HISTTIMEFORMAT='%y/%m/%d %H:%M:%S '
 export HISTIGNORE='&:ls:ll:pwd:history:hist:bash'
 export HISTSIZE=65535
 export HISTFILESIZE=65535
 export DOTFILES_SOURCES_DIR=$HOME/dotfiles_sources
+
+#tmake
+export TMAKEFILE=_tmp_Makefile
+export TMAKE=$DOTFILES_SOURCES_DIR/$TMAKEFILE
+
+function tmake(){
+	cp $TMAKE . 
+	make -f $TMAKEFILE "$@" 
+	rm $TMAKEFILE
+}
+
 # source
 source ~/.git-prompt.sh
 source $DOTFILES_SOURCES_DIR/*.sh
