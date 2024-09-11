@@ -231,5 +231,5 @@ export NVM_DIR="$HOME/.nvm"
 if which tmux >/dev/null 2>&1; then
     #if not inside a tmux session, and if no session is started, start a new session
     #もしtmuxの中にいないか起動していればサブシェルでアタッチ失敗したら新しいセッションを実行
-    test -z "$TMUX" && (tmux attach -t main || tmux new-session -s main -n tmuxの使い方 "less ~/tmux.txt")
+    test -z "$TMUX" && (tmux attach -t main || tmux new-session -s main)
 fi
