@@ -31,6 +31,7 @@ function repo(){
     cd $(ghq root)/$(ghq list | fzf --query="$LBUFFER" -e)
 }
 function ghu(){
+	gh repo view --json nameWithOwner,url
 	gh pr view --json url 
 }
 function gadd(){
