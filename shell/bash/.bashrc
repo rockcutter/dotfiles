@@ -17,7 +17,10 @@ function tmake(){
 	make -f $TMAKEFILE "$@" 
 	rm $TMAKEFILE
 }
-
+function gpushu() {
+    BRANCH=$(git symbolic-ref --short HEAD | tr -d '\n') # カレントブランチ名を取得
+    git push -u origin $BRANCH
+}
 # source
 source ~/.git-prompt.sh
 source $DOTFILES_SOURCES_DIR/*.sh
