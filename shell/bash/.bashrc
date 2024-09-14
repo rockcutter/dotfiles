@@ -34,8 +34,8 @@ function repo(){
     cd $(ghq root)/$(ghq list | fzf --query="$LBUFFER" -e)
 }
 function ghu(){
-	gh repo view --json nameWithOwner,url
 	gh pr view --json url 
+	gh repo view --json nameWithOwner,url
 }
 function gadd(){
     git add $(git status -s | awk '{print $2}' | fzf -m --preview 'git diff -- {1}' | sed -e 's/\n/ /g');
