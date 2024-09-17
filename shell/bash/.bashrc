@@ -1,5 +1,4 @@
 # begin user definition 
-eval "$(zoxide init bash --hook pwd)"
 
 # historyのformat設定
 export HISTTIMEFORMAT='%y/%m/%d %H:%M:%S '
@@ -229,9 +228,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # VSCodeでtmuxを自動起動しないようにしたい
 if [ -z $VSCODE_GIT_ASKPASS_MAIN ]; then
@@ -241,3 +237,6 @@ if [ -z $VSCODE_GIT_ASKPASS_MAIN ]; then
 		test -z "$TMUX" && (tmux attach -t main || tmux new-session -s main)
 	fi
 fi
+
+eval "$(zoxide init bash --hook pwd)"
+eval "$(~/.local/bin/mise activate bash)"
