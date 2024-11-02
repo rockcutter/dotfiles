@@ -1,3 +1,5 @@
+# Begin Oh My Zsh configuration -------------------------------------------------
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -9,98 +11,136 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 
-# ZSH_THEME="robbyrussell"
 ZSH_THEME="crcandy"
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+# End Oh My Zsh configuration -------------------------------------------------
 
-# export MANPATH="/usr/local/man:$MANPATH"
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+## aliases -------------------------------------------------
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='nvim'
-# fi
+alias tm='tmux'
 
-# Compilation flags
-# export ARCHFLAGS="-arch $(uname -m)"
+## End aliases -------------------------------------------------
 
-# Set personal aliases, overriding those provided by Oh My Zsh libs,
-# plugins, and themes. Aliases can be placed here, though Oh My Zsh
-# users are encouraged to define aliases within a top-level file in
-# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
-# - $ZSH_CUSTOM/aliases.zsh
-# - $ZSH_CUSTOM/macos.zsh
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+## sources -------------------------------------------------
+source $DOTFILES_SOURCES_DIR/*.sh
+## End sources -------------------------------------------------
+
+## aws configuration -------------------------------------------------
+
+export AWS_VAULT_BACKEND=pass
+export AWS_VAULT_PASS_PREFIX=aws-vault
+export AWS_SESSION_TOKEN_TTL=3h
+export AWS_DEFAULT_OUTPUT="json"
+
+export GPG_TTY=$(tty)
+
+## End aws configuration -------------------------------------------------
+
+## golang configuration -------------------------------------------------
+
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$GOBIN
+
+## End golang configuration -------------------------------------------------
+ 
+## history configuration -------------------------------------------------
+
+# export HISTTIMEFORMAT='%y-%m-%dT%H:%M:%S '
+export HISTIGNORE='&:ls:ll:pwd:history:hist:zsh'
+export HISTSIZE=65535
+export HISTFILESIZE=65535
+
+setopt share_history
+setopt hist_ignore_dups
+setopt append_history
+setopt hist_verify
+setopt hist_expire_dups_first
+
+## End history configuration -------------------------------------------------
+
+## Functions -------------------------------------------------
+function repo(){
+    cd $(ghq root)/$(ghq list | fzf --query="$LBUFFER" -e)
+}
+
+function ghu(){
+    gh pr view --json url
+    gh repo view --json nameWithOwner,url
+}
+
+function gadd(){
+    git add $(git status -s | awk '{print $2}' | fzf -m --preview 'git diff -- {1}' | sed -e 's/\n/ /g');
+    git status -s
+}
+
+function hoge(){
+	fc -s 278
+}
+
+function hist(){
+	set -H
+    local COMMAND=$(history -i | tac | fzf --no-sort -e | awk '{$1=$2=$3="";print $0}')
+    echo $COMMAND
+	eval $COMMAND
+
+}
+
+function histwc(){
+    local COMMAND=$(history -i | tac | fzf --no-sort -e | awk '{$1=$2=$3="";print $0}')
+    echo '$COMMAND | clip.exe'
+    echo $COMMAND | clip.exe
+}
+
+function avt() {
+    local role="$1"
+    shift
+	aws-vault exec $role -- $@
+}
+
+function pane(){
+	if [ $1 ]; then
+	  cnt_pane=1
+	  while [ $cnt_pane -lt $1 ]
+	  do
+		if [ $(( $cnt_pane & 1 )) ]; then
+			tmux split-window -h
+		else
+			tmux split-window -v
+		fi
+		if [ $1 -ne 2 ]; then
+			tmux select-layout tiled 1>/dev/null
+		fi
+		cnt_pane=$(( $cnt_pane + 1 ))
+	  done
+	fi
+}
+
+
+## End Functions -------------------------------------------------
+
+## tmux configurations -------------------------------------------------
+if [ -z $VSCODE_GIT_ASKPASS_MAIN ]; then
+    if which tmux >/dev/null 2>&1; then
+        #if not inside a tmux session, and if no session is started, start a new session
+        #もしtmuxの中にいないか起動していればサブシェルでアタッチ失敗したら新しいセッションを実行
+        test -z "$TMUX" && (tmux attach -t main || tmux new-session -s main)
+    fi
+fi
+## End tmux configurations -------------------------------------------------
+
+## zoxide configurations -------------------------------------------------
+eval "$(zoxide init zsh)"
+## End zoxide configurations -------------------------------------------------
+
+## mise configurations -------------------------------------------------
+eval "$(~/.local/bin/mise activate zsh)"
+## End mise configurations -------------------------------------------------
+
+# End User configuration -------------------------------------------------
