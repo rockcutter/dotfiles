@@ -23,6 +23,7 @@ source $ZSH/oh-my-zsh.sh
 ## aliases -------------------------------------------------
 
 alias tm='tmux'
+alias ll='ls -la'
 
 ## End aliases -------------------------------------------------
 
