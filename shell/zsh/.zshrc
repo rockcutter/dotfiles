@@ -19,6 +19,8 @@ source $ZSH/oh-my-zsh.sh
 
 # End Oh My Zsh configuration -------------------------------------------------
 
+export FZF_TMUX=1
+export FZF_TMUX_OPTS="-p 80%"
 
 ## aliases -------------------------------------------------
 
@@ -91,7 +93,7 @@ function gadd(){
 
 function hist(){
 	set -H
-    local COMMAND=$(history -i | tac | fzf --no-sort -e | awk '{$1=$2=$3="";print $0}')
+	local COMMAND=$(history -i | tac | fzf-tmux -p --no-sort -e --preview 'echo {} | fold -s -$(tput cols)' --preview-window=down | awk '{$1=$2=$3="";print $0}')
     echo $COMMAND
 	eval $COMMAND
 
