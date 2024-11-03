@@ -19,6 +19,9 @@ source $ZSH/oh-my-zsh.sh
 
 # User onfiguraitons 
 
+## zsh -------------------------------------------------
+setopt auto_menu
+
 ## aliases -------------------------------------------------
 
 alias tm='tmux'
