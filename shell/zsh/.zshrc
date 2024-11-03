@@ -43,6 +43,13 @@ export GPG_TTY=$(tty)
 
 ## End aws configuration -------------------------------------------------
 
+## 1password configuration -------------------------------------------------
+
+alias ssh='ssh.exe'
+alias ssh-add='ssh-add.exe'
+
+## End 1password configuration -------------------------------------------------
+
 ## golang configuration -------------------------------------------------
 
 export GOPATH=$HOME/go
