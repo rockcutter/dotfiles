@@ -17,14 +17,12 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-# End Oh My Zsh configuration -------------------------------------------------
+# User onfiguraitons 
 
 ## aliases -------------------------------------------------
 
 alias tm='tmux'
 alias ll='ls -la'
-
-## End aliases -------------------------------------------------
 
 ## fzf -------------------------------------------------
 if type fzf-tmux > /dev/null; then 
@@ -34,7 +32,6 @@ fi
 ## dotfile -------------------------------------------------
 export DOTFILES_SOURCES_DIR=$HOME/dotfiles_sources
 source $DOTFILES_SOURCES_DIR/*.sh
-## End dotfile -------------------------------------------------
 
 ## aws configuration -------------------------------------------------
 
@@ -45,14 +42,10 @@ export AWS_DEFAULT_OUTPUT="json"
 
 export GPG_TTY=$(tty)
 
-## End aws configuration -------------------------------------------------
-
 ## 1password configuration -------------------------------------------------
 
 alias ssh='ssh.exe'
 alias ssh-add='ssh-add.exe'
-
-## End 1password configuration -------------------------------------------------
 
 ## golang configuration -------------------------------------------------
 
@@ -60,8 +53,6 @@ export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$GOBIN
-
-## End golang configuration -------------------------------------------------
  
 ## history configuration -------------------------------------------------
 
@@ -75,8 +66,6 @@ setopt hist_ignore_dups
 setopt append_history
 setopt hist_verify
 setopt hist_expire_dups_first
-
-## End history configuration -------------------------------------------------
 
 ## Functions -------------------------------------------------
 function repo(){
@@ -132,8 +121,6 @@ function pane(){
 }
 
 
-## End Functions -------------------------------------------------
-
 ## tmux configurations -------------------------------------------------
 if [ -z $VSCODE_GIT_ASKPASS_MAIN ]; then
     if which tmux >/dev/null 2>&1; then
@@ -142,14 +129,10 @@ if [ -z $VSCODE_GIT_ASKPASS_MAIN ]; then
         test -z "$TMUX" && (tmux attach -t main || tmux new-session -s main)
     fi
 fi
-## End tmux configurations -------------------------------------------------
 
 ## zoxide configurations -------------------------------------------------
 eval "$(zoxide init zsh)"
-## End zoxide configurations -------------------------------------------------
 
 ## mise configurations -------------------------------------------------
 eval "$(~/.local/bin/mise activate zsh)"
-## End mise configurations -------------------------------------------------
 
-# End User configuration -------------------------------------------------
