@@ -89,10 +89,6 @@ function gadd(){
     git status -s
 }
 
-function hoge(){
-	fc -s 278
-}
-
 function hist(){
 	set -H
     local COMMAND=$(history -i | tac | fzf --no-sort -e | awk '{$1=$2=$3="";print $0}')
