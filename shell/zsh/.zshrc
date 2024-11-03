@@ -19,15 +19,17 @@ source $ZSH/oh-my-zsh.sh
 
 # End Oh My Zsh configuration -------------------------------------------------
 
-export FZF_TMUX=1
-export FZF_TMUX_OPTS="-p 80%"
-
 ## aliases -------------------------------------------------
 
 alias tm='tmux'
 alias ll='ls -la'
 
 ## End aliases -------------------------------------------------
+
+## fzf -------------------------------------------------
+if type fzf-tmux > /dev/null; then 
+	alias fzf='fzf-tmux -p 80%'
+fi
 
 ## dotfile -------------------------------------------------
 export DOTFILES_SOURCES_DIR=$HOME/dotfiles_sources
@@ -93,7 +95,7 @@ function gadd(){
 
 function hist(){
 	set -H
-	local COMMAND=$(history -i | tac | fzf-tmux -p --no-sort -e --preview 'echo {} | fold -s -$(tput cols)' --preview-window=down | awk '{$1=$2=$3="";print $0}')
+	local COMMAND=$(history -i | tac | fzf --no-sort -e --preview 'echo {} | fold -s -$(tput cols)' --preview-window=down | awk '{$1=$2=$3="";print $0}')
     echo $COMMAND
 	eval $COMMAND
 
