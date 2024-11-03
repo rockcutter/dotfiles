@@ -86,7 +86,7 @@ function hist(){
 	set -H
 	local COMMAND=$(\
 		history -i | tac | \
-		fzf --no-sort -e --preview 'echo {} -- | fold -s -$(tput cols)' --preview-window='down,wrap' | \
+		fzf --no-sort -e --preview 'echo {} | fold -s -$(tput cols)' --preview-window='down,wrap' | \
 		awk '{$1=$2=$3="";print $0}')
     echo $COMMAND
 	eval $COMMAND
