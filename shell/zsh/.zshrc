@@ -73,8 +73,8 @@ function repo(){
 }
 
 function ghu(){
-    gh pr view --json url
-    gh repo view --json nameWithOwner,url
+    gh pr view --json url | jq
+    gh repo view --json nameWithOwner,url | jq
 }
 
 function gadd(){
