@@ -66,6 +66,7 @@ setopt hist_ignore_dups
 setopt append_history
 setopt hist_verify
 setopt hist_expire_dups_first
+unsetopt hist_ignore_space
 
 ## Functions -------------------------------------------------
 function repo(){
