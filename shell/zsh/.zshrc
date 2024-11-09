@@ -69,6 +69,7 @@ setopt hist_ignore_dups
 setopt append_history
 setopt hist_verify
 setopt hist_expire_dups_first
+unsetopt hist_ignore_space
 
 ## Functions -------------------------------------------------
 function repo(){
@@ -76,8 +77,8 @@ function repo(){
 }
 
 function ghu(){
-    gh pr view --json url
-    gh repo view --json nameWithOwner,url
+    gh pr view --json url | jq
+    gh repo view --json nameWithOwner,url | jq
 }
 
 function gadd(){
@@ -86,18 +87,22 @@ function gadd(){
 }
 
 function hist(){
-	set -H
 	local COMMAND=$(\
 		history -i | tac | \
 		fzf --no-sort -e --preview 'echo {} | fold -s -$(tput cols)' --preview-window='down,wrap' | \
 		awk '{$1=$2=$3="";print $0}')
+	print -s $COMMAND
     echo $COMMAND
 	eval $COMMAND
 
 }
 
 function histwc(){
-    local COMMAND=$(history -i | tac | fzf --no-sort -e | awk '{$1=$2=$3="";print $0}')
+	local COMMAND=$(\
+		history -i | tac | \
+		fzf --no-sort -e --preview 'echo {} -- | fold -s -$(tput cols)' --preview-window='down,wrap' | \
+		awk '{$1=$2=$3="";print $0}')
+	print -s $COMMAND
     echo '$COMMAND | clip.exe'
     echo $COMMAND | clip.exe
 }
