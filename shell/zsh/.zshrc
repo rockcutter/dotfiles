@@ -20,7 +20,7 @@ source $ZSH/oh-my-zsh.sh
 # User onfiguraitons 
 
 ## zsh -------------------------------------------------
-setopt auto_menu
+unsetopt auto_menu
 
 ## aliases -------------------------------------------------
 
