@@ -25,7 +25,7 @@ unsetopt auto_menu
 ## aliases -------------------------------------------------
 
 alias tm='tmux'
-alias ll='ls -la'
+alias ll='ls -lah'
 
 ## fzf -------------------------------------------------
 if type fzf-tmux > /dev/null; then 
