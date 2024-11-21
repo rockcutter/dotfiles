@@ -113,6 +113,12 @@ function avt() {
 	aws-vault exec $role -- $@
 }
 
+function s3cp() {
+    local role="$1"
+    shift
+	aws-vault exec $role -- aws s3 cp $@
+}
+
 function pane(){
 	if [ $1 ]; then
 	  cnt_pane=1
