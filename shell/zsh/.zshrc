@@ -69,6 +69,7 @@ setopt hist_ignore_dups
 setopt append_history
 setopt hist_verify
 setopt hist_expire_dups_first
+setopt extended_glob
 unsetopt hist_ignore_space
 
 ## Functions -------------------------------------------------
@@ -91,7 +92,7 @@ function hist(){
 		history -i | tac | \
 		fzf --no-sort -e --preview 'echo {} | fold -s -$(tput cols)' --preview-window='down,wrap' | \
 		awk '{$1=$2=$3="";print $0}')
-	print -s $COMMAND
+	print -s "${COMMAND##+( )}"
     echo $COMMAND
 	eval $COMMAND
 
@@ -102,7 +103,7 @@ function histwc(){
 		history -i | tac | \
 		fzf --no-sort -e --preview 'echo {} -- | fold -s -$(tput cols)' --preview-window='down,wrap' | \
 		awk '{$1=$2=$3="";print $0}')
-	print -s $COMMAND
+	print -s "${COMMAND##+( )}"
     echo '$COMMAND | clip.exe'
     echo $COMMAND | clip.exe
 }
