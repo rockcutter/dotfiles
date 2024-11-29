@@ -1,5 +1,4 @@
 # Begin Oh My Zsh configuration -------------------------------------------------
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -92,7 +91,7 @@ function hist(){
 		history -i | tac | \
 		fzf --no-sort -e --preview 'echo {} | fold -s -$(tput cols)' --preview-window='down,wrap' | \
 		awk '{$1=$2=$3="";print $0}')
-	print -s "${COMMAND##+( )}"
+	print -s "${COMMAND##[[:space:]]##}"
     echo $COMMAND
 	eval $COMMAND
 
@@ -103,7 +102,7 @@ function histwc(){
 		history -i | tac | \
 		fzf --no-sort -e --preview 'echo {} -- | fold -s -$(tput cols)' --preview-window='down,wrap' | \
 		awk '{$1=$2=$3="";print $0}')
-	print -s "${COMMAND##+( )}"
+	print -s "${COMMAND##[[:space:]]##}"
     echo '$COMMAND | clip.exe'
     echo $COMMAND | clip.exe
 }
