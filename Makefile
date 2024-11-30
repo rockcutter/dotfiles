@@ -14,7 +14,7 @@ ifeq ($(OS), Windows_NT)
 install: 
 
 else
-install: zoxide/install opencommit/install
+install: zoxide/install opencommit/install git/install
 
 endif
 
@@ -25,7 +25,6 @@ zoxide/install:
 .PHONY: opencommit/install
 opencommit/install:
 	make -C opencommit install
-
 
 .PHONY: opencommit
 opencommit: 
@@ -55,3 +54,6 @@ neovim:
 git: 
 	make -C git setup
 
+.PHONY: git/install
+git: 
+	make -C git install
