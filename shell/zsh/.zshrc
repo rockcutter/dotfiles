@@ -27,9 +27,13 @@ alias tm='tmux'
 alias ll='ls -lah'
 
 ## fzf -------------------------------------------------
-if type fzf-tmux > /dev/null; then 
+# if type fzf-tmux > /dev/null; then 
+# 	alias fzf='fzf-tmux -p 80%'
+# fi
+if $TMUX;then 
 	alias fzf='fzf-tmux -p 80%'
 fi
+
 
 ## dotfile -------------------------------------------------
 export DOTFILES_SOURCES_DIR=$HOME/dotfiles_sources
