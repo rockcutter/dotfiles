@@ -24,11 +24,11 @@ zoxide/install:
 
 .PHONY: opencommit/install
 opencommit/install:
-	make -C opencommit install
+	# make -C opencommit install
 
 .PHONY: opencommit
 opencommit: 
-	make -C opencommit setup
+	# make -C opencommit setup
 
 .PHONY: zoxide
 zoxide:
