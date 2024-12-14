@@ -55,5 +55,5 @@ git:
 	make -C git setup
 
 .PHONY: git/install
-git: 
+git/install: 
 	make -C git install
