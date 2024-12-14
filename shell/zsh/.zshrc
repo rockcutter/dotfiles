@@ -10,8 +10,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 
-ZSH_THEME="crcandy"
-
+: ${ZSH_THEME:="crcandy"}
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
@@ -30,7 +29,8 @@ alias ll='ls -lah'
 # if type fzf-tmux > /dev/null; then 
 # 	alias fzf='fzf-tmux -p 80%'
 # fi
-if $TMUX;then 
+# if $TMUX;then 
+if [ -z "${(P)TMUX}" ];then 
 	alias fzf='fzf-tmux -p 80%'
 fi
 
