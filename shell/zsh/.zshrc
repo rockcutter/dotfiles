@@ -150,7 +150,7 @@ if which tmux >/dev/null 2>&1; then
 	if [ -z $VSCODE_GIT_ASKPASS_MAIN ]; then
 		break
     fi
-	if [ -z $DISABLE_TMUX ];then
+	if [ -z $DISABLE_TMUX_AUTOSTARTUP ];then
 		break
 	fi
 	#if not inside a tmux session, and if no session is started, start a new session
