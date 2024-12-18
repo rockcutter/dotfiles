@@ -147,15 +147,11 @@ function pane(){
 
 ## tmux configurations -------------------------------------------------
 if which tmux >/dev/null 2>&1; then
-	if [ -z $VSCODE_GIT_ASKPASS_MAIN ]; then
-		break
+	if [ -z $VSCODE_GIT_ASKPASS_MAIN ] && [ -z $DISABLE_TMUX_AUTOSTARTUP ]; then
+		#if not inside a tmux session, and if no session is started, start a new session
+		#もしtmuxの中にいないか起動していればサブシェルでアタッチ失敗したら新しいセッションを実行
+		test -z "$TMUX" && (tmux attach -t main || tmux new-session -s main)
     fi
-	if [ -z $DISABLE_TMUX_AUTOSTARTUP ];then
-		break
-	fi
-	#if not inside a tmux session, and if no session is started, start a new session
-	#もしtmuxの中にいないか起動していればサブシェルでアタッチ失敗したら新しいセッションを実行
-	test -z "$TMUX" && (tmux attach -t main || tmux new-session -s main)
 fi
 
 ## zoxide configurations -------------------------------------------------
