@@ -10,7 +10,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 
-: ${ZSH_THEME:="suvash_custom"}
+: ${ZSH_THEME:="suvash"}
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
@@ -60,8 +60,14 @@ export GOBIN=$GOPATH/bin
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$GOBIN
 
+## brew
+export PATH=$PATH:/opt/homebrew/bin
+
+## psql 
+export PATH=$PATH:/opt/homebrew/opt/libpq/bin
+
 ## compose configuration
-export PATH=$PATH$HOME/.config/composer/vendor/bin
+export PATH=$PATH:$HOME/.config/composer/vendor/bin
  
 ## history configuration -------------------------------------------------
 
@@ -95,7 +101,7 @@ function gadd(){
 
 function hist(){
 	local COMMAND=$(\
-		history -i | tac | \
+		history -i | tail -r | \
 		fzf --no-sort -e --preview 'echo {} | fold -s -$(tput cols)' --preview-window='down,wrap' | \
 		awk '{$1=$2=$3="";print $0}')
 	print -s "${COMMAND##[[:space:]]##}"
