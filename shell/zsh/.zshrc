@@ -25,6 +25,12 @@ unsetopt auto_menu
 alias tm='tmux'
 alias ll='ls -lah'
 
+## zoxide 
+if command -v z > /dev/null 2>&1; then
+	alias cd=z
+fi 
+
+
 ## fzf -------------------------------------------------
 # if type fzf-tmux > /dev/null; then 
 # 	alias fzf='fzf-tmux -p 80%'
