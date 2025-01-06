@@ -50,8 +50,10 @@ export GPG_TTY=$(tty)
 
 ## 1password configuration -------------------------------------------------
 
-alias ssh='ssh.exe'
-alias ssh-add='ssh-add.exe'
+if command -v ssh.exe > /dev/null 2>&1; then 
+	alias ssh='ssh.exe'
+	alias ssh-add='ssh-add.exe'
+fi 
 
 ## golang configuration -------------------------------------------------
 
