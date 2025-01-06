@@ -62,6 +62,9 @@ export GOBIN=$GOPATH/bin
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$GOBIN
 
+## bin 
+export PATH=$PATH:~/.local/bin
+
 ## brew
 export PATH=$PATH:/opt/homebrew/bin
 
