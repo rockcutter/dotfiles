@@ -4,7 +4,7 @@ ifeq ($(OS), Windows_NT)
 setup: neovim git
 
 else
-setup: bash tmux neovim git zoxide zsh opencommit ohmyzsh
+setup: bash tmux neovim git zoxide zsh opencommit 
 
 endif
 
@@ -40,11 +40,7 @@ bash:
 
 .PHONY: zsh
 zsh: 
-	make -C shell/zsh setup
 
-.PHONY: ohmyzsh
-ohmyzsh: 
-	make -C shell/oh-my-zsh setup
 
 .PHONY: tmux
 tmux:
