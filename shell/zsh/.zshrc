@@ -26,9 +26,6 @@ alias tm='tmux'
 alias ll='ls -lah'
 
 ## zoxide 
-if command -v z > /dev/null 2>&1; then
-	alias cd=z
-fi 
 
 
 ## fzf -------------------------------------------------
@@ -161,7 +158,15 @@ function pane(){
 	fi
 }
 
+## zoxide configurations -------------------------------------------------
+if command -v zoxide > /dev/null 2>&1; then
+	alias cd=z
+	eval "$(zoxide init zsh)"
+fi 
 
+## mise configurations -------------------------------------------------
+eval "$(~/.local/bin/mise activate zsh)"
+ 
 ## tmux configurations -------------------------------------------------
 if which tmux >/dev/null 2>&1; then
 	if [ -z $VSCODE_GIT_ASKPASS_MAIN ] && [ -z $DISABLE_TMUX_AUTOSTARTUP ]; then
@@ -170,10 +175,4 @@ if which tmux >/dev/null 2>&1; then
 		test -z "$TMUX" && (tmux attach -t main || tmux new-session -s main)
     fi
 fi
-
-## zoxide configurations -------------------------------------------------
-eval "$(zoxide init zsh)"
-
-## mise configurations -------------------------------------------------
-eval "$(~/.local/bin/mise activate zsh)"
 
