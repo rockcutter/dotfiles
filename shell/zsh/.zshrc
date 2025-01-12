@@ -140,7 +140,7 @@ function s3cp() {
 	aws-vault exec $role -- aws s3 cp $@
 }
 
-function pane(){
+function p(){
 	if [ $1 ]; then
 	  cnt_pane=1
 	  while [ $cnt_pane -lt $1 ]
