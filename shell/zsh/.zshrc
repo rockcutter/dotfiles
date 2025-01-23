@@ -94,7 +94,10 @@ unsetopt hist_ignore_space
 
 ## Functions -------------------------------------------------
 function repo(){
-    cd $(ghq root)/$(ghq list | fzf --query="$LBUFFER" -e)
+	REPO=$(ghq list | fzf --query="$LBUFFER" -e)
+	if [ -n "$REPO" ]; then
+		cd $(ghq root)/$REPO
+	fi
 }
 
 function ghu(){
@@ -109,7 +112,7 @@ function gadd(){
 
 function hist(){
 	local COMMAND=$(\
-		history -i | tail -r | \
+		history -i | tac | \
 		fzf --no-sort -e --preview 'echo {} | fold -s -$(tput cols)' --preview-window='down,wrap' | \
 		awk '{$1=$2=$3="";print $0}')
 	print -s "${COMMAND##[[:space:]]##}"
