@@ -112,13 +112,12 @@ function gadd(){
 
 function hist(){
 	local COMMAND=$(\
-		history -i | tac | \
-		fzf --no-sort -e --preview 'echo {} | fold -s -$(tput cols)' --preview-window='down,wrap' | \
-		awk '{$1=$2=$3="";print $0}')
+		history -i | sort -u -k 4 | sort -k 1,1r \
+		| fzf --no-sort -e --preview 'echo {} | fold -s -$(tput cols)' --preview-window='down,wrap' \
+		| awk '{$1=$2=$3="";print $0}')
 	print -s "${COMMAND##[[:space:]]##}"
     echo $COMMAND
 	eval $COMMAND
-
 }
 
 function histwc(){
