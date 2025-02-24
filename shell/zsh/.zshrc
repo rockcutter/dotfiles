@@ -24,6 +24,8 @@ unsetopt auto_menu
 
 alias tm='tmux'
 alias ll='ls -lah'
+alias dc='docker compose'
+alias d='docker'
 
 ## zoxide 
 
