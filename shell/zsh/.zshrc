@@ -67,6 +67,9 @@ export GOBIN=$GOPATH/bin
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$GOBIN
 
+## rye 
+source "$HOME/.rye/env"
+
 ## bin 
 export PATH=$PATH:~/.local/bin
 
