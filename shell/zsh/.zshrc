@@ -117,7 +117,7 @@ function gadd(){
 
 function hist(){
 	local COMMAND=$(\
-		history -i | sort -u -k 4 | sort -k 1,1r \
+		history -i | sort -r -k 4 | sort -u -k 4 | sort -r -k 1,1 \
 		| fzf --no-sort -e --preview 'echo {} | fold -s -$(tput cols)' --preview-window='down,wrap' \
 		| awk '{$1=$2=$3="";print $0}')
 	print -s "${COMMAND##[[:space:]]##}"
