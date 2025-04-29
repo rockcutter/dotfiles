@@ -5,6 +5,7 @@ alias l='ls -CF --color=auto'
 
 # kubeclt 
 alias kc='kubectl'
+alias mkc='microk8s kubectl'
 
 # docker 
 alias dc='docker compose'
