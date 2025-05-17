@@ -57,6 +57,7 @@ export GPG_TTY=$(tty)
 
 if command -v ssh.exe > /dev/null 2>&1; then 
 	alias ssh='ssh.exe'
+	alias scp='scp.exe'
 	alias ssh-add='ssh-add.exe'
 fi 
 
