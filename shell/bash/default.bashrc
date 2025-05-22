@@ -3,9 +3,14 @@ alias ll='ls -alF --color=auto'
 alias la='ls -A --color=auto'
 alias l='ls -CF --color=auto'
 
-# kubeclt 
+# kubectl 
 alias kc='kubectl'
 alias mkc='microk8s kubectl'
+
+# microk8sが存在する場合、kubectlコマンドをmicrok8s kubectlにエイリアス
+if command -v microk8s >/dev/null 2>&1; then
+    alias kubectl='microk8s kubectl'
+fi
 
 # docker 
 alias dc='docker compose'
