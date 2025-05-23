@@ -1,6 +1,5 @@
 [user]
 	name = rockcutter
-	email = rockcutter414@gmail.com
 [alias]
 	sw = switch
 	swf = "!f () { git switch $(git --no-pager branch --sort=-committerdate | fzf); };f"
@@ -11,7 +10,6 @@
 	cmm = commit -m
 	b = branch
 	cdiff = diff --cached
-	# addf = "!f () { git add $(git status -s | awk '{print $2}' | fzf -m --preview 'git diff -- {1}' | sed -e 's/\n/ /g'); git status -s; };f"
 
 [core]
 	editor = nvim
