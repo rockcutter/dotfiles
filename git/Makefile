@@ -8,6 +8,7 @@ ifeq ($(OS), Windows_NT)
 	Copy-Item -Path .gitconfig -Destination $${HOME}/.gitconfig -Force
 else
 	cp .gitconfig $${HOME}/.gitconfig
+	cp ignore $${HOME}/.config/git/ignore
 endif
 
 .PHONY: install
