@@ -1,10 +1,10 @@
 ## .clinerules
 ```
-curl -OL https://raw.githubusercontent.com/rockcutter/dotfiles/refs/heads/main/cline/.clinerules
+curl -OL https://raw.githubusercontent.com/rockcutter/dotfiles/refs/heads/main/ai_agent/.clinerules
 ```
 
 ## CLAUDE.md
 ```
 mkdir ~/.claude
-curl -L https://raw.githubusercontent.com/rockcutter/dotfiles/refs/heads/main/cline/.clinerules -o ~/.claude/CLAUDE.md
+curl -L https://raw.githubusercontent.com/rockcutter/dotfiles/refs/heads/main/ai_agent/.clinerules -o ~/.claude/CLAUDE.md
 ```
