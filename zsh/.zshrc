@@ -100,7 +100,7 @@ unsetopt hist_ignore_space
 
 ## Functions -------------------------------------------------
 function repo(){
-	REPO=$(ghq list | fzf --query="$LBUFFER" -e)
+	REPO=$(ghq list | grep -v "^archive/" | fzf --query="$LBUFFER" -e)
 	if [ -n "$REPO" ]; then
 		cd $(ghq root)/$REPO
 	fi
