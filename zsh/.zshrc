@@ -168,8 +168,8 @@ function p(){
 
 ## zoxide configurations -------------------------------------------------
 if command -v zoxide > /dev/null 2>&1; then
-	alias cd=z
 	eval "$(zoxide init zsh)"
+	alias cd=z
 fi 
 
 ## mise configurations -------------------------------------------------
