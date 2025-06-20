@@ -178,7 +178,7 @@ if command -v zoxide > /dev/null 2>&1; then
 fi 
 
 ## mise configurations -------------------------------------------------
-eval "$(~/.local/bin/mise activate zsh)"
+eval "$(mise activate zsh)"
  
 ## tmux configurations -------------------------------------------------
 if which tmux >/dev/null 2>&1; then
