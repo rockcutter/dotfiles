@@ -27,6 +27,11 @@ alias ll='ls -lah'
 alias dc='docker compose'
 alias d='docker'
 
+if command -v gdate > /dev/null 2>&1; then 
+	alias date=gdate
+fi 
+
+
 ## zoxide 
 
 
@@ -41,8 +46,8 @@ fi
 
 
 ## dotfile -------------------------------------------------
-export DOTFILES_SOURCES_DIR=$HOME/dotfiles_sources
-source $DOTFILES_SOURCES_DIR/*.sh
+# export DOTFILES_SOURCES_DIR=$HOME/dotfiles_sources
+# source $DOTFILES_SOURCES_DIR/*.sh
 
 ## aws configuration -------------------------------------------------
 
