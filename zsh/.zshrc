@@ -100,7 +100,7 @@ unsetopt hist_ignore_space
 
 ## Functions -------------------------------------------------
 function repo(){
-	REPO=$(ghq list | fzf --query="$LBUFFER" -e)
+	REPO=$(ghq list | grep -v "^archive/" | fzf --query="$LBUFFER" -e)
 	if [ -n "$REPO" ]; then
 		cd $(ghq root)/$REPO
 	fi
@@ -168,8 +168,8 @@ function p(){
 
 ## zoxide configurations -------------------------------------------------
 if command -v zoxide > /dev/null 2>&1; then
-	alias cd=z
 	eval "$(zoxide init zsh)"
+	alias cd=z
 fi 
 
 ## mise configurations -------------------------------------------------
