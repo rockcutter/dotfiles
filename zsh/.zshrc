@@ -34,6 +34,10 @@ fi
 
 ## zoxide 
 
+## brew
+### coreutils
+export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+
 
 ## fzf -------------------------------------------------
 # if type fzf-tmux > /dev/null; then 
