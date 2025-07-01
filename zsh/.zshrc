@@ -17,6 +17,8 @@ source $ZSH/oh-my-zsh.sh
 
 # User onfiguraitons 
 
+OS=$(uname | tr A-Z a-z)
+
 ## zsh -------------------------------------------------
 unsetopt auto_menu
 
@@ -55,7 +57,11 @@ fi
 
 ## aws configuration -------------------------------------------------
 
-export AWS_VAULT_BACKEND=pass
+if [ "$OS" = "darwin" ]; then
+    export AWS_VAULT_BACKEND=keychain
+else
+    export AWS_VAULT_BACKEND=pass
+fi
 export AWS_VAULT_PASS_PREFIX=aws-vault
 export AWS_SESSION_TOKEN_TTL=3h
 export AWS_DEFAULT_OUTPUT="json"
