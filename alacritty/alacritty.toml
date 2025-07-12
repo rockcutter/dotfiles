@@ -57,3 +57,14 @@ white = "#D5D6F3"
 key = "Slash"
 mods = "Control"
 chars = "\u001f"
+
+[[keyboard.bindings]]
+key = "V"
+mods = "Control"
+action = "Paste"
+
+[[keyboard.bindings]]
+key = "C"
+mods = "Control"
+action = "Copy"
+
