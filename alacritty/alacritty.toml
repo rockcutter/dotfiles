@@ -1,0 +1,57 @@
+[font]
+# CaskaydiaCove Nerd Fontの基本設定
+normal = { family = "CaskaydiaCove Nerd Font", style = "Regular" }
+bold = { family = "CaskaydiaCove Nerd Font", style = "Bold" }
+italic = { family = "CaskaydiaCove Nerd Font", style = "Italic" }
+bold_italic = { family = "CaskaydiaCove Nerd Font", style = "Bold Italic" }
+
+# フォントサイズ
+size = 12.0
+
+# 文字間隔の調整（必要に応じて）
+offset = { x = 0, y = 0 }
+glyph_offset = { x = 0, y = 0 }
+
+
+[colors]
+# 基本色
+[colors.primary]
+background = "#1D1D26"
+foreground = "#CBCBF0"
+
+# カーソル
+[colors.cursor]
+text = "CellBackground"
+cursor = "#CBCBF0"
+
+# 選択範囲
+[colors.selection]
+text = "CellForeground"
+background = "#FF3399"
+
+# 通常色
+[colors.normal]
+black = "#1D1D26"
+red = "#FF3399"
+green = "#00D364"
+yellow = "#FFCC66"
+blue = "#00CBFF"
+magenta = "#CC66FF"
+cyan = "#00CECA"
+white = "#CBCBF0"
+
+# 明るい色
+[colors.bright]
+black = "#636667"
+red = "#FF2F92"
+green = "#00D364"
+yellow = "#FFD479"
+blue = "#00CBFF"
+magenta = "#D783FF"
+cyan = "#00D5D4"
+white = "#D5D6F3"
+
+[[keyboard.bindings]]
+key = "Slash"
+mods = "Control"
+chars = "\u001f"
