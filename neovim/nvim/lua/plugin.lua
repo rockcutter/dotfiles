@@ -1,25 +1,66 @@
 require("lazy").setup({
-        {
-                "vim-airline/vim-airline",
-                airline_powerline_fonts = 1
-        },
-        {
-                "easymotion/vim-easymotion"
-        },
-        {
-                "tpope/vim-surround"
-        },
+	{
+		"vim-airline/vim-airline",
+		airline_powerline_fonts = 1,
+	},
+	{
+		"prabirshrestha/vim-lsp"
+	},
+	{
+		"mattn/vim-lsp-settings"
+	},
+	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		build = "make",
+	},
+	{
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.8",
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
+	{
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v3.x",
+		filesystem = {
+			hijack_netrw_behavior = "open_current",
+			filtered_items = {
+				visible = false,
+				hide_dotfiles = false,
+				hide_gitignored = true,
+			},
+		},
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+				"MunifTanjim/nui.nvim",
+				-- Optional image support for file preview: See `# Preview Mode` for more information.
+			-- {"3rd/image.nvim", opts = {}},
+			-- OR use snacks.nvim's image module:
+			-- "folke/snacks.nvim",
+		},
+		lazy = false, -- neo-tree will lazily load itself
+		---@module "neo-tree"
+		---@type neotree.Config?
+		opts = {
+			-- add options here
+		},
+	},
+	{
+		"voldikss/vim-floaterm",
+	},
+	{
+		"tpope/vim-surround",
+	},
 
-        -- theme
-        {
-                "ajmwagar/vim-deus"
-        },
-        {
-                "folke/tokyonight.nvim",
-                lazy = false,
-        },
-        {
-                "morhetz/gruvbox"
-        },
+	-- theme
+	{
+		"ajmwagar/vim-deus",
+	},
+	{
+		"folke/tokyonight.nvim",
+		lazy = false,
+	},
+	{
+		"morhetz/gruvbox",
+	},
 })
-
