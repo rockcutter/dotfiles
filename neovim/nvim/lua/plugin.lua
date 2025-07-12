@@ -7,6 +7,9 @@ require("lazy").setup({
 		"prabirshrestha/vim-lsp",
 	},
 	{
+		"airblade/vim-gitgutter",
+	},
+	{
 		"mattn/vim-lsp-settings",
 	},
 	{
