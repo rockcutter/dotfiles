@@ -22,4 +22,3 @@ require("keymap")
 
 -- telescope
 require("prep_telescope")
-

@@ -4,10 +4,10 @@ require("lazy").setup({
 		airline_powerline_fonts = 1,
 	},
 	{
-		"prabirshrestha/vim-lsp"
+		"prabirshrestha/vim-lsp",
 	},
 	{
-		"mattn/vim-lsp-settings"
+		"mattn/vim-lsp-settings",
 	},
 	{
 		"nvim-telescope/telescope-fzf-native.nvim",
@@ -32,8 +32,8 @@ require("lazy").setup({
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-				"MunifTanjim/nui.nvim",
-				-- Optional image support for file preview: See `# Preview Mode` for more information.
+			"MunifTanjim/nui.nvim",
+			-- Optional image support for file preview: See `# Preview Mode` for more information.
 			-- {"3rd/image.nvim", opts = {}},
 			-- OR use snacks.nvim's image module:
 			-- "folke/snacks.nvim",

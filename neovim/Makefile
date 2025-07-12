@@ -6,3 +6,6 @@ else
 	cp -r nvim $${HOME}/.config/nvim
 endif
 
+fmt: 
+	stylua . 
+
