@@ -16,7 +16,6 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # User onfiguraitons 
-
 OS=$(uname | tr A-Z a-z)
 
 ## zsh -------------------------------------------------
@@ -147,8 +146,8 @@ function histwc(){
 		fzf --no-sort -e --preview 'echo {} -- | fold -s -$(tput cols)' --preview-window='down,wrap' | \
 		awk '{$1=$2=$3="";print $0}')
 	print -s "${COMMAND##[[:space:]]##}"
-    echo '$COMMAND | clip.exe'
-    echo $COMMAND | clip.exe
+	echo '$COMMAND | clip.exe'
+	echo $COMMAND | clip.exe
 }
 
 function avt() {
@@ -158,34 +157,34 @@ function avt() {
 }
 
 function s3cp() {
-    local role="$1"
-    shift
+	local role="$1"
+	shift
 	aws-vault exec $role -- aws s3 cp $@
 }
 
 function p(){
 	if [ $1 ]; then
-	  cnt_pane=1
-	  while [ $cnt_pane -lt $1 ]
-	  do
-		if [ $(( $cnt_pane & 1 )) ]; then
-			tmux split-window -h
-		else
-			tmux split-window -v
-		fi
-		if [ $1 -ne 2 ]; then
-			tmux select-layout tiled 1>/dev/null
-		fi
-		cnt_pane=$(( $cnt_pane + 1 ))
-	  done
+		cnt_pane=1
+		while [ $cnt_pane -lt $1 ]
+		do
+			if [ $(( $cnt_pane & 1 )) ]; then
+				tmux split-window -h
+			else
+				tmux split-window -v
+			fi
+			if [ $1 -ne 2 ]; then
+				tmux select-layout tiled 1>/dev/null
+			fi
+			cnt_pane=$(( $cnt_pane + 1 ))
+		done
 	fi
 }
 
 ## zoxide configurations -------------------------------------------------
-if command -v zoxide > /dev/null 2>&1; then
-	eval "$(zoxide init zsh)"
-	alias cd=z
-fi 
+# if command -v zoxide > /dev/null 2>&1; then
+# 	eval "$(zoxide init zsh)"
+# 	alias cd=z
+# fi 
 
 ## mise configurations -------------------------------------------------
 eval "$(mise activate zsh)"
