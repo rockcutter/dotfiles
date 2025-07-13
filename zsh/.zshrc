@@ -187,7 +187,14 @@ function p(){
 # fi 
 
 ## mise configurations -------------------------------------------------
-eval "$(mise activate zsh)"
+# PATHを一旦退避させないと重くなる
+PATH_BUFFER=$PATH
+PATH=
+
+eval "$($HOME/.local/bin/mise activate zsh)"
+
+PATH="$PATH:$PATH_BUFFER"
+export PATH="$HOME/.local/share/mise/shims:$PATH"
  
 ## tmux configurations -------------------------------------------------
 if which tmux >/dev/null 2>&1; then
