@@ -13,6 +13,8 @@ vim.cmd("set number")
 vim.opt.mouse = ""
 vim.opt.clipboard = "unnamedplus"
 
+vim.opt.splitright = true
+
 -- tab -> 4 space
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
