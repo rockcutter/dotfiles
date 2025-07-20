@@ -1,4 +1,6 @@
 .PHONY: setup
 
+# windows command prompt copy command 
 setup: 
-	cp .wezterm.lua $$HOME/.wezterm.lua
+	copy .\.wezterm.lua %USERPROFILE%\.wezterm.lua
+
