@@ -1,10 +1,15 @@
 local wezterm = require("wezterm")
-local config = {}
+local config = wezterm.config_builder()
 
 -- Windowsの場合のみデフォルトシェルを設定
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   config.default_prog = { "ubuntu2204.exe" }
 end
+
+config.use_fancy_tab_bar = false
+config.window_decorations = "RESIZE"
+config.use_ime = true
+config.window_background_opacity = 0.95
 
 -- フォント設定
 config.font = wezterm.font("CaskaydiaCove Nerd Font", { weight = "Regular" })
