@@ -12,7 +12,9 @@ config.use_ime = true
 config.window_background_opacity = 0.95
 
 -- フォント設定
-config.font = wezterm.font("CaskaydiaCove Nerd Font", { weight = "Regular" })
+-- config.font = wezterm.font("CaskaydiaCove Nerd Font", { weight = "Regular" })
+config.font = wezterm.font("UDEV Gothic 35NF", { weight = "Regular" })
+
 config.font_size = 12.0
 
 -- 色設定
