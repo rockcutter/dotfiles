@@ -45,7 +45,7 @@ export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 # 	alias fzf='fzf-tmux -p 80%'
 # fi
 # if $TMUX;then 
-if [ -z "${(P)TMUX}" ];then 
+if command -v fzf-tmux >/dev/null 2>&1 && [ -z "${(P)TMUX}" ];then 
 	alias fzf='fzf-tmux -p 80%'
 fi
 
