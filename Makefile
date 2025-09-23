@@ -2,13 +2,14 @@
 help: 
 	less Makefile
 
-setup: 
+setup:
 	-make -C ./zsh setup
 	-make -C ./tmux setup
 	-make -C ./neovim setup
 	-make -C ./git setup
 	-make -C ./ai_agent setup
+	-make -C ./sway setup
 	-make -C ./wezterm -f linux.mk setup
-	# deprecated 
+	# deprecated
 	-make -C ./alacritty -f linux.mk setup
 
