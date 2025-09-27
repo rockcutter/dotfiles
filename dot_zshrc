@@ -27,7 +27,7 @@ alias tm='tmux'
 alias ll='ls -lah'
 alias dc='docker compose'
 alias d='docker'
-alias czm='chezmoi'
+alias chez='chezmoi'
 
 if command -v gdate > /dev/null 2>&1; then 
 	alias date=gdate
@@ -124,7 +124,7 @@ function repo(){
 	fi
 }
 
-function czmcmm(){
+function chezcmm(){
 	chezmoi git add . 
 	chezmoi git -- commit -m "$(chezmoi generate git-commit-message)"
 	chezmoi git push
