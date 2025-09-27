@@ -1,0 +1,17 @@
+[user]
+	name = rockcutter
+[alias]
+	sw = switch
+	swf = "!f () { git switch $(git --no-pager branch --sort=-committerdate | fzf); };f"
+	s = status
+	ss = status -s
+	s = switch
+	cm = commit
+	cmm = commit -m
+	b = branch
+	cdiff = diff --cached
+
+[core]
+	editor = nvim
+[push]
+	autoSetupRemote = true
