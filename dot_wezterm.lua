@@ -10,7 +10,7 @@ config.use_fancy_tab_bar = false
 config.window_decorations = "RESIZE"
 config.use_ime = true
 -- config.window_background_opacity = 0.95
-config.window_background_opacity = 0.80
+config.window_background_opacity = 0.7
 
 -- フォント設定
 -- config.font = wezterm.font("CaskaydiaCove Nerd Font", { weight = "Regular" })
