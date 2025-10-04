@@ -276,6 +276,15 @@ bindsym $mod+t exec "swaymsg '[app_id=org.wezfurlong.wezterm] scratchpad show; [
 exec discord
 exec swaync
 exec 1password
+exec fcitx5
+exec wezterm
+
+# media control
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
 
 output "*" background ~/.config/sway/wallpaper.png fill
 
