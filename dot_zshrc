@@ -27,7 +27,6 @@ alias tm='tmux'
 alias ll='ls -lah'
 alias dc='docker compose'
 alias d='docker'
-alias chez='chezmoi'
 
 if command -v gdate > /dev/null 2>&1; then 
 	alias date=gdate
@@ -124,12 +123,6 @@ function repo(){
 	fi
 }
 
-function chezcmm(){
-	chezmoi git add . 
-	chezmoi git -- commit -m "$(chezmoi generate git-commit-message)"
-	chezmoi git push
-}
-
 function ghu(){
     gh pr view --json url | jq
     gh repo view --json nameWithOwner,url | jq
@@ -195,6 +188,23 @@ function p(){
 # 	eval "$(zoxide init zsh)"
 # 	alias cd=z
 # fi 
+
+## chezmoi configurations
+alias chez='chezmoi'
+
+function chezcmm(){
+	chezmoi git add . 
+	chezmoi git -- commit -m "$(chezmoi generate git-commit-message)"
+	chezmoi git push
+}
+
+function chezg(){
+	chezmoi git "$@"
+}
+
+function chezea(){
+	chezmoi edit --apply "$@"
+}
 
 ## mise configurations -------------------------------------------------
 # PATHを一旦退避させないと重くなる
