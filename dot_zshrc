@@ -193,9 +193,10 @@ function p(){
 alias chez='chezmoi'
 
 function chezcmm(){
-	chezmoi git add . 
+	chezmoi git -- add . 
+	chezmoi git -- diff --cache
 	chezmoi git -- commit -m "$(chezmoi generate git-commit-message)"
-	chezmoi git push
+	chezmoi git -- push
 }
 
 function chezg(){
