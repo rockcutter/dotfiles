@@ -9,7 +9,7 @@ function virtualenv_info {
 
 # PROMPT='%F{red}%n%f at %F{yellow}%m%f in %B%F{green}%~%f%b at %F{red}%D{%Y-%m-%dT%H:%M:%S%z}%f
 # $?$(git_prompt_info)$(virtualenv_info) $(prompt_char) '
-PROMPT='%F{red}%n%f at %F{yellow}%m%f at %F{red}%D{%Y-%m-%dT%H:%M:%S%z} %F{yellow}$ZSH_NEST_INDICATOR%f
+PROMPT='%F{green}$ZSH_NEST_INDICATOR %F{red}%n%f at %F{yellow}%m%f at %F{red}%D{%Y-%m-%dT%H:%M:%S%z} %f
 wd %B%F{green}%~%f%b
 $?$(git_prompt_info)$(virtualenv_info) $(prompt_char) '
 
