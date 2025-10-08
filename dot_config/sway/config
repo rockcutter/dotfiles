@@ -269,7 +269,8 @@ for_window [app_id="org.wezfurlong.wezterm"] {
     move scratchpad
 }
 
-client.focused #000000 #ff3399 #ffffff
+client.focused #000000 #ff3399 #f8f8ff
+font pango:UDEV Gothic 35NF 10
 
 # F12キーでweztermをトグル表示
 bindsym $mod+t exec "swaymsg '[app_id=org.wezfurlong.wezterm] scratchpad show; [app_id=org.wezfurlong.wezterm] resize set width 98ppt height 98ppt; [app_id=org.wezfurlong.wezterm] move position 1ppt 1ppt'"
