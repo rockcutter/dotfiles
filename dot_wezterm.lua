@@ -16,6 +16,8 @@ config.window_background_opacity = 0.7
 -- config.font = wezterm.font("CaskaydiaCove Nerd Font", { weight = "Regular" })
 config.font = wezterm.font("UDEV Gothic 35NF", { weight = "Regular" })
 
+config.window_close_confirmation = "NeverPrompt"
+
 config.font_size = 12.0
 
 -- 色設定
