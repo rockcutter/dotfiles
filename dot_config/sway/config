@@ -17,7 +17,7 @@ set $term wezterm
 # Your preferred application launcher
 set $menu rofi -show drun
 
-default_border none 
+default_border pixel 2
 
 ### Output configuration
 #
@@ -268,6 +268,12 @@ for_window [app_id="org.wezfurlong.wezterm"] {
     move position center
     move scratchpad
 }
+
+client.focused #000000 #ff3399 #f8f8ff
+font pango:UDEV Gothic 35NF 10
+
+gaps outer 5
+gaps inner 5
 
 # F12キーでweztermをトグル表示
 bindsym $mod+t exec "swaymsg '[app_id=org.wezfurlong.wezterm] scratchpad show; [app_id=org.wezfurlong.wezterm] resize set width 98ppt height 98ppt; [app_id=org.wezfurlong.wezterm] move position 1ppt 1ppt'"
