@@ -2,6 +2,7 @@
 alias ll='ls -alF --color=auto'
 alias la='ls -A --color=auto'
 alias l='ls -CF --color=auto'
+alias sctl='systemctl'
 
 # kubectl 
 alias kc='kubectl'
