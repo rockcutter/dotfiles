@@ -277,6 +277,7 @@ gaps inner 5
 
 # F12キーでweztermをトグル表示
 bindsym $mod+t exec "swaymsg '[app_id=org.wezfurlong.wezterm] scratchpad show; [app_id=org.wezfurlong.wezterm] resize set width 98ppt height 98ppt; [app_id=org.wezfurlong.wezterm] move position 1ppt 1ppt'"
+bindsym Ctrl+Shift+Space exec "1password --quick-access"
 
 # auto startup 
 exec discord
