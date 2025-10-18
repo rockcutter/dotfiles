@@ -20,7 +20,7 @@ OS=$(uname | tr A-Z a-z)
 
 ## zsh -------------------------------------------------
 unsetopt auto_menu
-export ZSH_NEST_INDICATOR="$ZSH_NEST_INDICATOR>"
+export ZSH_NEST_INDICATOR="$ZSH_NEST_INDICATOR+"
 
 ## aliases -------------------------------------------------
 
@@ -63,6 +63,8 @@ fi
 
 if [ "$OS" = "darwin" ]; then
     export AWS_VAULT_BACKEND=keychain
+elif command -v secret-tool >/dev/null 2>&1; then
+    export AWS_VAULT_BACKEND=secret-service
 else
     export AWS_VAULT_BACKEND=pass
 fi

@@ -1,0 +1,18 @@
+# Host hogefuga
+# 	HostName hogefuga.example.com
+# 	User hogefuga
+# 	Port 22
+# 	ServerAliveInterval 60
+# 	ServerAliveCountMax 60
+
+# Host hogefuga
+# 	HostName hogefuga.example.com
+# 	User hogefuga
+# 	Port 22
+# 	ServerAliveInterval 60
+# 	ServerAliveCountMax 60
+# 	RequestTTY yes
+# 	RemoteCommand mkdir -p /tmp/rockcutter; curl -o /tmp/rockcutter/default.bashrc "https://raw.githubusercontent.com/rockcutter/dotfiles/refs/heads/main/default.bashrc"; bash --rcfile "/tmp/rockcutter/default.bashrc"
+	
+# Host *
+# 	IdentityAgent ~/.1password/agent.sock
