@@ -29,6 +29,10 @@ alias ll='ls -lah'
 alias dc='docker compose'
 alias d='docker'
 alias sctl='systemctl'
+alias zbat='gunzip | bat'
+alias zhead='gunzip | head'
+alias ztail='gunzip | tail'
+
 
 if command -v gdate > /dev/null 2>&1; then 
 	alias date=gdate
