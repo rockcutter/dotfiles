@@ -15,10 +15,17 @@ config.window_background_opacity = 0.7
 -- フォント設定
 -- config.font = wezterm.font("CaskaydiaCove Nerd Font", { weight = "Regular" })
 config.font = wezterm.font("UDEV Gothic 35NF", { weight = "Regular" })
+config.font_size = 12.0
 
 config.window_close_confirmation = "NeverPrompt"
 
-config.font_size = 12.0
+config.keys = {
+	{
+		key = 'v',
+		mods = 'CTRL',
+		action = wezterm.action.PasteFrom 'Clipboard',
+	}
+}
 
 -- 色設定
 config.colors = {
