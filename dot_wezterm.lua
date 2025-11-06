@@ -19,13 +19,15 @@ config.font_size = 12.0
 
 config.window_close_confirmation = "NeverPrompt"
 
-config.keys = {
-	{
-		key = 'v',
-		mods = 'CTRL',
-		action = wezterm.action.PasteFrom 'Clipboard',
+if wezterm.target_triple ~= "aarch64-apple-darwin" then
+	config.keys = {
+		{
+			key = 'v',
+			mods = 'CTRL',
+			action = wezterm.action.PasteFrom 'Clipboard',
+		}
 	}
-}
+end
 
 -- 色設定
 config.colors = {
