@@ -17,10 +17,10 @@ vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", { noremap = true, silent = true 
 vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('t', '<C-h>', '<C-\\><C-n><C-w>h', { desc = 'Move to left pane' })
-vim.api.nvim_set_keymap('t', '<C-j>', '<C-\\><C-n><C-w>j', { desc = 'Move to bottom pane' })
-vim.api.nvim_set_keymap('t', '<C-k>', '<C-\\><C-n><C-w>k', { desc = 'Move to top pane' })
-vim.api.nvim_set_keymap('t', '<C-l>', '<C-\\><C-n><C-w>l', { desc = 'Move to right pane' })
+-- vim.api.nvim_set_keymap('t', '<C-h>', '<C-\\><C-n><C-w>h', { desc = 'Move to left pane' })
+-- vim.api.nvim_set_keymap('t', '<C-j>', '<C-\\><C-n><C-w>j', { desc = 'Move to bottom pane' })
+-- vim.api.nvim_set_keymap('t', '<C-k>', '<C-\\><C-n><C-w>k', { desc = 'Move to top pane' })
+-- vim.api.nvim_set_keymap('t', '<C-l>', '<C-\\><C-n><C-w>l', { desc = 'Move to right pane' })
 
 -- jj -> esc
 -- for vscode add ↓ keybindings.json
