@@ -89,7 +89,7 @@ require("lazy").setup({
 -- neo-tree
 require("neo-tree").setup({
   window = {
-    width = 20,
+    width = 40,
   },
 
 })

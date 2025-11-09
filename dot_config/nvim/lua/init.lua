@@ -11,6 +11,13 @@ require("~/.config/nvim/random_colorscheme")
 -- etc setting
 vim.cmd("set number")
 
+vim.api.nvim_create_autocmd("VimResized", {
+  pattern = "*",
+  callback = function()
+    vim.cmd("wincmd =")
+  end,
+})
+
 -- tab -> 4 space
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
