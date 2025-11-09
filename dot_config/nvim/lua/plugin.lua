@@ -85,3 +85,28 @@ require("lazy").setup({
 		"morhetz/gruvbox",
 	},
 })
+
+-- neo-tree
+require("neo-tree").setup({
+  window = {
+    width = 20,
+  },
+
+})
+
+-- フォーカスに応じて幅を変更
+vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter" }, {
+  callback = function()
+    if vim.bo.filetype == "neo-tree" then
+      vim.cmd("vertical resize 40")
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd("WinLeave", {
+  callback = function()
+    if vim.bo.filetype == "neo-tree" then
+      vim.cmd("vertical resize 20")
+    end
+  end,
+})
