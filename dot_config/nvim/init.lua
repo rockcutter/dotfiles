@@ -10,6 +10,15 @@ require("random_colorscheme")
 
 -- etc setting
 vim.cmd("set number")
+
+vim.api.nvim_create_autocmd("VimResized", {
+  pattern = "*",
+  callback = function()
+    vim.cmd("wincmd =")
+  end,
+})
+
+
 vim.opt.mouse = ""
 vim.opt.clipboard = "unnamedplus"
 
