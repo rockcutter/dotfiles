@@ -21,24 +21,33 @@ require("lazy").setup({
 		tag = "0.1.8",
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
--- 	{
--- 		"folke/noice.nvim",
--- 		event = "VeryLazy",
--- 		config = function()
--- 			require("prep_noice")
--- 		end,
--- 		opts = {
--- 			-- add any options here
--- 		},
--- 		dependencies = {
--- 			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
--- 			"MunifTanjim/nui.nvim",
--- 			-- OPTIONAL:
--- 			--   `nvim-notify` is only needed, if you want to use the notification view.
--- 			--   If not available, we use `mini` as the fallback
--- 			"rcarriga/nvim-notify",
--- 		},
--- 	},
+	{
+		"coder/claudecode.nvim",
+		dependencies = { "folke/snacks.nvim" },
+		config = true,
+		opts = {
+			auto_start = true,
+		},
+		keys = {
+			{ "<leader>a", nil, desc = "AI/Claude Code" },
+			{ "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+			{ "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
+			{ "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
+			{ "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+			{ "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
+			{ "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
+			{ "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+			{
+				"<leader>as",
+				"<cmd>ClaudeCodeTreeAdd<cr>",
+				desc = "Add file",
+				ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw" },
+			},
+			-- Diff management
+			{ "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+			{ "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
+		},
+	},
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v3.x",

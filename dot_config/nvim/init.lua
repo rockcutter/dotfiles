@@ -1,3 +1,5 @@
+vim.g.mapleader = " "
+
 require("prep_lazy")
 
 require("plugin")
