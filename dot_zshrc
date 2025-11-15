@@ -20,7 +20,7 @@ OS=$(uname | tr A-Z a-z)
 
 ## zsh -------------------------------------------------
 unsetopt auto_menu
-export ZSH_NEST_INDICATOR="$ZSH_NEST_INDICATOR+"
+export ZSH_NEST_INDICATOR="$ZSH_NEST_INDICATOR*"
 
 ## aliases -------------------------------------------------
 
