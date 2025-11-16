@@ -29,6 +29,11 @@ require("lazy").setup({
 		opts = {
 			auto_start = true,
 		},
+		keys = {
+			{
+				"<leader>cls", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude"
+			},
+		},
 	},
 	{
 		"nvim-neo-tree/neo-tree.nvim",
