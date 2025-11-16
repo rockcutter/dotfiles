@@ -159,16 +159,6 @@ function hist_old(){
 	eval $COMMAND
 }
 
-function histwc(){
-	local COMMAND=$(\
-		history -i | tac | \
-		fzf --no-sort -e --preview 'echo {} -- | fold -s -$(tput cols)' --preview-window='down,wrap' | \
-		awk '{$1=$2=$3="";print $0}')
-	print -s "${COMMAND##[[:space:]]##}"
-	echo '$COMMAND | clip.exe'
-	echo $COMMAND | clip.exe
-}
-
 function avt() {
     local role="$1"
     shift
@@ -224,7 +214,6 @@ function chezg(){
 function chezea(){
 	chezmoi edit --apply "$@"
 }
-
 ## mise configurations -------------------------------------------------
 # PATHを一旦退避させないと重くなる
 # PATH_BUFFER=$PATH

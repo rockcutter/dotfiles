@@ -29,21 +29,18 @@ vim.api.nvim_set_keymap("t", "jj", "<C-\\><C-n>", { noremap = true, silent = tru
 --     },
 vim.api.nvim_set_keymap("i", "jj", "<Esc>", {})
 
--- leader
-vim.g.mapleader = " "
-vim.api.nvim_set_keymap("n", "<Leader>k", ":q", {})
-
 -- Q
 vim.api.nvim_create_user_command("Q", "qa!", {})
 
--- vsplit | term 
-vim.api.nvim_create_user_command("VT", "vsplit | term", {})
-
 -- floaterm
 vim.api.nvim_set_keymap("n", "<C-t>", ":FloatermToggle<CR>", { noremap = true, silent = true }) vim.api.nvim_set_keymap("t", "<C-t>", "<Cmd>FloatermToggle<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>t", ":FloatermToggle<CR>", { noremap = true, silent = true }) vim.api.nvim_set_keymap("t", "<C-t>", "<Cmd>FloatermToggle<CR>", { noremap = true, silent = true })
 
 -- telescope
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<C-p>", function()
+	builtin.find_files({ hidden = true })
+end, { desc = "Telescope find files" })
+vim.keymap.set("n", "<leader>p", function()
 	builtin.find_files({ hidden = true })
 end, { desc = "Telescope find files" })
