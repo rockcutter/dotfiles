@@ -40,7 +40,7 @@ fi
 
 ## general environment
 
-EDITOR=nvim
+export EDITOR=nvim
 
 ## zoxide 
 
