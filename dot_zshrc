@@ -219,7 +219,7 @@ function chezea(){
 # PATH_BUFFER=$PATH
 # PATH=
 
-eval "$(mise activate zsh)"
+# eval "$(mise activate zsh)"
 
 # PATH="$PATH:$PATH_BUFFER"
 # export PATH="$HOME/.local/share/mise/shims:$PATH"
