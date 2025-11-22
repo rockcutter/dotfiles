@@ -43,6 +43,3 @@ vim.opt.shiftwidth = 4
 
 require("keymap")
 
--- telescope
-require("prep_telescope")
-
