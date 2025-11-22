@@ -1,8 +1,7 @@
 vim.g.mapleader = " "
 
-require("prep_lazy")
-
-require("plugin")
+require("config.lazy")
+require("config.lsp")
 
 -- airline
 vim.g["airline#extensions#tabline#enabled"] = 1
