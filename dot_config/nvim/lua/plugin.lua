@@ -7,6 +7,9 @@ require("lazy").setup({
 		"prabirshrestha/vim-lsp",
 	},
 	{
+		"github/copilot.vim",
+	},
+	{
 		"airblade/vim-gitgutter",
 	},
 	{
@@ -30,9 +33,8 @@ require("lazy").setup({
 			auto_start = true,
 		},
 		keys = {
-			{
-				"<leader>cls", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude"
-			},
+			{ "<leader>clo", "<cmd>ClaudeCode<cr>", mode = "n", desc = "Open Claude Code" },
+			{ "<leader>cls", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
 		},
 	},
 	{
@@ -43,8 +45,7 @@ require("lazy").setup({
 			filtered_items = {
 				visible = false,
 				hide_dotfiles = false,
-				hide_gitignored = true,
-			},
+				hide_gitignored = true, },
 		},
 		dependencies = {
 			"nvim-lua/plenary.nvim",
