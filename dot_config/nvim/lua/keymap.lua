@@ -51,5 +51,3 @@ end, { desc = "Telescope find files" })
 vim.keymap.set("n", "<leader>ff", builtin.live_grep, { desc = "Telescope live grep" })
 vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
 
--- lsp
-vim.keymap.set("n", "<F12>", ":LspDefinition<CR>", { noremap = true, silent = true, desc = "LSP Go to definition" })

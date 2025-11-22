@@ -1,19 +1,17 @@
 return {
 	{
-		"vim-airline/vim-airline",
-		airline_powerline_fonts = 1,
+		"mason-org/mason.nvim",
+		opts = {}
 	},
 	{
-		"prabirshrestha/vim-lsp",
+		"vim-airline/vim-airline",
+		airline_powerline_fonts = 1,
 	},
 	{
 		"github/copilot.vim",
 	},
 	{
 		"airblade/vim-gitgutter",
-	},
-	{
-		"mattn/vim-lsp-settings",
 	},
 	{
 		"coder/claudecode.nvim",
@@ -37,5 +35,9 @@ return {
 	},
 	{
 		"tpope/vim-surround",
+	},
+	{
+		"neovim/nvim-lspconfig",
+		event = { "BufReadPre", "BufNewFile" },
 	},
 }
