@@ -50,6 +50,13 @@ end, { desc = "Telescope find files" })
 vim.keymap.set("n", "<leader>p", function()
 	builtin.find_files({ hidden = true })
 end, { desc = "Telescope find files" })
+vim.keymap.set("n", "<leader>fp", function()
+	builtin.find_files({ hidden = true })
+end, { desc = "Telescope find files" })
+vim.keymap.set("n", "<leader>fr", function()
+	builtin.lsp_references()
+end, { desc = "Telescope find references" })
+
 vim.keymap.set("n", "<leader>ff", builtin.live_grep, { desc = "Telescope live grep" })
 vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
 

@@ -68,7 +68,7 @@ vim.lsp.config["lua_ls"] = {
 	},
 }
 
-vim.lsp.config["lua_ls"] = {
+vim.lsp.config["gopls"] = {
 	settings = {
 		gopls = {
 			analyses = {
@@ -83,4 +83,5 @@ vim.lsp.config["lua_ls"] = {
 
 vim.lsp.enable({
 	"lua_ls",
+	"gopls",
 })
