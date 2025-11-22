@@ -19,6 +19,10 @@ vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", { noremap = true, silent = true 
 
 vim.api.nvim_set_keymap("t", "jj", "<C-\\><C-n>", { noremap = true, silent = true })
 
+-- buffer navigation
+vim.api.nvim_set_keymap("n", "<leader>n", ":bnext<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>p", ":bprevious<CR>", { noremap = true, silent = true })
+
 -- jj -> esc
 -- for vscode add ↓ keybindings.json
 --     {
@@ -44,3 +48,8 @@ end, { desc = "Telescope find files" })
 vim.keymap.set("n", "<leader>p", function()
 	builtin.find_files({ hidden = true })
 end, { desc = "Telescope find files" })
+vim.keymap.set("n", "<leader>ff", builtin.live_grep, { desc = "Telescope live grep" })
+vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
+
+-- lsp
+vim.keymap.set("n", "<F12>", ":LspDefinition<CR>", { noremap = true, silent = true, desc = "LSP Go to definition" })
