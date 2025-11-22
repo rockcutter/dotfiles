@@ -1,7 +1,21 @@
 return {
 	{
 		"mason-org/mason.nvim",
-		opts = {}
+		opts = {},
+	},
+	{
+		"mason-org/mason-lspconfig.nvim",
+		dependencies = { "mason-org/mason.nvim" },
+		opts = {
+			ensure_installed = {
+				"lua_ls",
+				"stylua",
+				"gopls",
+			},
+		},
+	},
+	{
+		"fatih/vim-go",
 	},
 	{
 		"vim-airline/vim-airline",
@@ -29,8 +43,8 @@ return {
 	{
 		"voldikss/vim-floaterm",
 		config = function()
-			vim.g.floaterm_width = 0.95   -- 幅：画面の90%
-			vim.g.floaterm_height = 0.95  -- 高さ：画面の90%
+			vim.g.floaterm_width = 0.95 -- 幅：画面の90%
+			vim.g.floaterm_height = 0.95 -- 高さ：画面の90%
 		end,
 	},
 	{
