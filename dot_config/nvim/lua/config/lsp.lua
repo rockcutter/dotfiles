@@ -56,6 +56,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 vim.lsp.config["lua_ls"] = {
 	cmd = { "lua-language-server" },
+	filetypes = { "lua" },
 	settings = {
 		Lua = {
 			diagnostics = {
