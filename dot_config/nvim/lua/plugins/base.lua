@@ -17,6 +17,10 @@ return {
 	},
 	{
 		"fatih/vim-go",
+		init = function()
+			-- vim-goのデフォルトキーマッピングを無効化
+			vim.g.go_def_mapping_enabled = 0
+		end,
 	},
 	{
 		"vim-airline/vim-airline",
@@ -35,6 +39,10 @@ return {
 		lazy = false,
 		opts = {
 			auto_start = true,
+			diff_opts = {
+				vertical_split = false,
+				open_in_current_tab = false,
+			},
 		},
 		keys = {
 			{ "<leader>clo", "<cmd>ClaudeCode<cr>", mode = "n", desc = "Open Claude Code" },
@@ -44,8 +52,8 @@ return {
 	{
 		"voldikss/vim-floaterm",
 		config = function()
-			vim.g.floaterm_width = 0.95 -- 幅：画面の90%
-			vim.g.floaterm_height = 0.95 -- 高さ：画面の90%
+			vim.g.floaterm_width = 0.95
+			vim.g.floaterm_height = 0.95
 		end,
 	},
 	{

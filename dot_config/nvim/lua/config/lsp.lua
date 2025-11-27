@@ -47,6 +47,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("my.lsp", { clear = false }),
 				buffer = args.buf,
 				callback = function()
+					-- Goファイルはvim-goのgoimportsに任せる
+					if vim.bo[args.buf].filetype == "go" then
+						return
+					end
 					vim.lsp.buf.format({ bufnr = args.buf, id = client.id, timeout_ms = 1000 })
 				end,
 			})
@@ -70,6 +74,8 @@ vim.lsp.config["lua_ls"] = {
 }
 
 vim.lsp.config["gopls"] = {
+	cmd = { "gopls" },
+	filetypes = { "go", "gomod" },
 	settings = {
 		gopls = {
 			analyses = {
@@ -77,7 +83,7 @@ vim.lsp.config["gopls"] = {
 				shadow = true,
 			},
 			staticcheck = true,
-			gofumpt = true, -- より厳密なフォーマット
+			gofumpt = true,
 		},
 	},
 }
