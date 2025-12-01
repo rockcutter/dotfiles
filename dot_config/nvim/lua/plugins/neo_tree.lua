@@ -10,7 +10,7 @@ return {
 		lazy = false,
 		opts = {
 			window = {
-				width = 40,
+				width = 100,
 				position = "left",
 			},
 			filesystem = {
@@ -34,7 +34,7 @@ return {
 			vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter" }, {
 				callback = function()
 					if vim.bo.filetype == "neo-tree" then
-						vim.cmd("vertical resize 40")
+						vim.cmd("vertical resize 100")
 					end
 				end,
 			})

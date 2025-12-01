@@ -62,3 +62,6 @@ vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" 
 
 -- 補完を enter で確定する
 vim.api.nvim_set_keymap("i", "<CR>", 'pumvisible() ? "\\<C-y>" : "\\<CR>"', { noremap = true, expr = true })
+
+-- LSP restart
+vim.keymap.set("n", "<leader>lr", ":LspRestart<CR>", { desc = "LSP restart", noremap = true, silent = true })

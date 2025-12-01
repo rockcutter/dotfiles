@@ -7,6 +7,10 @@ vim.diagnostic.config({
 	underline = true,
 	update_in_insert = false,
 	severity_sort = true,
+	float = {
+		border = "rounded",
+		source = "always",
+	},
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -24,6 +28,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
 		vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, opts)
 		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+		vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
 
 		if client:supports_method("textDocument/implementation") then
 			vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
