@@ -20,6 +20,9 @@ return {
 					"^Music",
 					"Dropbox/",
 					".DS_Store",
+					-- report
+					"cdk.out",
+					".venv",
 				},
 				vimgrep_arguments = {
 					-- ripggrepコマンドのオプション
