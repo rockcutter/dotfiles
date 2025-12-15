@@ -12,6 +12,8 @@ return {
 				"stylua",
 				"gopls",
 				"terraformls",
+				"graphql-language-service-cli",
+				"ts_ls",
 			},
 		},
 	},

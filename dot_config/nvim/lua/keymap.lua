@@ -21,7 +21,7 @@ vim.api.nvim_set_keymap("t", "jj", "<C-\\><C-n>", { noremap = true, silent = tru
 
 -- buffer navigation
 vim.api.nvim_set_keymap("n", "<leader>n", ":bnext<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>p", ":bprevious<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>N", ":bprevious<CR>", { noremap = true, silent = true })
 
 -- jj -> esc
 -- for vscode add ↓ keybindings.json
@@ -68,3 +68,10 @@ vim.api.nvim_set_keymap("i", "<CR>", 'pumvisible() ? "\\<C-y>" : "\\<CR>"', { no
 
 -- LSP restart
 vim.keymap.set("n", "<leader>lr", ":LspRestart<CR>", { desc = "LSP restart", noremap = true, silent = true })
+
+-- 現在のファイルと行番号をGitHubで開く
+vim.keymap.set({ "n", "v" }, "<leader>go", function()
+	local file = vim.fn.expand("%:.")
+	local line = vim.fn.line(".")
+	vim.fn.system('gh browse "' .. file .. ":" .. line .. '"')
+end, { desc = "Open current line in GitHub" })

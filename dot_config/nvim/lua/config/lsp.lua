@@ -23,7 +23,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 		end
 
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+		vim.keymap.set("n", "gd", function()
+			require("telescope.builtin").lsp_definitions()
+		end, opts)
 		vim.keymap.set("n", "<leader>k", vim.lsp.buf.hover, opts)
 		-- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
 		vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, opts)
@@ -93,7 +95,20 @@ vim.lsp.config["gopls"] = {
 	},
 }
 
+vim.lsp.config["graphql"] = {
+	cmd = { "graphql-lsp", "server", "-m", "stream" },
+	filetypes = { "graphql" },
+}
+
+vim.lsp.config["ts_ls"] = {
+	cmd = { "typescript-language-server", "--stdio" },
+	filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+	root_markers = { "package.json", "tsconfig.json", "jsconfig.json" },
+}
+
 vim.lsp.enable({
 	"lua_ls",
 	"gopls",
+	"graphql",
+	"ts_ls",
 })
