@@ -70,8 +70,16 @@ vim.api.nvim_set_keymap("i", "<CR>", 'pumvisible() ? "\\<C-y>" : "\\<CR>"', { no
 vim.keymap.set("n", "<leader>lr", ":LspRestart<CR>", { desc = "LSP restart", noremap = true, silent = true })
 
 -- 現在のファイルと行番号をGitHubで開く
-vim.keymap.set({ "n", "v" }, "<leader>go", function()
+vim.keymap.set("n", "<leader>go", function()
 	local file = vim.fn.expand("%:.")
 	local line = vim.fn.line(".")
 	vim.fn.system('gh browse "' .. file .. ":" .. line .. '"')
 end, { desc = "Open current line in GitHub" })
+
+vim.keymap.set("v", "<leader>go", function()
+	local file = vim.fn.expand("%:.")
+	local start_line = vim.fn.line("'<")
+	local end_line = vim.fn.line("'>")
+	local line_range = start_line == end_line and tostring(start_line) or (start_line .. "-" .. end_line)
+	vim.fn.system('gh browse "' .. file .. ":" .. line_range .. '"')
+end, { desc = "Open selected range in GitHub" })
