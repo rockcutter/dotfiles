@@ -214,6 +214,11 @@ function chezg(){
 function chezea(){
 	chezmoi edit --apply "$@"
 }
+
+function cheze(){
+	nvim $(chezmoi source-path) 
+}
+
 ## mise configurations -------------------------------------------------
 # PATHを一旦退避させないと重くなる
 # PATH_BUFFER=$PATH

@@ -295,5 +295,10 @@ bindsym XF86AudioPrev exec playerctl previous
 
 output "*" background ~/.config/sway/wallpaper.png fill
 
+input type:keyboard {
+	repeat_delay 200
+    repeat_rate 50
+}
 
 include /etc/sway/config.d/*
+

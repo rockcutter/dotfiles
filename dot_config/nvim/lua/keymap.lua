@@ -17,6 +17,15 @@ vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", { noremap = true, silent = true 
 vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
 
+-- window zoom toggle
+vim.keymap.set("n", "<leader>z", function()
+	if vim.fn.winnr("$") == 1 then
+		vim.cmd("tab close")
+	else
+		vim.cmd("tab split")
+	end
+end, { desc = "Toggle window zoom", noremap = true, silent = true })
+
 vim.api.nvim_set_keymap("t", "jj", "<C-\\><C-n>", { noremap = true, silent = true })
 
 -- buffer navigation
