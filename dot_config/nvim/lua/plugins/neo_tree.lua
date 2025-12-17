@@ -46,7 +46,11 @@ return {
 			vim.api.nvim_create_autocmd("WinLeave", {
 				callback = function()
 					if vim.bo.filetype == "neo-tree" then
-						vim.cmd("vertical resize 20")
+						local mode = vim.fn.mode()
+						-- 検索時に幅が狭くなるのを防ぐ
+						if mode ~= "i" then
+							vim.cmd("vertical resize 20")
+						end
 					end
 				end,
 			})

@@ -75,9 +75,6 @@ vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" 
 -- 補完を enter で確定する
 vim.api.nvim_set_keymap("i", "<CR>", 'pumvisible() ? "\\<C-y>" : "\\<CR>"', { noremap = true, expr = true })
 
--- LSP restart
-vim.keymap.set("n", "<leader>lr", ":LspRestart<CR>", { desc = "LSP restart", noremap = true, silent = true })
-
 -- 現在のファイルと行番号をGitHubで開く
 vim.keymap.set("n", "<leader>go", function()
 	local file = vim.fn.expand("%:.")
