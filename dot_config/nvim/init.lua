@@ -1,18 +1,15 @@
+-- native settings
 vim.g.mapleader = " "
-require("config.lazy")
-require("config.lsp")
+vim.g.editorconfig = true
 
-require("keymap")
-
--- airline
-vim.g["airline#extensions#tabline#enabled"] = 1
-vim.g["airline#extensions#tabline#formatter"] = "unique_tail_improved"
-
--- choose random theme
-require("random_colorscheme")
-
--- etc setting
-vim.cmd("set number")
+vim.opt.scrolloff = 10
+vim.opt.mouse = ""
+vim.opt.clipboard = "unnamedplus"
+vim.opt.autoread = true
+vim.opt.splitright = true
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
 
 vim.api.nvim_create_autocmd("VimResized", {
 	pattern = "*",
@@ -31,15 +28,16 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHo
 	end,
 })
 
-vim.opt.mouse = ""
-vim.opt.clipboard = "unnamedplus"
-vim.opt.autoread = true
+-- etc setting
+vim.opt.number = true
 
-vim.opt.splitright = true
+require("keymap")
+require("config.lazy")
+require("config.lsp")
 
--- tab -> 4 space
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
+-- airline
+vim.g["airline#extensions#tabline#enabled"] = 1
+vim.g["airline#extensions#tabline#formatter"] = "unique_tail_improved"
 
-vim.g.editorconfig = true
+-- choose random theme
+require("random_colorscheme")
