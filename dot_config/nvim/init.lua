@@ -2,7 +2,7 @@
 vim.g.mapleader = " "
 vim.g.editorconfig = true
 
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 20
 vim.opt.mouse = ""
 vim.opt.clipboard = "unnamedplus"
 vim.opt.autoread = true

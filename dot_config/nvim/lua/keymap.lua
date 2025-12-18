@@ -68,3 +68,6 @@ vim.keymap.set("v", "<leader>go", function()
 	local line_range = start_line == end_line and tostring(start_line) or (start_line .. "-" .. end_line)
 	vim.fn.system('gh browse "' .. file .. ":" .. line_range .. '"')
 end, { desc = "Open selected range in GitHub" })
+
+-- disable macro recording
+vim.api.nvim_set_keymap("n", "q", "<Nop>", { noremap = true, silent = true })
