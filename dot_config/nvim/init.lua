@@ -10,6 +10,7 @@ vim.opt.splitright = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
+vim.opt.number = true
 
 vim.api.nvim_create_autocmd("VimResized", {
 	pattern = "*",
@@ -28,12 +29,10 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHo
 	end,
 })
 
--- etc setting
-vim.opt.number = true
-
 require("keymap")
 require("config.lazy")
 require("config.lsp")
+require("telescope_keymap")
 
 -- airline
 vim.g["airline#extensions#tabline#enabled"] = 1
