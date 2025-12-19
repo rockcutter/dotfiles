@@ -32,6 +32,23 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 		vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
 
+		-- Document highlight on cursor hold
+		if client:supports_method("textDocument/documentHighlight") then
+			vim.api.nvim_create_autocmd("CursorHold", {
+				buffer = args.buf,
+				callback = function()
+					vim.lsp.buf.document_highlight()
+				end,
+			})
+
+			vim.api.nvim_create_autocmd("CursorMoved", {
+				buffer = args.buf,
+				callback = function()
+					vim.lsp.buf.clear_references()
+				end,
+			})
+		end
+
 		if client:supports_method("textDocument/implementation") then
 			vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
 		end

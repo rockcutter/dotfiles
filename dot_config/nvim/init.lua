@@ -11,6 +11,7 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.number = true
+vim.opt.updatetime = 500
 
 vim.api.nvim_create_autocmd("VimResized", {
 	pattern = "*",

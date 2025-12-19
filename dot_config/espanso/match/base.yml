@@ -12,7 +12,7 @@
 
 matches:
   # Simple text replacement
-  - trigger: ":sqltmpl"
+  - trigger: ":sql"
     replace: "select * from\n\nwhere true\nand event_at > '2025-01-01T00:00:00+09:00'\nlimit 100;"
 
   # NOTE: espanso uses YAML to define matches, so pay attention to the indentation!
