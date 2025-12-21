@@ -14,6 +14,7 @@ return {
 				"terraformls",
 				"graphql",
 				"ts_ls",
+				"clangd",
 			},
 		},
 	},
