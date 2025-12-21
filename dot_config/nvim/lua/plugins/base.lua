@@ -38,9 +38,7 @@ return {
 		"coder/claudecode.nvim",
 		dependencies = { "folke/snacks.nvim" },
 		config = true,
-		lazy = false,
 		opts = {
-			auto_start = true,
 			diff_opts = {
 				vertical_split = false,
 				open_in_current_tab = false,
