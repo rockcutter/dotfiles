@@ -2,16 +2,18 @@
 vim.g.mapleader = " "
 vim.g.editorconfig = true
 
-vim.opt.scrolloff = 20
 vim.opt.mouse = ""
-vim.opt.clipboard = "unnamedplus"
-vim.opt.autoread = true
-vim.opt.splitright = true
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
 vim.opt.number = true
+vim.opt.autoread = true
+vim.opt.scrolloff = 20
+vim.opt.clipboard = "unnamedplus"
+vim.opt.splitright = true
 vim.opt.updatetime = 500
+
+vim.opt.tabstop = 2
+vim.opt.expandtab = true
+vim.opt.softtabstop = -1 -- tabstop に従わせる
+vim.opt.shiftwidth = 0   -- tabstop に従わせる
 
 vim.api.nvim_create_autocmd("VimResized", {
 	pattern = "*",

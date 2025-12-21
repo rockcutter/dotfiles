@@ -61,6 +61,13 @@ return {
 		"tpope/vim-surround",
 	},
 	{
+		"junegunn/vim-easy-align",
+		config = function()
+			vim.keymap.set("x", "<leader>ea", "<Plug>(EasyAlign)", { desc = "Easy Align" })
+			vim.keymap.set("n", "<leader>ea", "<Plug>(EasyAlign)", { desc = "Easy Align" })
+		end,
+	},
+	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 	},
