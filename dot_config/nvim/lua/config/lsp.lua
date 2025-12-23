@@ -19,6 +19,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 		local opts = { buffer = args.buf }
 
+		-- Setup signature help
+		require("lsp_signature").on_attach({
+			bind = true,
+			handler_opts = {
+				border = "rounded",
+			},
+			hint_enable = false,
+			floating_window = true,
+			toggle_key = "<C-k>",
+		}, args.buf)
+
 		if client:supports_method("textDocument/declaration") then
 			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 		end
