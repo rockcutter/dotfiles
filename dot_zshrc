@@ -42,8 +42,6 @@ fi
 
 export EDITOR=nvim
 
-## zoxide 
-
 ## brew
 ### coreutils
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
@@ -190,10 +188,9 @@ function p(){
 }
 
 ## zoxide configurations -------------------------------------------------
-# if command -v zoxide > /dev/null 2>&1; then
-# 	eval "$(zoxide init zsh)"
-# 	alias cd=z
-# fi 
+if command -v zoxide > /dev/null 2>&1; then
+	eval "$(zoxide init zsh)"
+fi 
 
 ## chezmoi configurations
 alias chez='chezmoi'
