@@ -70,3 +70,12 @@ end, { desc = "Open selected range in GitHub" })
 
 -- disable macro recording
 vim.api.nvim_set_keymap("n", "q", "<Nop>", { noremap = true, silent = true })
+
+-- gf の代わりに Telescope でファイル検索
+vim.keymap.set("n", "gf", function()
+	local word = vim.fn.expand("<cfile>")
+	require("telescope.builtin").find_files({
+		default_text = word,
+		hidden = true,
+	})
+end, { desc = "Find file under cursor with Telescope" })
