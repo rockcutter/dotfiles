@@ -11,4 +11,5 @@ chezmoi init --apply --verbose git@github.com:rockcutter/dotfiles.git
 cat > ~/.config/chezmoi/chezmoi.toml << 'EOF'
 [data]
     email = ""
+EOF
 ```
