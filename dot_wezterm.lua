@@ -20,13 +20,13 @@ config.font_size = 12.0
 config.window_close_confirmation = "NeverPrompt"
 
 if wezterm.target_triple ~= "aarch64-apple-darwin" then
-	config.keys = {
-		{
-			key = 'v',
-			mods = 'CTRL',
-			action = wezterm.action.PasteFrom 'Clipboard',
-		}
-	}
+  config.keys = {
+    {
+      key = "v",
+      mods = "CTRL",
+      action = wezterm.action.PasteFrom("Clipboard"),
+    },
+  }
 end
 
 -- 色設定
@@ -34,15 +34,15 @@ config.colors = {
   -- 基本色
   foreground = "#CBCBF0",
   background = "#1D1D26",
-  
+
   -- カーソル
   cursor_bg = "#CBCBF0",
   cursor_fg = "#1D1D26",
-  
+
   -- 選択範囲
   selection_bg = "#FF3399",
   selection_fg = "#CBCBF0",
-  
+
   -- ANSI カラー
   ansi = {
     "#1D1D26", -- black
@@ -54,7 +54,7 @@ config.colors = {
     "#00CECA", -- cyan
     "#CBCBF0", -- white
   },
-  
+
   -- Bright ANSI カラー
   brights = {
     "#636667", -- bright black
