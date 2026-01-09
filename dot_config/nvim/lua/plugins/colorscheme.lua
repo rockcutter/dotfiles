@@ -9,4 +9,7 @@ return {
 	{
 		"morhetz/gruvbox",
 	},
+	{
+		"Shatur/neovim-ayu",
+	},
 }
