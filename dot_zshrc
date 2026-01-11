@@ -105,13 +105,16 @@ export PATH=$PATH:/opt/homebrew/opt/libpq/bin
 
 ## compose configuration
 export PATH=$PATH:$HOME/.config/composer/vendor/bin
+
+## vcpkg 
+export PATH=$PATH:$HOME/.local/share/vcpkg
  
 ## history configuration -------------------------------------------------
 
 # export HISTTIMEFORMAT='%y-%m-%dT%H:%M:%S '
 export HISTIGNORE='&:ls:ll:pwd:history:hist:zsh'
 export HISTSIZE=65535
-export HISTFILESIZE=65535
+export SAVEHIST=65535
 
 setopt share_history
 setopt hist_ignore_dups
