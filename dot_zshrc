@@ -61,6 +61,10 @@ fi
 # export DOTFILES_SOURCES_DIR=$HOME/dotfiles_sources
 # source $DOTFILES_SOURCES_DIR/*.sh
 
+## c++ 
+export CC=clang
+export CXX=clang++
+
 ## aws configuration -------------------------------------------------
 
 if [ "$OS" = "darwin" ]; then
