@@ -7,10 +7,31 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 end
 
 config.use_fancy_tab_bar = false
+config.enable_tab_bar = false
 config.window_decorations = "RESIZE"
 config.use_ime = true
 -- config.window_background_opacity = 0.95
 config.window_background_opacity = 0.7
+
+border_color = "#c6f"
+
+config.window_frame = {
+  border_left_width = "2px",
+  border_right_width = "2px",
+  border_bottom_height = "2px",
+  border_top_height = "2px",
+  border_left_color = border_color,
+  border_right_color = border_color,
+  border_bottom_color = border_color,
+  border_top_color = border_color,
+}
+
+config.window_padding = {
+  left = 0,
+  right = 0,
+  top = 0,
+  bottom = 0,
+}
 
 -- フォント設定
 -- config.font = wezterm.font("CaskaydiaCove Nerd Font", { weight = "Regular" })
