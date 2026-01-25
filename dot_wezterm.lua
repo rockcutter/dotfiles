@@ -50,43 +50,7 @@ if wezterm.target_triple ~= "aarch64-apple-darwin" then
   }
 end
 
--- 色設定
-config.colors = {
-  -- 基本色
-  foreground = "#CBCBF0",
-  background = "#1D1D26",
-
-  -- カーソル
-  cursor_bg = "#CBCBF0",
-  cursor_fg = "#1D1D26",
-
-  -- 選択範囲
-  selection_bg = "#FF3399",
-  selection_fg = "#CBCBF0",
-
-  -- ANSI カラー
-  ansi = {
-    "#1D1D26", -- black
-    "#FF3399", -- red
-    "#00D364", -- green
-    "#FFCC66", -- yellow
-    "#00CBFF", -- blue
-    "#CC66FF", -- magenta
-    "#00CECA", -- cyan
-    "#CBCBF0", -- white
-  },
-
-  -- Bright ANSI カラー
-  brights = {
-    "#636667", -- bright black
-    "#FF2F92", -- bright red
-    "#00D364", -- bright green
-    "#FFD479", -- bright yellow
-    "#00CBFF", -- bright blue
-    "#D783FF", -- bright magenta
-    "#00D5D4", -- bright cyan
-    "#D5D6F3", -- bright white
-  },
-}
+config.color_scheme = "Tinacious Design (Dark)"
+-- config.color_scheme = "Tinacious Design (Light)"
 
 return config
