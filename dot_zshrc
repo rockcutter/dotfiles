@@ -62,8 +62,13 @@ fi
 # source $DOTFILES_SOURCES_DIR/*.sh
 
 ## c++ 
+### compiler
 export CC=clang
 export CXX=clang++
+
+### vcpkg
+export VCPKG_ROOT=$HOME/.local/share/vcpkg
+export PATH=$VCPKG_ROOT:$PATH
 
 ## aws configuration -------------------------------------------------
 
