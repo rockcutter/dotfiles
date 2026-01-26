@@ -75,4 +75,19 @@ return {
 		"ray-x/lsp_signature.nvim",
 		event = "LspAttach",
 	},
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		---@module "ibl"
+		---@type ibl.config
+		opts = {
+			indent = {
+				char = "▏",
+				tab_char = "▏",
+			},
+			whitespace = {
+				highlight = { "Whitespace", "NonText" },
+			},
+		},
+	},
 }

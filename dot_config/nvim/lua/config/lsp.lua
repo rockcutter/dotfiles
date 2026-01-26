@@ -2,7 +2,7 @@
 vim.opt.completeopt = { "noselect", "menuone", "popup" }
 
 vim.diagnostic.config({
-  virtual_text = true,
+  virtual_lines = true,
   signs = true,
   underline = true,
   update_in_insert = false,
