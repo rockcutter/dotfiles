@@ -2,7 +2,6 @@
 vim.g.mapleader = " "
 vim.g.editorconfig = true
 
-vim.opt.mouse = ""
 vim.opt.number = true
 vim.opt.autoread = true
 vim.opt.scrolloff = 20
@@ -16,6 +15,12 @@ vim.opt.softtabstop = -1 -- tabstop に従わせる
 vim.opt.shiftwidth = 0 -- tabstop に従わせる
 
 vim.o.laststatus = 3
+vim.opt.list = true
+vim.opt.listchars = {
+	space = "·",
+	trail = "·",
+	tab = "  ",
+}
 
 vim.api.nvim_create_autocmd("VimResized", {
 	pattern = "*",
