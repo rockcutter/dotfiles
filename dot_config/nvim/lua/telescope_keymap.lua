@@ -11,6 +11,7 @@ vim.keymap.set("n", "<leader>fi", function()
 end, { desc = "Telescope find implementations" })
 vim.keymap.set("n", "<leader>ff", builtin.live_grep, { desc = "Telescope live grep" })
 vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
+vim.keymap.set("n", "<leader>b", builtin.buffers, { desc = "Telescope buffers" })
 
 vim.keymap.set("n", "gf", function()
 	local word = vim.fn.expand("<cfile>")

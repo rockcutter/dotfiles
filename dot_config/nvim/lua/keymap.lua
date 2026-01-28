@@ -71,3 +71,11 @@ end, { desc = "Open selected range in GitHub" })
 
 -- disable macro recording
 vim.api.nvim_set_keymap("n", "q", "<Nop>", { noremap = true, silent = true })
+
+-- カーソル下のURLをブラウザで開く
+vim.keymap.set("n", "<leader>gx", function()
+	local url = vim.fn.expand("<cfile>")
+	if url:match("^https?://") then
+		vim.fn.system({ "open", url })
+	end
+end, { desc = "Open URL under cursor in browser", noremap = true, silent = true })

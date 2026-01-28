@@ -32,6 +32,7 @@ alias zbat='gunzip | bat'
 alias zhead='gunzip | head'
 alias ztail='gunzip | tail'
 alias m='make'
+alias lg='lazygit'
 
 
 if command -v gdate > /dev/null 2>&1; then 
