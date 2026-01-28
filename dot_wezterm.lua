@@ -53,7 +53,7 @@ end
 config.color_scheme = "Tinacious Design (Dark)"
 -- config.color_scheme = "Tinacious Design (Light)"
 
--- 文字色白に対し、カーソルが白で変換中みづらかったので黒に変更
+-- 文字色白に対し、カーソルが白で変換中見辛かったので黒に変更
 config.colors = {
   compose_cursor = "#0d0d2b",
 }
