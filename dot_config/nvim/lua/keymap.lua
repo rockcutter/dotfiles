@@ -79,3 +79,6 @@ vim.keymap.set("n", "<leader>gx", function()
 		vim.fn.system({ "open", url })
 	end
 end, { desc = "Open URL under cursor in browser", noremap = true, silent = true })
+
+-- ビジュアルモードでペースト時に上書きした文字をレジスタに入れない
+vim.keymap.set("x", "p", '"_dP', { noremap = true, silent = true })

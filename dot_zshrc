@@ -33,6 +33,7 @@ alias zhead='gunzip | head'
 alias ztail='gunzip | tail'
 alias m='make'
 alias lg='lazygit'
+alias n='nvim'
 
 
 if command -v gdate > /dev/null 2>&1; then 
@@ -239,7 +240,6 @@ function cheze(){
 # PATH=/opt/homebrew/bin:/usr/bin
 
 eval "$(mise activate zsh)"
-
 
 # PATH="$PATH:$PATH_BUFFER"
 # export PATH="$HOME/.local/share/mise/shims:$PATH"
