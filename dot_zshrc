@@ -10,7 +10,7 @@ function _git_branch_for_prompt() {
 function _git_row_changes_for_prompt() {
   local change=$(git diff HEAD --numstat 2>/dev/null | \
     awk '{add+=$1; del+=$2} END {print "%F{green}+"add"%f", "%F{red}-"del"%f"}')
-  echo "${change:--}"
+  echo "${change}"
 }
 
 unsetopt auto_menu
