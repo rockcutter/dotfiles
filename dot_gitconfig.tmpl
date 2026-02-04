@@ -2,8 +2,7 @@
 	name = rockcutter
 	email = {{ .email }}
 [alias]
-	a = "!f() { git add \"$@\" && git status -s -u; }; f"
-	add = "!f() { git add \"$@\" && git status -s -u; }; f"
+	a = "!f() { cd \"${GIT_PREFIX:-.}\" && git add \"$@\" && git status -s -u; }; f"
 	sw = switch
 	swf = "!f () { git switch $(git --no-pager branch --sort=-committerdate | fzf); };f"
 	s = status
