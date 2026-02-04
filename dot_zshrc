@@ -7,13 +7,28 @@ function _git_branch_for_prompt() {
   echo "${branch:--}"
 }
 
+function _git_row_changes_for_prompt() {
+  git diff HEAD --numstat | \
+    awk '{add+=$1; del+=$2} END {print "%F{green}+"add"%f", "%F{red}-"del"%f"}'
+}
+
 unsetopt auto_menu
 export ZSH_NEST_INDICATOR="$ZSH_NEST_INDICATOR*"
 bindkey -e
 
-PROMPT='%F{green}$ZSH_NEST_INDICATOR%f %F{red}%n%f at %F{yellow}%m%f at %F{red}%D{%Y-%m-%dT%H:%M:%S%z}%f
-wd %B%F{green}%~%f%b
+PROMPT='
+%F{green}$ZSH_NEST_INDICATOR%f %F{red}%n%f at %F{red}%m%f at %F{yellow}%D{%Y-%m-%dT%H:%M:%S%z}%f
+wd %B%F{yellow}%~%f%b {$(_git_row_changes_for_prompt)}
 $? %F{red}$(_git_branch_for_prompt)%f$ '
+
+
+## completion
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
 
 ## aliases -------------------------------------------------
 
