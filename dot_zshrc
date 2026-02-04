@@ -4,7 +4,7 @@ OS=$(uname | tr A-Z a-z)
 ## zsh -------------------------------------------------
 function _git_branch_for_prompt() {
   local branch=$(git branch --show-current 2>/dev/null)
-  echo "${branch:- }"
+  echo "${branch:--}"
 }
 
 unsetopt auto_menu
@@ -13,7 +13,7 @@ bindkey -e
 
 PROMPT='%F{green}$ZSH_NEST_INDICATOR%f %F{red}%n%f at %F{yellow}%m%f at %F{red}%D{%Y-%m-%dT%H:%M:%S%z}%f
 wd %B%F{green}%~%f%b
-$? %F{red}$(_git_branch_for_prompt)%f $ '
+$? %F{red}$(_git_branch_for_prompt)%f$ '
 
 ## aliases -------------------------------------------------
 
