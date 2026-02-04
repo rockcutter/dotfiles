@@ -1,29 +1,19 @@
-date +"%Y-%m-%d %H:%M:%S.%3N"
-# Begin Oh My Zsh configuration -------------------------------------------------
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
-
-# Path to your Oh My Zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time Oh My Zsh is loaded, in which case, to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-
-: ${ZSH_THEME:="suvash_custom"}
-plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
-
-echo "[DEBUG] oh-my-zsh loaded"
-date +"%Y-%m-%d %H:%M:%S.%3N"
-
 # User onfiguraitons 
 OS=$(uname | tr A-Z a-z)
 
 ## zsh -------------------------------------------------
+function _git_branch_for_prompt() {
+  local branch=$(git branch --show-current 2>/dev/null)
+  echo "${branch:- }"
+}
+
 unsetopt auto_menu
 export ZSH_NEST_INDICATOR="$ZSH_NEST_INDICATOR*"
+bindkey -e
+
+PROMPT='%F{green}$ZSH_NEST_INDICATOR%f %F{red}%n%f at %F{yellow}%m%f at %F{red}%D{%Y-%m-%dT%H:%M:%S%z}%f
+wd %B%F{green}%~%f%b
+$? %F{red}$(_git_branch_for_prompt)%f $ '
 
 ## aliases -------------------------------------------------
 
@@ -38,6 +28,7 @@ alias ztail='gunzip | tail'
 alias m='make'
 alias lg='lazygit'
 alias n='nvim'
+alias g='git'
 
 
 if command -v gdate > /dev/null 2>&1; then 
@@ -131,6 +122,7 @@ export HISTIGNORE='&:ls:ll:pwd:history:hist:zsh'
 export HISTSIZE=65535
 export SAVEHIST=65535
 
+setopt prompt_subst
 setopt share_history
 setopt hist_ignore_dups
 setopt append_history
