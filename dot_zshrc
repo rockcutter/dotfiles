@@ -8,8 +8,9 @@ function _git_branch_for_prompt() {
 }
 
 function _git_row_changes_for_prompt() {
-  git diff HEAD --numstat | \
-    awk '{add+=$1; del+=$2} END {print "%F{green}+"add"%f", "%F{red}-"del"%f"}'
+  local change=$(git diff HEAD --numstat 2>/dev/null | \
+    awk '{add+=$1; del+=$2} END {print "%F{green}+"add"%f", "%F{red}-"del"%f"}')
+  echo "${change:--}"
 }
 
 unsetopt auto_menu
@@ -17,8 +18,8 @@ export ZSH_NEST_INDICATOR="$ZSH_NEST_INDICATOR*"
 bindkey -e
 
 PROMPT='
-%F{green}$ZSH_NEST_INDICATOR%f %F{red}%n%f at %F{red}%m%f at %F{yellow}%D{%Y-%m-%dT%H:%M:%S%z}%f
-wd %B%F{yellow}%~%f%b {$(_git_row_changes_for_prompt)}
+%F{green}$ZSH_NEST_INDICATOR%f %F{red}%n%f at %F{yellow}%m%f at %F{red}%D{%Y-%m-%dT%H:%M:%S%z}%f
+wd %B%F{green}%~%f%b {$(_git_row_changes_for_prompt)}
 $? %F{red}$(_git_branch_for_prompt)%f$ '
 
 
