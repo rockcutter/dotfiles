@@ -236,8 +236,6 @@ function cheze(){
 # PATH=/opt/homebrew/bin:/usr/bin
 
 eval "$(mise activate zsh)"
-echo "[DEBUG] mise activated"
-date +"%Y-%m-%d %H:%M:%S.%3N"
 
 # PATH="$PATH:$PATH_BUFFER"
 # export PATH="$HOME/.local/share/mise/shims:$PATH"
