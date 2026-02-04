@@ -14,6 +14,7 @@ function _git_row_changes_for_prompt() {
 }
 
 unsetopt auto_menu
+setopt prompt_subst
 export ZSH_NEST_INDICATOR="$ZSH_NEST_INDICATOR*"
 bindkey -e
 
@@ -138,13 +139,13 @@ export HISTIGNORE='&:ls:ll:pwd:history:hist:zsh'
 export HISTSIZE=65535
 export SAVEHIST=65535
 
-setopt prompt_subst
 setopt share_history
 setopt hist_ignore_dups
 setopt append_history
 setopt hist_verify
 setopt hist_expire_dups_first
 setopt extended_glob
+setopt extended_history
 unsetopt hist_ignore_space
 
 ## Functions -------------------------------------------------
@@ -171,20 +172,10 @@ function gadd(){
 
 function hist(){
 	local HISTORY_ID=$(\
-		history -i | sort -r -k 4 | sort -u -k 4 | sort -r -k 1,1 \
+		history -i 1 | sort -r -k 4 | sort -u -k 4 | sort -r -k 1,1 \
 		| fzf --no-sort -e --preview 'echo {} | fold -s -$(tput cols)' --preview-window='down,wrap' \
 		| awk '{print $1}')
 	[[ -n "$HISTORY_ID" ]] && fc $HISTORY_ID
-}
-
-function hist_old(){
-	local COMMAND=$(\
-		history -i | sort -r -k 4 | sort -u -k 4 | sort -r -k 1,1 \
-		| fzf --no-sort -e --preview 'echo {} | fold -s -$(tput cols)' --preview-window='down,wrap' \
-		| awk '{$1=$2=$3="";print $0}')
-	print -s "${COMMAND##[[:space:]]##}"
-    echo $COMMAND
-	eval $COMMAND
 }
 
 function avt() {
