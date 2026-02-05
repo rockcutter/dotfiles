@@ -46,6 +46,7 @@ alias ztail='gunzip | tail'
 alias m='make'
 alias lg='lazygit'
 alias n='nvim'
+alias nn='nvim .'
 alias g='git'
 
 
