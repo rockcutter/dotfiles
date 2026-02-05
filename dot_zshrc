@@ -57,6 +57,7 @@ fi
 ## general environment
 
 export EDITOR=nvim
+export FCEDIT="nvim --clean -u ~/.config/nvim-minimal/init.lua"
 
 ## brew
 ### coreutils
