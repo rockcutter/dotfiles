@@ -15,7 +15,8 @@ function _git_row_changes_for_prompt() {
 
 unsetopt auto_menu
 setopt prompt_subst
-export ZSH_NEST_INDICATOR="$ZSH_NEST_INDICATOR*"
+
+export ZSH_NEST_INDICATOR="$ZSH_NEST_INDICATOR${${$(ps -p $PPID -o comm=):t}[1]}"
 
 bindkey -e
 
@@ -48,7 +49,7 @@ alias lg='lazygit'
 alias n='nvim'
 alias nn='nvim .'
 alias neovim_lightweight='nvim --clean -u ~/.config/nvim-minimal/init.lua'
-alias nlw=neovim_lightweight
+alias nlwneovim_lightweight
 alias g='git'
 
 
@@ -59,7 +60,7 @@ fi
 ## general environment
 
 export EDITOR=nvim
-export FCEDIT="neovim_lightweight"
+export FCEDIT="nvim --clean -u ~/.config/nvim-minimal/init.lua"
 
 ## brew
 ### coreutils
