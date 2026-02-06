@@ -225,7 +225,7 @@ alias chez='chezmoi'
 
 function chezcmm(){
 	chezmoi git -- add . 
-	chezmoi git -- diff --cached
+	chezmoi git -- diff --cached | less 
 	echo "commit after 5 seconds..."
 	sleep 5
 	chezmoi git -- commit -m "$(chezmoi generate git-commit-message)"
