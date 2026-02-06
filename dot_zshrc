@@ -141,6 +141,7 @@ export PATH=$PATH:$HOME/.local/share/vcpkg
 ## history configuration -------------------------------------------------
 
 # export HISTTIMEFORMAT='%y-%m-%dT%H:%M:%S '
+export HISTFILE=~/.zsh_history
 export HISTIGNORE='&:ls:ll:pwd:history:hist:zsh'
 export HISTSIZE=65535
 export SAVEHIST=65535
