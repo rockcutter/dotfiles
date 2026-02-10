@@ -221,9 +221,7 @@ if command -v zoxide > /dev/null 2>&1; then
 fi 
 
 ## chezmoi configurations
-alias chez='chezmoi'
-
-function chezcmm(){
+function chezmoi_commit(){
 	chezmoi git -- add . 
 	chezmoi git -- diff --cached | less 
 	echo "commit after 5 seconds..."
@@ -232,17 +230,29 @@ function chezcmm(){
 	chezmoi git -- push
 }
 
-function chezg(){
+function chezmoi_git(){
 	chezmoi git "$@"
 }
 
-function chezea(){
+function chezmoi_edit_apply(){
 	chezmoi edit --apply "$@"
 }
 
-function cheze(){
+function chezmoi_edit_source_path(){
 	nvim $(chezmoi source-path) 
 }
+
+alias chez='chezmoi'
+alias chezcmm='chezmoi_commit'
+alias chezg='chezmoi_git'
+alias chezea='chezmoi_edit_apply'
+alias cheze='chezmoi_edit_source_path'
+
+alias ch='chezmoi'
+alias chcmm='chezmoi_commit'
+alias chg='chezmoi_git'
+alias chea='chezmoi_edit_apply'
+alias che='chezmoi_edit_source_path'
 
 ## mise configurations -------------------------------------------------
 # PATHを一旦退避させないと重くなる
