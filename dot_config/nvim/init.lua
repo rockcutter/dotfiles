@@ -61,12 +61,11 @@ vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
 	callback = function()
 		local bufname = vim.api.nvim_buf_get_name(0)
 
-		print("hoge")
-
 		-- バッファ名に "claude" が含まれている場合のみstopinsert
 		if bufname:lower():match("claude") then
-			print("fuga")
-			vim.cmd("stopinsert")
+			vim.schedule(function()
+				vim.cmd("stopinsert")
+			end)
 		end
 	end,
 })
