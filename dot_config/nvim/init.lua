@@ -56,6 +56,21 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHo
 	end,
 })
 
+vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
+	pattern = "term://*",
+	callback = function()
+		local bufname = vim.api.nvim_buf_get_name(0)
+
+		print("hoge")
+
+		-- バッファ名に "claude" が含まれている場合のみstopinsert
+		if bufname:lower():match("claude") then
+			print("fuga")
+			vim.cmd("stopinsert")
+		end
+	end,
+})
+
 require("keymap")
 require("config.lazy")
 require("config.lsp")
