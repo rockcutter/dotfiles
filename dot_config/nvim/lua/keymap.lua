@@ -27,7 +27,8 @@ vim.keymap.set("n", "<leader>z", function()
 end, { desc = "Toggle window zoom", noremap = true, silent = true })
 
 -- vim.api.nvim_set_keymap("t", "jj", "<C-\\><C-n>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("t", "tt", "<C-\\><C-n>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("t", "tt", "<C-\\><C-n>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("t", "jt", "<C-\\><C-n>", { noremap = true, silent = true })
 
 -- buffer navigation
 vim.api.nvim_set_keymap("n", "<leader>n", ":bnext<CR>", { noremap = true, silent = true })
