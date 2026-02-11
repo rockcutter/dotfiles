@@ -72,12 +72,12 @@ vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
 
 require("keymap")
 require("config.lazy")
-require("config.lsp")
-require("telescope_keymap")
+require("lsp.lsp")
+require("lsp.autocmd")
+
+-- choose random theme
+require("random_colorscheme")
 
 -- airline
 vim.g["airline#extensions#tabline#enabled"] = 1
 vim.g["airline#extensions#tabline#formatter"] = "unique_tail_improved"
-
--- choose random theme
-require("random_colorscheme")

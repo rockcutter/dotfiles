@@ -90,4 +90,113 @@ return {
 			},
 		},
 	},
+	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		build = "make",
+	},
+	{
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.8",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {
+			defaults = {
+				file_ignore_patterns = {
+					-- 検索から除外するものを指定
+					"^.git/",
+					"^.cache/",
+					"^.zsh_sessions/",
+					"^Library/",
+					"Parallels",
+					"^Movies",
+					"^Music",
+					"Dropbox/",
+					".DS_Store",
+					-- report
+					"cdk.out",
+					".venv",
+				},
+				vimgrep_arguments = {
+					-- ripggrepコマンドのオプション
+					"rg",
+					"--color=never",
+					"--no-heading",
+					"--with-filename",
+					"--line-number",
+					"--column",
+					"--smart-case",
+					"-uu",
+				},
+			},
+			extensions = {
+				-- ソート性能を大幅に向上させるfzfを使う
+				fzf = {
+					fuzzy = true,
+					override_generic_sorter = true,
+					override_file_sorter = true,
+					case_mode = "smart_case",
+				},
+			},
+		},
+		config = function(_, opts)
+			require("telescope").setup(opts)
+			require("telescope").load_extension("fzf")
+		end,
+	},
+	{
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v3.x",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons",
+			"MunifTanjim/nui.nvim",
+		},
+		lazy = false,
+		opts = {
+			window = {
+				width = 100,
+				position = "left",
+			},
+			filesystem = {
+				follow_current_file = {
+					enabled = true,
+					leave_dirs_open = false,
+				},
+				hijack_netrw_behavior = "open_default",
+				filtered_items = {
+					visible = false,
+					hide_dotfiles = false,
+					hide_gitignored = true,
+				},
+			},
+			default_component_configs = {
+				indent = {
+					with_expanders = true,
+				},
+			},
+		},
+		config = function(_, opts)
+			require("neo-tree").setup(opts)
+
+			-- フォーカスに応じて幅を変更
+			vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter" }, {
+				callback = function()
+					if vim.bo.filetype == "neo-tree" then
+						vim.cmd("vertical resize 100")
+					end
+				end,
+			})
+
+			vim.api.nvim_create_autocmd("WinLeave", {
+				callback = function()
+					if vim.bo.filetype == "neo-tree" then
+						local mode = vim.fn.mode()
+						-- 検索時に幅が狭くなるのを防ぐ
+						if mode ~= "i" then
+							vim.cmd("vertical resize 20")
+						end
+					end
+				end,
+			})
+		end,
+	},
 }

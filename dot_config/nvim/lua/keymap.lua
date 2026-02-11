@@ -2,7 +2,6 @@
 
 -- blockwise-visual modk
 vim.api.nvim_set_keymap("n", "vv", "<C-v>", {})
-
 -- bracket
 vim.api.nvim_set_keymap("i", "{", "{}<Left>", {})
 vim.api.nvim_set_keymap("i", "{}", "{}", {})
@@ -10,7 +9,11 @@ vim.api.nvim_set_keymap("i", "{<Enter>", "{}<Left><CR><ESC><S-o>", {})
 vim.api.nvim_set_keymap("i", "(", "()<ESC>i", {})
 vim.api.nvim_set_keymap("i", "()", "()", {})
 vim.api.nvim_set_keymap("i", "(<Enter>", "()<Left><CR><ESC><S-o>", {})
-
+-- quotes
+vim.api.nvim_set_keymap("i", '"', '""<Left>', { noremap = true })
+vim.api.nvim_set_keymap("i", '""', '""', { noremap = true })
+vim.api.nvim_set_keymap("i", "'", "''<Left>", { noremap = true })
+vim.api.nvim_set_keymap("i", "''", "''", { noremap = true })
 -- focus window
 vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
@@ -19,11 +22,11 @@ vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", { noremap = true, silent = true 
 
 -- window zoom toggle
 vim.keymap.set("n", "<leader>z", function()
-  if vim.fn.winnr("$") == 1 then
-    vim.cmd("tab close")
-  else
-    vim.cmd("tab split")
-  end
+	if vim.fn.winnr("$") == 1 then
+		vim.cmd("tab close")
+	else
+		vim.cmd("tab split")
+	end
 end, { desc = "Toggle window zoom", noremap = true, silent = true })
 
 -- vim.api.nvim_set_keymap("t", "jj", "<C-\\><C-n>", { noremap = true, silent = true })
@@ -57,17 +60,17 @@ vim.api.nvim_set_keymap("i", "<CR>", 'pumvisible() ? "\\<C-y>" : "\\<CR>"', { no
 
 -- 現在のファイルと行番号をGitHubで開く
 vim.keymap.set("n", "<leader>go", function()
-  local file = vim.fn.expand("%:.")
-  local line = vim.fn.line(".")
-  vim.fn.system('gh browse "' .. file .. ":" .. line .. '"')
+	local file = vim.fn.expand("%:.")
+	local line = vim.fn.line(".")
+	vim.fn.system('gh browse "' .. file .. ":" .. line .. '"')
 end, { desc = "Open current line in GitHub" })
 
 vim.keymap.set("v", "<leader>go", function()
-  local file = vim.fn.expand("%:.")
-  local start_line = vim.fn.line("'<")
-  local end_line = vim.fn.line("'>")
-  local line_range = start_line == end_line and tostring(start_line) or (start_line .. "-" .. end_line)
-  vim.fn.system('gh browse "' .. file .. ":" .. line_range .. '"')
+	local file = vim.fn.expand("%:.")
+	local start_line = vim.fn.line("'<")
+	local end_line = vim.fn.line("'>")
+	local line_range = start_line == end_line and tostring(start_line) or (start_line .. "-" .. end_line)
+	vim.fn.system('gh browse "' .. file .. ":" .. line_range .. '"')
 end, { desc = "Open selected range in GitHub" })
 
 -- disable macro recording
@@ -75,3 +78,31 @@ vim.api.nvim_set_keymap("n", "q", "<Nop>", { noremap = true, silent = true })
 
 -- ビジュアルモードでペースト時に上書きした文字をレジスタに入れない
 vim.keymap.set("x", "p", '"_dP', { noremap = true, silent = true })
+
+local telescope = require("telescope.builtin")
+
+vim.keymap.set("n", "<leader>fr", telescope.lsp_references, { desc = "Telescope find references" })
+vim.keymap.set("n", "<leader>fi", telescope.lsp_implementations(), { desc = "Telescope find implementations" })
+vim.keymap.set("n", "<leader>ff", telescope.live_grep, { desc = "Telescope live grep" })
+vim.keymap.set("n", "<leader>fb", telescope.buffers, { desc = "Telescope buffers" })
+vim.keymap.set("n", "<leader>b", telescope.buffers, { desc = "Telescope buffers" })
+
+vim.keymap.set("n", "<leader>p", function()
+	telescope.find_files({ hidden = true })
+end, { desc = "Telescope find files" })
+
+vim.keymap.set("n", "gf", function()
+	local word = vim.fn.expand("<cfile>")
+
+	-- TODO: terminal という絞り方ではなく floaterm であることを判定する方法を考える
+	-- floaterm内の場合は一旦floatermを閉じてからファイルを開く
+	-- 閉じないとfloaterm内でファイルが開いてしまうため
+	if vim.bo.buftype == "terminal" then
+		vim.cmd("FloatermHide")
+	end
+
+	telescope.find_files({
+		default_text = word,
+		hidden = true,
+	})
+end, { desc = "Find file under cursor with Telescope" })
