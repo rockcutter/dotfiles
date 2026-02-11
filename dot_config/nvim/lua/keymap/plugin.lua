@@ -4,7 +4,7 @@
 local telescope = require("telescope.builtin")
 
 vim.keymap.set("n", "<leader>fr", telescope.lsp_references, { desc = "Telescope find references" })
-vim.keymap.set("n", "<leader>fi", telescope.lsp_implementations(), { desc = "Telescope find implementations" })
+vim.keymap.set("n", "<leader>fi", telescope.lsp_implementations, { desc = "Telescope find implementations" })
 vim.keymap.set("n", "<leader>ff", telescope.live_grep, { desc = "Telescope live grep" })
 vim.keymap.set("n", "<leader>fb", telescope.buffers, { desc = "Telescope buffers" })
 vim.keymap.set("n", "<leader>b", telescope.buffers, { desc = "Telescope buffers" })

@@ -70,8 +70,11 @@ vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
 	end,
 })
 
-require("keymap")
+require("keymap.native")
+
 require("config.lazy")
+require("keymap.plugin")
+
 require("lsp.lsp")
 require("lsp.autocmd")
 
