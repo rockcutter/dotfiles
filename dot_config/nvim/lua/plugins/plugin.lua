@@ -182,11 +182,13 @@ return {
     config = function(_, opts)
       require("neo-tree").setup(opts)
 
-      -- フォーカスに応じて幅を変更
       vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter" }, {
         callback = function()
           if vim.bo.filetype == "neo-tree" then
+            -- フォーカスに応じて幅を変更
             vim.cmd("vertical resize 100")
+            -- ファイルシステムの変更を反映
+            require("neo-tree.sources.manager").refresh("filesystem")
           end
         end,
       })
