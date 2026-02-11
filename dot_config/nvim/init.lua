@@ -23,6 +23,10 @@ vim.opt.listchars = {
 	tab = "  ",
 }
 
+-- airline
+vim.g["airline#extensions#tabline#enabled"] = 1
+vim.g["airline#extensions#tabline#formatter"] = "unique_tail_improved"
+
 require("keymap.native")
 require("autocmd")
 
@@ -34,7 +38,3 @@ require("lsp.autocmd")
 
 -- choose random theme
 require("random_colorscheme")
-
--- airline
-vim.g["airline#extensions#tabline#enabled"] = 1
-vim.g["airline#extensions#tabline#formatter"] = "unique_tail_improved"
