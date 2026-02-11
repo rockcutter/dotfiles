@@ -263,7 +263,13 @@ output "HP Inc. HP P223 CNK8021268" {
 }
 
 
-for_window [app_id="org.wezfurlong.wezterm"] {
+# for_window [app_id="org.wezfurlong.wezterm"] {
+#     floating enable
+#     move position center
+#     move scratchpad
+# }
+
+for_window [app_id="ghostty"] {
     floating enable
     move position center
     move scratchpad
@@ -275,8 +281,9 @@ font pango:UDEV Gothic 35NF 10
 gaps outer 5
 gaps inner 5
 
-# F12キーでweztermをトグル表示
-bindsym $mod+t exec "swaymsg '[app_id=org.wezfurlong.wezterm] scratchpad show; [app_id=org.wezfurlong.wezterm] resize set width 98ppt height 98ppt; [app_id=org.wezfurlong.wezterm] move position 1ppt 1ppt'"
+# F12キーでterminalをトグル表示
+bindsym $mod+t exec "swaymsg '[app_id=ghostty] scratchpad show; [app_id=ghostty] resize set width 98ppt height 98ppt; [app_id=ghostty] move position 1ppt 1ppt'"
+
 bindsym Ctrl+Shift+Space exec "1password --quick-access"
 
 # auto startup 

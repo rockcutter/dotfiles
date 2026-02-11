@@ -65,3 +65,10 @@ theme = tinacious-design-dark
 
 # キーバインド
 keybind = ctrl+v=paste_from_clipboard
+keybind = global:ctrl+shift+t=toggle_quick_terminal
+
+quick-terminal-position = top
+quick-terminal-screen = main
+quick-terminal-animation-duration = 0.2
+quick-terminal-autohide = true
+
