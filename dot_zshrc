@@ -23,7 +23,7 @@ bindkey -e
 PROMPT='
 %F{green}$ZSH_NEST_INDICATOR%f %F{red}%n%f on %F{yellow}%m%f at %F{red}%D{%Y-%m-%dT%H:%M:%S%z}%f
 wd %B%F{green}%~%f%b {$(_git_row_changes_for_prompt)}
-$? %F{red}$(_git_branch_for_prompt)%f$ '
+$(echo $?) %F{red}$(_git_branch_for_prompt)%f$ '
 
 
 ## completion
@@ -49,7 +49,7 @@ alias lg='lazygit'
 alias n='nvim'
 alias nn='nvim .'
 alias neovim_lightweight='nvim --clean -u ~/.config/nvim-minimal/init.lua'
-alias nlwneovim_lightweight
+alias nlw=neovim_lightweight
 alias g='git'
 
 
@@ -104,14 +104,6 @@ export AWS_SESSION_TOKEN_TTL=3h
 export AWS_DEFAULT_OUTPUT="json"
 
 export GPG_TTY=$(tty)
-
-## 1password configuration -------------------------------------------------
-
-if command -v ssh.exe > /dev/null 2>&1; then 
-	alias ssh='ssh.exe'
-	alias scp='scp.exe'
-	alias ssh-add='ssh-add.exe'
-fi 
 
 ## golang configuration -------------------------------------------------
 
