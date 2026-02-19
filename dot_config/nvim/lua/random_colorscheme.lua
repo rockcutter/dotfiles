@@ -12,6 +12,7 @@ choosed_theme = choose_random_theme({
 	"ayu",
 	"ayu-dark",
 	"ayu-mirage",
+	"everforest",
 })
 
 vim.cmd("colorscheme " .. choosed_theme)
