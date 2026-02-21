@@ -51,6 +51,9 @@ alias nn='nvim .'
 alias neovim_lightweight='nvim --clean -u ~/.config/nvim-minimal/init.lua'
 alias nlw=neovim_lightweight
 alias g='git'
+alias mv="mv -i"
+alias rm="rm -i"
+alias cp="cp -i"
 
 
 if command -v gdate > /dev/null 2>&1; then 
