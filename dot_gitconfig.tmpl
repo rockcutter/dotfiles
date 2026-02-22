@@ -1,6 +1,7 @@
 [user]
 	name = rockcutter
 	email = {{ .email }}
+
 [alias]
 	a = "!f() { cd \"${GIT_PREFIX:-.}\" && git add \"$@\" && git status -s -u; }; f"
 	sw = switch
@@ -17,8 +18,11 @@
 [core]
 	editor = nvim
 	excludesfile = ~/.gitignore_global
+  pager = delta
+
 [push]
 	autoSetupRemote = true
+
 [pull]
 	rebase = false
 
