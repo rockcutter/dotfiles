@@ -59,10 +59,14 @@ alias rm="rm -i"
 alias cp="cp -i"
 
 if command -v eza >/dev/null 2>&1; then 
-  alias ll='eza -lah --icons'
+  alias ls='eza --icons --sort=type'
 else 
-  alias ll='ls -lah --color=auto'
+  alias ls='ls --color=auto'
 fi
+
+alias ll='ls -lah'
+alias llf='ll -f'
+alias lld='ll -D'
 
 if command -v gdate > /dev/null 2>&1; then 
 	alias date=gdate
