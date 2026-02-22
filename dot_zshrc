@@ -41,7 +41,7 @@ bindkey "^[[B" down-line-or-beginning-search
 ## aliases -------------------------------------------------
 
 alias tm='tmux'
-alias ll='ls -lah --color=auto'
+alias ll='eza -lah --icons'
 alias dc='docker compose'
 alias d='docker'
 alias sctl='systemctl'

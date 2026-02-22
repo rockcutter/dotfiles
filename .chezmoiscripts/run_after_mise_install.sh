@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "mise install if mise is installed..."
+
 if mise --version &> /dev/null
 then
   mise install

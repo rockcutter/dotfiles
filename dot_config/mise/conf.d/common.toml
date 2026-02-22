@@ -1,3 +1,11 @@
 [tools]
 eza = "latest"
 ghq = "latest"
+lazygit = "latest"
+# バグが厄介なため 0.11.6 がリリースされるまでは 0.11.4 を使用する
+neovim = "0.11.6"
+fzf = "latest"
+jq = "latest"
+bat = "latest"
+delta = "latest"
+ripgrep = "latest"
