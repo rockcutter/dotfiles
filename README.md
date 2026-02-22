@@ -1,6 +1,8 @@
 
+## install mise
+https://mise.jdx.dev/getting-started.html
 
-install chezmoi 
+## install chezmoi 
 https://www.chezmoi.io/install/
 
 ```sh
