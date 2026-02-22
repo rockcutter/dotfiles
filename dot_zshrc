@@ -133,7 +133,7 @@ export PATH=$PATH:$HOME/.config/composer/vendor/bin
 
 ## vcpkg 
 export PATH=$PATH:$HOME/.local/share/vcpkg
- 
+
 ## history configuration -------------------------------------------------
 
 # export HISTTIMEFORMAT='%y-%m-%dT%H:%M:%S '
