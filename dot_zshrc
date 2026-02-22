@@ -2,7 +2,7 @@
 OS=$(uname | tr A-Z a-z)
 
 ## zsh -------------------------------------------------
-#
+
 function _git_branch_for_prompt() {
   local branch=$(git branch --show-current 2>/dev/null)
   echo "${branch:--}"
@@ -30,7 +30,6 @@ PROMPT='
 wd %B%F{green}%~%f%b {$(_git_row_changes_for_prompt)}
 $_last_exit_status %F{red}$(_git_branch_for_prompt)%f$ '
 
-
 ## completion
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
@@ -42,7 +41,6 @@ bindkey "^[[B" down-line-or-beginning-search
 ## aliases -------------------------------------------------
 
 alias tm='tmux'
-alias ll='eza -lah --icons'
 alias dc='docker compose'
 alias d='docker'
 alias sctl='systemctl'
@@ -60,6 +58,11 @@ alias mv="mv -i"
 alias rm="rm -i"
 alias cp="cp -i"
 
+if command -v eza >/dev/null 2>&1; then 
+  alias ll='eza -lah --icons'
+else 
+  alias ll='ls -lah --color=auto'
+fi
 
 if command -v gdate > /dev/null 2>&1; then 
 	alias date=gdate
@@ -68,6 +71,8 @@ fi
 ## general environment
 
 export EDITOR=nvim
+
+## fc
 export FCEDIT="nvim --clean -u ~/.config/nvim-minimal/init.lua"
 
 ## brew
@@ -76,18 +81,9 @@ export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 
 
 ## fzf -------------------------------------------------
-# if type fzf-tmux > /dev/null; then 
-# 	alias fzf='fzf-tmux -p 80%'
-# fi
-# if $TMUX;then 
 if command -v fzf-tmux >/dev/null 2>&1 && [ -z "${(P)TMUX}" ];then 
 	alias fzf='fzf-tmux -p 80%'
 fi
-
-
-## dotfile -------------------------------------------------
-# export DOTFILES_SOURCES_DIR=$HOME/dotfiles_sources
-# source $DOTFILES_SOURCES_DIR/*.sh
 
 ## c++ 
 ### compiler
@@ -154,11 +150,6 @@ setopt hist_expire_dups_first
 setopt extended_glob
 setopt extended_history
 unsetopt hist_ignore_space
-
-## Functions -------------------------------------------------
-## function preexec() {
-##     echo '───────────────────────────────────────────────────────────────────────────'
-## }
 
 function repo(){
 	REPO=$(ghq list | grep -v "^archive/" | fzf --query="$LBUFFER" -e)
