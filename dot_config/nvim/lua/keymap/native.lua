@@ -6,7 +6,7 @@ vim.api.nvim_create_user_command("Q", "qa!", {})
 vim.api.nvim_set_keymap("n", "<leader>n", ":bnext<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>N", ":bprevious<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "vv", "<C-v>", {})
-vim.api.nvim_set_keymap("t", "hh", "<C-\\><C-n>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("t", "hh", "<C-\\><C-n>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("t", "hj", "<C-\\><C-n>", { noremap = true, silent = true })
 
 -- bracket
