@@ -4,6 +4,16 @@ return {
 		opts = {},
 	},
 	{
+		"nvim-treesitter/nvim-treesitter",
+		lazy = false,
+		build = ":TSUpdate",
+		opts = {
+			highlight = {
+				enable = true,
+			},
+		},
+	},
+	{
 		"mason-org/mason-lspconfig.nvim",
 		dependencies = { "mason-org/mason.nvim" },
 		opts = {
@@ -37,11 +47,10 @@ return {
 	},
 	{
 		"coder/claudecode.nvim",
-		-- dependencies = { "folke/snacks.nvim" },
+		dependencies = { "folke/snacks.nvim" },
 		config = true,
 		opts = {
 			terminal = {
-				provider = "native",
 				split_side = "right",
 				split_width_percentage = 0.1,
 			},
@@ -101,7 +110,7 @@ return {
 	},
 	{
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.8",
+		commit = "3333a52ff548ba0a68af6d8da1e54f9cd96e9179", -- v0.2.1
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {
 			defaults = {
