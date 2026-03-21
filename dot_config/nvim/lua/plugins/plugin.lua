@@ -52,7 +52,7 @@ return {
 		opts = {
 			terminal = {
 				split_side = "right",
-				split_width_percentage = 0.1,
+				split_width_percentage = 0.3,
 			},
 			diff_opts = {
 				vertical_split = false,
