@@ -64,6 +64,7 @@ alias g='git'
 alias mv="mv -i"
 alias rm="rm -i"
 alias cp="cp -i"
+alias kctl='kubectl'
 
 if command -v eza >/dev/null 2>&1; then 
   alias ls='eza --icons --sort=type'
@@ -81,7 +82,7 @@ fi
 
 ## general environment
 
-export EDITOR=nvim
+export EDITOR=nvim 
 
 ## fc
 export FCEDIT="nvim --clean -u ~/.config/nvim-minimal/init.lua"
@@ -92,7 +93,7 @@ export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 
 
 ## fzf -------------------------------------------------
-if command -v fzf-tmux >/dev/null 2>&1 && [ -z "${(P)TMUX}" ];then 
+if command -v fzf-tmux >/dev/null 2>&1 && [ -z "${(P)TMUX}" ];then
 	alias fzf='fzf-tmux -p 80%'
 fi
 
