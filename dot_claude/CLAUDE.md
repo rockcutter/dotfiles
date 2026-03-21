@@ -8,13 +8,11 @@
 ## Git/GitHub
 - commit/push前に許可必須
 - ブランチ状態確認必須（master/mainへの直push禁止）
-- PR/Issue末尾に AI が作成した旨を記載
 - PR本文は日本語で「何をしたのか」「なぜやったのか」明記
 - PR本文はissueリンクを含める（例: 関連issue: $(issue url here) ）
 - ブランチにはissue番号を含める（例：issue-123-description）
   - issue番号がわからない場合、事前にユーザに確認する
 - PRはdraft状態で作成する
-- PR/Issue 本文は一度ファイルに記述し、ghコマンドの --body-file オプションで参照することを推奨
 
 ## SSH
 ```bash
