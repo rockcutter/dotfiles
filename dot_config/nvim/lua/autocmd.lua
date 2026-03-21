@@ -47,6 +47,16 @@ vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
 	end,
 })
 
+-- 保存時にtrailing whitespaceを自動削除
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*",
+	callback = function()
+		local pos = vim.api.nvim_win_get_cursor(0)
+		vim.cmd([[%s/\s\+$//e]])
+		vim.api.nvim_win_set_cursor(0, pos)
+	end,
+})
+
 vim.api.nvim_create_autocmd("VimResized", {
 	pattern = "*",
 	callback = function()
@@ -55,15 +65,5 @@ vim.api.nvim_create_autocmd("VimResized", {
 		if claude_win then
 			vim.api.nvim_win_set_width(claude_win, math.floor(vim.o.columns * 0.1))
 		end
-	end,
-})
-
--- 保存時にtrailing whitespaceを自動削除
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*",
-	callback = function()
-		local pos = vim.api.nvim_win_get_cursor(0)
-		vim.cmd([[%s/\s\+$//e]])
-		vim.api.nvim_win_set_cursor(0, pos)
 	end,
 })
