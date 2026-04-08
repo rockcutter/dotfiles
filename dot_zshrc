@@ -1,4 +1,4 @@
-# User onfiguraitons 
+# User onfiguraitons
 OS=$(uname | tr A-Z a-z)
 
 ## zsh -------------------------------------------------
@@ -66,9 +66,9 @@ alias rm="rm -i"
 alias cp="cp -i"
 alias kctl='kubectl'
 
-if command -v eza >/dev/null 2>&1; then 
+if command -v eza >/dev/null 2>&1; then
   alias ls='eza --icons --sort=type'
-else 
+else
   alias ls='ls --color=auto'
 fi
 
@@ -76,13 +76,13 @@ alias ll='ls -lah'
 alias llf='ll -f'
 alias lld='ll -D'
 
-if command -v gdate > /dev/null 2>&1; then 
+if command -v gdate > /dev/null 2>&1; then
 	alias date=gdate
-fi 
+fi
 
 ## general environment
 
-export EDITOR=nvim 
+export EDITOR=nvim
 
 ## fc
 export FCEDIT="nvim --clean -u ~/.config/nvim-minimal/init.lua"
@@ -97,7 +97,7 @@ if command -v fzf-tmux >/dev/null 2>&1 && [ -z "${(P)TMUX}" ];then
 	alias fzf='fzf-tmux -p 80%'
 fi
 
-## c++ 
+## c++
 ### compiler
 export CC=clang
 export CXX=clang++
@@ -128,22 +128,22 @@ export GOBIN=$GOPATH/bin
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$GOBIN
 
-## rye 
+## rye
 # source "$HOME/.rye/env"
 
-## bin 
+## bin
 export PATH=$PATH:~/.local/bin
 
 ## brew
 export PATH=$PATH:/opt/homebrew/bin
 
-## psql 
+## psql
 export PATH=$PATH:/opt/homebrew/opt/libpq/bin
 
 ## compose configuration
 export PATH=$PATH:$HOME/.config/composer/vendor/bin
 
-## vcpkg 
+## vcpkg
 export PATH=$PATH:$HOME/.local/share/vcpkg
 
 ## history configuration -------------------------------------------------
@@ -168,6 +168,14 @@ function repo(){
 	if [ -n "$REPO" ]; then
 		cd $(ghq root)/$REPO
 	fi
+
+}
+
+function gwa() {
+  local branch=$1
+  local repo_name=$(basename "$PWD")
+  # ../リポジトリ名+ブランチ名 でworktreeを作成
+  git worktree add "../${repo_name}+${branch}" -b "$branch"
 }
 
 function ghu(){
@@ -221,11 +229,11 @@ function p(){
 ## zoxide configurations -------------------------------------------------
 if command -v zoxide > /dev/null 2>&1; then
 	eval "$(zoxide init zsh)"
-fi 
+fi
 
 ## chezmoi configurations
 function chezmoi_commit(){
-	chezmoi git -- add . 
+	chezmoi git -- add .
 	chezmoi git -- diff --cached
 	echo "commit after 5 seconds..."
 	sleep 5
@@ -242,7 +250,7 @@ function chezmoi_edit_apply(){
 }
 
 function chezmoi_edit_source_path(){
-	nvim $(chezmoi source-path) 
+	nvim $(chezmoi source-path)
 }
 
 alias chez='chezmoi'
@@ -266,7 +274,7 @@ eval "$(mise activate zsh)"
 
 # PATH="$PATH:$PATH_BUFFER"
 # export PATH="$HOME/.local/share/mise/shims:$PATH"
- 
+
 ## tmux configurations -------------------------------------------------
 if which tmux >/dev/null 2>&1; then
 	if [ -z $VSCODE_GIT_ASKPASS_MAIN ] && [ -z $DISABLE_TMUX_AUTOSTARTUP ]; then
