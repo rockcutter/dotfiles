@@ -109,13 +109,6 @@ export PATH=$VCPKG_ROOT:$PATH
 
 ## aws configuration -------------------------------------------------
 
-if [ "$OS" = "darwin" ]; then
-    export AWS_VAULT_BACKEND=keychain
-elif command -v secret-tool >/dev/null 2>&1; then
-    export AWS_VAULT_BACKEND=secret-service
-else
-    export AWS_VAULT_BACKEND=pass
-fi
 export AWS_VAULT_PASS_PREFIX=aws-vault
 export AWS_SESSION_TOKEN_TTL=3h
 export AWS_DEFAULT_OUTPUT="json"
