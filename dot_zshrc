@@ -1,3 +1,4 @@
+zmodload zsh/zprof
 # User onfiguraitons
 OS=$(uname | tr A-Z a-z)
 
@@ -289,4 +290,4 @@ if which tmux >/dev/null 2>&1; then
     fi
 fi
 
-
+zprof > "/tmp/zsh_zprof_$(date '+%Y-%m-%d_%H-%M-%S').log" 2>&1
