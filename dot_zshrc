@@ -174,8 +174,13 @@ function repo(){
 function gwa() {
   local branch=$1
   local repo_name=$(basename "$PWD")
+  local safe_branch=${branch//\//-}
   # ../リポジトリ名+ブランチ名 でworktreeを作成
-  git worktree add "../${repo_name}+${branch}" -b "$branch"
+  if git show-ref --verify --quiet "refs/heads/$branch"; then
+    git worktree add "../${repo_name}+${safe_branch}" "$branch"
+  else
+    git worktree add "../${repo_name}+${safe_branch}" -b "$branch"
+  fi
 }
 
 function ghu(){

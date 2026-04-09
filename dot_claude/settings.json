@@ -1,5 +1,12 @@
 {
   "model": "opus[1m]",
+  "permissions": {
+    "allow": [
+      "Bash(gh pr view *)",
+      "Bash(gh issue view *)",
+      "Bash(gh pr diff *)"
+    ]
+  },
   "hooks": {
     "Notification": [
       {
