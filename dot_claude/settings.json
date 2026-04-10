@@ -3,8 +3,11 @@
   "effortLevel": "medium",
   "permissions": {
     "allow": [
+      "Bash(git add *)",
+      "Bash(git commit *)",
       "Bash(gh pr view *)",
       "Bash(gh issue view *)",
+      "Bash(git checkout -b *)",
       "Bash(gh pr diff *)"
     ]
   },
