@@ -7,6 +7,7 @@
       "Bash(git commit *)",
       "Bash(gh pr view *)",
       "Bash(gh issue view *)",
+      "Bash(go build *)",
       "Bash(git checkout -b *)",
       "Bash(gh pr diff *)"
     ]
