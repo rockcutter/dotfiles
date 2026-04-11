@@ -2,6 +2,9 @@ zmodload zsh/zprof
 # User onfiguraitons
 OS=$(uname | tr A-Z a-z)
 
+## alive
+~/.local/bin/report_alive.sh &!
+
 ## zsh -------------------------------------------------
 
 function _git_branch_for_prompt() {

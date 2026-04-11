@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# alive_token が存在しないことを許容する
+{{ if (index . "alive_token") -}}
+curl -s https://alive.rockcutter.jp/api/v1/report \
+    -X POST \
+    -H 'Authorization: Bearer {{ .alive_token }}' \
+    -H 'Content-Type: application/json' \
+    -d '{"message": "生存報告 from zsh"}'
+{{- end }}
