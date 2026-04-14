@@ -9,7 +9,8 @@
       "Bash(gh issue view *)",
       "Bash(go build *)",
       "Bash(git checkout -b *)",
-      "Bash(gh pr diff *)"
+      "Bash(gh pr diff *)",
+      "mcp__snowflake__snowflake-docs-search"
     ]
   },
   "hooks": {
