@@ -35,7 +35,12 @@ wd %B%F{green}%~%f%b {$(_git_row_changes_for_prompt)}
 $_last_exit_status %F{red}$(_git_branch_for_prompt)%f$ '
 
 ## completion
-autoload -Uz compinit && compinit
+autoload -Uz compinit
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
