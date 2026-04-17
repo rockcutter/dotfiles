@@ -36,11 +36,7 @@ $_last_exit_status %F{red}$(_git_branch_for_prompt)%f$ '
 
 ## completion
 autoload -Uz compinit
-if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
-  compinit
-else
-  compinit -C
-fi
+compinit
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
@@ -88,6 +84,21 @@ alias lld='ll -D'
 if command -v gdate > /dev/null 2>&1; then
 	alias date=gdate
 fi
+
+## abbreviation setting -------------------------------------------------
+bindkey ' ' expand-alias-and-self-insert
+
+###  https://qiita.com/aosho235/items/181af4d29b323da0baa1
+functions expand-alias-and-self-insert() {
+  local words=(${(z)LBUFFER})
+  local word="${words[1]}"
+  # カーソル前の単語がバックスラッシュで始まる場合は除外。ls等は除外
+  if [[ ${words[-1][1]} != '\' && "$word" != "ls" && "$word" != "ll" ]]; then
+    zle _expand_alias
+  fi
+  zle self-insert
+}
+zle -N expand-alias-and-self-insert
 
 ## general environment
 
@@ -296,4 +307,6 @@ zprof > "$_zprof_log" 2>&1
 if (( SECONDS > 2 )); then
 	echo "zsh startup took ${SECONDS}s -- zprof: $_zprof_log"
 fi
+
+
 unset _zprof_log
