@@ -86,10 +86,9 @@ if command -v gdate > /dev/null 2>&1; then
 fi
 
 ## abbreviation setting -------------------------------------------------
-bindkey ' ' expand-alias-and-self-insert
 
 ###  https://qiita.com/aosho235/items/181af4d29b323da0baa1
-functions expand-alias-and-self-insert() {
+function expand-alias-and-self-insert() {
   local words=(${(z)LBUFFER})
   local word="${words[1]}"
   # カーソル前の単語がバックスラッシュで始まる場合は除外。ls等は除外
@@ -98,7 +97,10 @@ functions expand-alias-and-self-insert() {
   fi
   zle self-insert
 }
+
 zle -N expand-alias-and-self-insert
+
+bindkey ' ' expand-alias-and-self-insert
 
 ## general environment
 
