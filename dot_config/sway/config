@@ -219,13 +219,13 @@ bindsym $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 # bar {
-# 
+#
 #     position top
-# 
+#
 #     # When the status_command prints a new line to stdout, swaybar updates.
 #     # The default just shows the current date and time.
 #     status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-# 
+#
 #     colors {
 #         statusline #ffffff
 #         background #323232
@@ -286,12 +286,11 @@ bindsym $mod+t exec "swaymsg '[app_id=ghostty] scratchpad show; [app_id=ghostty]
 
 bindsym Ctrl+Shift+Space exec "1password --quick-access"
 
-# auto startup 
-exec discord
+# auto startup
 exec swaync
 exec 1password
 exec fcitx5
-exec wezterm
+exec ghostty
 
 # media control
 bindsym XF86AudioPlay exec playerctl play-pause
