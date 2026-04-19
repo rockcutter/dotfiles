@@ -91,8 +91,9 @@ fi
 function expand-alias-and-self-insert() {
   local words=(${(z)LBUFFER})
   local word="${words[1]}"
+  local exclude_aliases=(ls ll cp rm)
   # カーソル前の単語がバックスラッシュで始まる場合は除外。ls等は除外
-  if [[ ${words[-1][1]} != '\' && "$word" != "ls" && "$word" != "ll" ]]; then
+  if [[ ${words[-1][1]} != '\' && ${exclude_aliases[(r)$word]} != "$word" ]]; then
     zle _expand_alias
   fi
   zle self-insert
