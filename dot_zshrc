@@ -209,7 +209,41 @@ function gadd(){
     git status -s
 }
 
-function hist(){
+export HIST_EDITOR="neovim_lightweight"
+function hist() {
+  setopt pipefail
+
+  local tmp
+  tmp="$(mktemp "/tmp/atuin-edit.XXXXXX.zsh")"
+
+  atuin search -i > ${tmp}
+
+  local initial="$(<"$tmp")"
+  if [[ -z "${initial//[[:space:]]/}" ]]; then
+    rm -f "$tmp"
+    return 0
+  fi
+
+  eval "${HIST_EDITOR} ${tmp}"
+
+  local cmd="$(<"$tmp")"
+  if [[ -z "$cmd" ]]; then
+    return 0
+  fi
+  echo "$cmd"
+
+  local id=""
+  id="$(atuin history start -- "$cmd" 2>/dev/null)"
+
+  eval "$cmd"
+  local ec=$?
+
+  ATUIN_HISTORY_ID="$id" atuin history end --exit "$ec" >/dev/null 2>&1 || true
+
+  return $ec
+}
+
+function hist_old(){
 	local HISTORY_ID=$(\
 		history -i 1 | sort -r -k 4 | sort -u -k 4 | sort -r -k 1,1 \
 		| fzf --no-sort -e --preview 'echo {} | fold -s -$(tput cols)' --preview-window='down,wrap' \
@@ -295,6 +329,9 @@ eval "$(mise activate zsh)"
 
 # PATH="$PATH:$PATH_BUFFER"
 # export PATH="$HOME/.local/share/mise/shims:$PATH"
+
+## atuin configurations -------------------------------------------------
+eval "$(atuin init zsh --disable-up-arrow)"
 
 ## direnv configurations -------------------------------------------------
 if command -v direnv > /dev/null 2>&1; then
