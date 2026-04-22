@@ -1,6 +1,4 @@
 {
-  "model": "opus[1m]",
-  "effortLevel": "medium",
   "permissions": {
     "allow": [
       "Bash(git add *)",
@@ -13,6 +11,7 @@
       "mcp__snowflake__snowflake-docs-search"
     ]
   },
+  "model": "opus[1m]",
   "hooks": {
     "Notification": [
       {
@@ -40,5 +39,18 @@
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh"
+  },
+  "extraKnownMarketplaces": {
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    }
+  },
+  "effortLevel": "medium",
+  "skipAutoPermissionPrompt": true,
+  "enabledPlugins": {
+    "codex@openai-codex": true
   }
 }
