@@ -322,7 +322,7 @@ records = true
 ## The "workspace" mode is skipped when not in a workspace or workspaces = false.
 ## Default filter mode can be overridden with the filter_mode setting.
 # filters = [ "global", "host", "session", "session-preload", "workspace", "directory" ]
-filters = [ "global", "directory" ]
+filters = [ "directory", "global" ]
 
 [tmux]
 ## Enable using atuin with tmux popup (requires tmux >= 3.2)
@@ -387,6 +387,7 @@ filters = [ "global", "directory" ]
 "left" = "cursor-left"
 "right" = "cursor-right"
 "j j" = "vim-enter-normal"
+"tab" = "cycle-filter-mode"
 
 [keymap.vim-normal]
 "up" = "select-previous"
@@ -399,4 +400,4 @@ filters = [ "global", "directory" ]
 ": Q" = "exit"
 ": q" = "exit"
 "q" = "exit"
-
+"tab" = "cycle-filter-mode"
