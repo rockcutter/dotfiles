@@ -53,6 +53,7 @@ alias mv="mv -i"
 alias rm="rm -i"
 alias cp="cp -i"
 alias kctl='kubectl'
+alias s3cp='aws s3 cp --profile'
 
 if command -v eza >/dev/null 2>&1; then
   alias ls='eza --icons --sort=type'
@@ -236,7 +237,7 @@ function avt() {
 	aws-vault exec $role -- $@
 }
 
-function s3cp() {
+function s3cp_old() {
 	local role="$1"
 	shift
 	aws-vault exec $role -- aws s3 cp $@
