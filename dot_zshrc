@@ -1,8 +1,7 @@
-zmodload zsh/zprof
 # User onfiguraitons
-OS=$(uname | tr A-Z a-z)
+zmodload zsh/zprof
 
-## alive
+## alive -----------------------------------------------
 ~/.local/bin/report_alive.sh &!
 
 ## zsh -------------------------------------------------
@@ -34,7 +33,7 @@ PROMPT='
 wd %B%F{green}%~%f%b {$(_git_row_changes_for_prompt)}
 $_last_exit_status %F{red}$(_git_branch_for_prompt)%f$ '
 
-## completion
+## completion -------------------------------------------------
 autoload -Uz compinit
 compinit
 autoload -U up-line-or-beginning-search
@@ -99,8 +98,15 @@ function expand-alias-and-self-insert() {
   zle self-insert
 }
 
-zle -N expand-alias-and-self-insert
+function expand-alias-and-accept-line() {
+  zle _expand_alias
+  zle accept-line
+}
 
+zle -N expand-alias-and-accept-line
+bindkey '^M' expand-alias-and-accept-line
+
+zle -N expand-alias-and-self-insert
 bindkey ' ' expand-alias-and-self-insert
 
 ## general environment
@@ -216,7 +222,7 @@ function hist() {
   local tmp
   tmp="$(mktemp "/tmp/atuin-edit.XXXXXX.zsh")"
 
-  atuin search -i > ${tmp}
+  atuin search -i 2>"$tmp"
 
   local initial="$(<"$tmp")"
   if [[ -z "${initial//[[:space:]]/}" ]]; then
@@ -347,11 +353,12 @@ if which tmux >/dev/null 2>&1; then
     fi
 fi
 
+
+## zprof -------------------------------------------------
 _zprof_log="/tmp/zsh_zprof_$(date '+%Y-%m-%d_%H-%M-%S').log"
 zprof > "$_zprof_log" 2>&1
 if (( SECONDS > 2 )); then
 	echo "zsh startup took ${SECONDS}s -- zprof: $_zprof_log"
 fi
-
 
 unset _zprof_log
