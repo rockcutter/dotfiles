@@ -33,22 +33,6 @@ PROMPT='
 wd %B%F{green}%~%f%b {$(_git_row_changes_for_prompt)}
 $_last_exit_status %F{red}$(_git_branch_for_prompt)%f$ '
 
-## completion -------------------------------------------------
-autoload -Uz compinit
-compinit
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-bindkey "^[[A" up-line-or-beginning-search
-bindkey "^[[B" down-line-or-beginning-search
-bindkey "^[[H"  beginning-of-line
-bindkey "^[[F"  end-of-line
-bindkey "^[[3~" delete-char
-bindkey "^[[2~" overwrite-mode
-bindkey "^[[5~" up-line-or-history
-bindkey "^[[6~" down-line-or-history
-
 ## aliases -------------------------------------------------
 
 alias tm='tmux'
@@ -110,7 +94,6 @@ zle -N expand-alias-and-self-insert
 bindkey ' ' expand-alias-and-self-insert
 
 ## general environment
-
 export EDITOR=nvim
 
 ## fc
@@ -119,7 +102,6 @@ export FCEDIT="nvim --clean -u ~/.config/nvim-minimal/init.lua"
 ## brew
 ### coreutils
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
-
 
 ## fzf -------------------------------------------------
 if command -v fzf-tmux >/dev/null 2>&1 && [ -z "${(P)TMUX}" ];then
@@ -190,7 +172,6 @@ function repo(){
 	if [ -n "$REPO" ]; then
 		cd $(ghq root)/$REPO
 	fi
-
 }
 
 function gwa() {
@@ -360,5 +341,21 @@ zprof > "$_zprof_log" 2>&1
 if (( SECONDS > 2 )); then
 	echo "zsh startup took ${SECONDS}s -- zprof: $_zprof_log"
 fi
+
+## completion -------------------------------------------------
+autoload -Uz compinit
+compinit
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
+bindkey "^[[H"  beginning-of-line
+bindkey "^[[F"  end-of-line
+bindkey "^[[3~" delete-char
+bindkey "^[[2~" overwrite-mode
+bindkey "^[[5~" up-line-or-history
+bindkey "^[[6~" down-line-or-history
 
 unset _zprof_log
