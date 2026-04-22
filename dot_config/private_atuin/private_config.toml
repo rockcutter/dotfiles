@@ -395,5 +395,8 @@ filters = [ "global", "directory" ]
 "j" = "select-next"
 "left" = "cursor-left"
 "right" = "cursor-right"
+"D D" = "delete"
 ": Q" = "exit"
+": q" = "exit"
+"q" = "exit"
 
