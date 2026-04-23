@@ -393,6 +393,7 @@ filters = [ "directory", "global" ]
 "up" = "select-previous"
 "down" = "select-next"
 "k" = "select-previous"
+"h" = "exit"
 "j" = "select-next"
 "left" = "cursor-left"
 "right" = "cursor-right"

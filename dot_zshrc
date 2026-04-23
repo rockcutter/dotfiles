@@ -171,7 +171,7 @@ setopt extended_history
 unsetopt hist_ignore_space
 
 function repo(){
-	REPO=$(ghq list | grep -v "^archive/" | fzf --query="$LBUFFER" -e)
+	REPO=$(ghq list | grep -v "archive/" | fzf --query="$LBUFFER" -e)
 	if [ -n "$REPO" ]; then
 		cd $(ghq root)/$REPO
 	fi
