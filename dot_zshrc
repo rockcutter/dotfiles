@@ -216,6 +216,7 @@ function hist() {
   id="$(atuin history start -- "$cmd" 2>/dev/null)"
 
   eval "$cmd"
+  print -s "$cmd"
   local ec=$?
 
   ATUIN_HISTORY_ID="$id" atuin history end --exit "$ec" >/dev/null 2>&1 || true
