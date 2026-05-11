@@ -1,0 +1,30 @@
+notify = ["bash", "-lc", "$HOME/.codex/hooks/notification.sh"]
+
+[features]
+codex_hooks = true
+
+[projects."/Users/rockcutter/.local/share/chezmoi"]
+trust_level = "trusted"
+
+[projects."/Users/rockcutter/ghq/github.com/voyagegroup/fluct_report_batch"]
+trust_level = "trusted"
+
+[projects."/Users/rockcutter"]
+trust_level = "trusted"
+
+[projects."/Users/rockcutter/ghq/github.com/voyagegroup/fluct_funnel"]
+trust_level = "trusted"
+
+[projects."/Users/rockcutter/ghq/github.com/voyagegroup/fluct_ms"]
+trust_level = "trusted"
+
+[tui.model_availability_nux]
+"gpt-5.5" = 4
+
+[[hooks.Stop]]
+
+[[hooks.Stop.hooks]]
+type = "command"
+command = "$HOME/.codex/hooks/stop.sh"
+timeout = 30
+statusMessage = "Notifying"

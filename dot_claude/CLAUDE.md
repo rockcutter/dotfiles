@@ -8,11 +8,17 @@
 ## Git/GitHub
 - commit/push前に許可必須
 - ブランチ状態確認必須（master/mainへの直push禁止）
-- PR本文は日本語で「何をしたのか」「なぜやったのか」明記
-- PR本文はissueリンクを含める（例: 関連issue: $(issue url here) ）
 - ブランチにはissue番号を含める（例：issue-123-description）
   - issue番号がわからない場合、事前にユーザに確認する
+
+## PR作成
 - PRはdraft状態で作成する
+- PR本文は日本語で記述
+- PR本文にはissueリンクを含める（例: 関連issue: $(issue url here) ）
+- PR descriptionで欲しいのはdiffの再説明ではなく、diffからは読み取りにくい文脈
+  - 「どのファイルをどう変えたか」はdiffを見れば分かる
+  - PR descriptionの役割は、diffの代替ではなく、diffを読むための地図であるべき
+  - 「何をしたのか」より「なぜやったのか」「どういう判断をしたのか」を重視
 
 ## コマンド実行について
 - 実行許可設定の粒度を細かくするために、独立したコマンドは分けて実行することが推奨される
