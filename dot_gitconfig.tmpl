@@ -15,6 +15,7 @@
 	cdiff = diff --cached
   p = pull
 	master = "!f() { if git show-ref --verify --quiet refs/heads/main; then git switch main; elif git show-ref --verify --quiet refs/heads/master; then git switch master; else echo 'main/master ブランチが見つからないよ〜' >&2; return 1; fi; }; f"
+	ma = master
 
 [core]
 	editor = nvim
