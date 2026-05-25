@@ -1,4 +1,18 @@
 #!/bin/bash
+LOG=~/.claude/hooks/notification.log
+INPUT=$(cat)
+{
+  echo "=== $(date '+%Y-%m-%d %H:%M:%S') PID=$$ PPID=$PPID TMUX_PANE=$TMUX_PANE ==="
+  echo "$INPUT"
+  echo ""
+} >> "$LOG"
+
+# idle_prompt は Stop hook と重複するためスキップ
+NOTIFICATION_TYPE=$(echo "$INPUT" | jq -r '.notification_type // ""')
+if [[ "$NOTIFICATION_TYPE" == "idle_prompt" ]]; then
+  exit 0
+fi
+
 tmux select-window -t "$TMUX_PANE"
 if [[ "$(uname)" == "Darwin" ]]; then
   osascript -e 'display notification "Claude Codeが入力を待っています" with title "Claude Code" sound name "Glass"'

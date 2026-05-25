@@ -1,4 +1,12 @@
 #!/bin/bash
+LOG=~/.claude/hooks/stop.log
+INPUT=$(cat)
+{
+  echo "=== $(date '+%Y-%m-%d %H:%M:%S') PID=$$ PPID=$PPID TMUX_PANE=$TMUX_PANE ==="
+  echo "$INPUT"
+  echo ""
+} >> "$LOG"
+
 tmux select-window -t "$TMUX_PANE"
 if [[ "$(uname)" == "Darwin" ]]; then
   osascript -e 'display notification "Claude Codeが入力を待っています" with title "Claude Code" sound name "Glass"'
