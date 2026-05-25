@@ -3,6 +3,8 @@
 -- general
 vim.api.nvim_set_keymap("i", "jj", "<Esc>", {})
 vim.api.nvim_create_user_command("Q", "qa!", {})
+vim.api.nvim_create_user_command("CLAUDE", "term claude", {})
+vim.api.nvim_create_user_command("CL", "term claude", {})
 vim.api.nvim_set_keymap("n", "<leader>n", ":bnext<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>N", ":bprevious<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "vv", "<C-v>", {})
