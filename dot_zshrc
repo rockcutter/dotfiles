@@ -307,8 +307,9 @@ fi
 ## zprof -------------------------------------------------
 _zprof_log="/tmp/zsh_zprof_$(date '+%Y-%m-%d_%H-%M-%S').log"
 zprof > "$_zprof_log" 2>&1
+echo "zsh startup took ${SECONDS}s -- zprof: $_zprof_log"
 if (( SECONDS > 2 )); then
-	echo "zsh startup took ${SECONDS}s -- zprof: $_zprof_log"
+  echo "zsh startup took ${SECONDS}s -- zprof: $_zprof_log"
 fi
 
 ## completion -------------------------------------------------
