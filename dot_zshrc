@@ -66,6 +66,7 @@ alias llf='ll -f'
 alias lld='ll -D'
 
 alias ghu='gh pr view --json url | jq;gh repo view --json nameWithOwner,url | jq'
+alias ghpr='gh pr view --web'
 
 if command -v gdate > /dev/null 2>&1; then
 	alias date=gdate
