@@ -2,6 +2,7 @@
 input=$(cat)
 
 MODEL=$(echo "$input" | jq -r '.model.display_name')
+EFFORT=$(echo "$input" | jq -r '.effort.level // empty')
 PCT=$(echo "$input" | jq -r '.context_window.used_percentage // 0' | cut -d. -f1)
 INPUT_TOKENS=$(echo "$input" | jq -r '.context_window.total_input_tokens // 0')
 OUTPUT_TOKENS=$(echo "$input" | jq -r '.context_window.total_output_tokens // 0')
@@ -43,6 +44,6 @@ fi
 [ -n "$SEVEN_D" ] && LIMITS="${LIMITS:+$LIMITS }7d:$(printf '%.0f' "$SEVEN_D")%"
 
 [ -n "$LIMITS" ] && echo "$LIMITS"
-echo "[$MODEL] Context: ${PCT}% | \$${COST}"
+echo "[$MODEL${EFFORT:+ effort:$EFFORT}] Context: ${PCT}% | \$${COST}"
 echo "${TOTAL} tokens (in:${INPUT_TOKENS} out:${OUTPUT_TOKENS})"
 echo "${DURATION} (API:${API_DURATION})"
