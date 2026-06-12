@@ -166,6 +166,20 @@ return {
 		},
 		lazy = false,
 		opts = {
+			event_handlers = {
+				{
+					event = "file_opened",
+					handler = function()
+						-- 新規split時にneo-treeが幅を復元してくるので、開いた後に縮め直す
+						for _, win in ipairs(vim.api.nvim_list_wins()) do
+							local buf = vim.api.nvim_win_get_buf(win)
+							if vim.bo[buf].filetype == "neo-tree" then
+								vim.api.nvim_win_set_width(win, 8)
+							end
+						end
+					end,
+				},
+			},
 			window = {
 				width = 100,
 				position = "left",

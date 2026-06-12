@@ -15,10 +15,10 @@ end
 vim.api.nvim_create_autocmd("WinEnter", {
   callback = function()
     vim.cmd("wincmd =")
-    local claude_win = find_claude_terminal_win()
-    if claude_win then
-      vim.api.nvim_win_set_width(claude_win, math.floor(vim.o.columns * 0.3))
-    end
+    --    local claude_win = find_claude_terminal_win()
+    --    if claude_win then
+    --      vim.api.nvim_win_set_width(claude_win, math.floor(vim.o.columns * 0.3))
+    --    end
   end,
 })
 
