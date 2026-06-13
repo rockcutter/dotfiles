@@ -8,6 +8,7 @@ vim.keymap.set("n", "<leader>fi", telescope.lsp_implementations, { desc = "Teles
 vim.keymap.set("n", "<leader>ff", telescope.live_grep, { desc = "Telescope live grep" })
 vim.keymap.set("n", "<leader>fb", telescope.buffers, { desc = "Telescope buffers" })
 vim.keymap.set("n", "<leader>b", telescope.buffers, { desc = "Telescope buffers" })
+vim.keymap.set("n", "<leader><Space>", telescope.buffers, { desc = "Telescope buffers" })
 
 vim.keymap.set("n", "<leader>p", function()
 	telescope.find_files({ hidden = true })

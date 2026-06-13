@@ -46,6 +46,14 @@ return {
 		"airblade/vim-gitgutter",
 	},
 	{
+		"folke/snacks.nvim",
+		priority = 1000,
+		lazy = false,
+		opts = {
+			notifier = { enabled = true },
+		},
+	},
+	{
 		"coder/claudecode.nvim",
 		dependencies = { "folke/snacks.nvim" },
 		config = true,
