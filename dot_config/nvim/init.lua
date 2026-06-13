@@ -37,9 +37,6 @@ require("keymap.plugin")
 require("lsp.lsp")
 require("lsp.autocmd")
 
--- choose random theme
-require("random_colorscheme")
-
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "<filetype>" },
   callback = function()
