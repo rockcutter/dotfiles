@@ -12,7 +12,7 @@
       "mcp__snowflake__snowflake-docs-search"
     ]
   },
-  "model": "opus[1m]",
+  "model": "claude-fable-5[1m]",
   "hooks": {
     "Notification": [
       {
