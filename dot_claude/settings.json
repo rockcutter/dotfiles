@@ -54,5 +54,6 @@
   },
   "effortLevel": "xhigh",
   "language": "Japanese",
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "autoMemoryEnabled": false
 }
