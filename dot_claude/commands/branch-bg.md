@@ -14,4 +14,3 @@ claude --resume "${CLAUDE_SESSION_ID}" --fork-session --bg "$ARGUMENTS"
 
 - 出力に表示された短縮IDが分岐後のバックグラウンドセッション
 - このIDをユーザに通知し、fork が完了した旨を伝える
-
