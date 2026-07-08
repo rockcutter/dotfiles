@@ -13,9 +13,5 @@ claude --resume "${CLAUDE_SESSION_ID}" --fork-session --bg "$ARGUMENTS"
 ```
 
 - 出力に表示された短縮IDが分岐後のバックグラウンドセッション
-- 元のセッション(このセッション)は新しいIDに分岐して起動されるため影響を受けない
-- 接続: `claude attach <id>` / ログ確認: `claude logs <id>` / 停止: `claude stop <id>`
+- このIDをユーザに通知し、fork が完了した旨を伝える
 
-ユーザーには分岐後のセッションIDと上記の操作方法を簡潔に伝えること。
-prompt required エラーが出ている場合は、`/branch-bg <指示>` のように
-バックグラウンドセッションへの指示を引数で渡す必要があることを伝えること。
