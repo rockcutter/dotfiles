@@ -55,5 +55,6 @@
   "effortLevel": "xhigh",
   "skipAutoPermissionPrompt": true,
   "tui": "fullscreen",
+  "language": "Japanese",
   "autoMemoryEnabled": false
 }

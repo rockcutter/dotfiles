@@ -66,6 +66,8 @@ theme = tinacious-design-dark
 # キーバインド
 keybind = ctrl+v=paste_from_clipboard
 keybind = global:ctrl+shift+t=toggle_quick_terminal
+# Ctrl+EはGhosttyでは処理せずアプリ側へ渡す
+keybind = ctrl+e=unbind
 
 quick-terminal-position = top
 quick-terminal-screen = main
