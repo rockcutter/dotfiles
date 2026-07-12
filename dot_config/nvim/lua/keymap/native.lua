@@ -64,6 +64,51 @@ vim.keymap.set("v", "<leader>go", function()
   vim.fn.system('gh browse "' .. file .. ":" .. line_range .. '"')
 end, { desc = "Open selected range in GitHub" })
 
+-- 現在行を最後に変更したPRをブラウザで開く
+-- git blameでコミットを特定し、GitHub APIでそのコミットに紐づくPRを取得する
+local function trace_pr()
+  local file = vim.fn.expand("%:p")
+  local line = vim.fn.line(".")
+  local cwd = vim.fn.expand("%:p:h")
+
+  vim.system({ "git", "blame", "-L", line .. "," .. line, "--porcelain", file }, { cwd = cwd }, function(blame)
+    if blame.code ~= 0 then
+      vim.schedule(function()
+        vim.notify("git blame failed: " .. vim.trim(blame.stderr or ""), vim.log.levels.ERROR)
+      end)
+      return
+    end
+
+    local sha = (blame.stdout or ""):match("^(%x+)")
+    if not sha or sha:match("^0+$") then
+      vim.schedule(function()
+        vim.notify("この行はまだコミットされていません", vim.log.levels.WARN)
+      end)
+      return
+    end
+
+    vim.system(
+      { "gh", "api", "repos/{owner}/{repo}/commits/" .. sha .. "/pulls", "--jq", ".[0].html_url" },
+      { cwd = cwd },
+      function(pr)
+        local url = vim.trim(pr.stdout or "")
+        vim.schedule(function()
+          if pr.code ~= 0 or url == "" or url == "null" then
+            -- PRが見つからない場合はコミットページを開く
+            vim.notify("PRが見つからないためコミットを開きます: " .. sha:sub(1, 7), vim.log.levels.WARN)
+            vim.system({ "gh", "browse", sha }, { cwd = cwd })
+            return
+          end
+          vim.ui.open(url)
+        end)
+      end
+    )
+  end)
+end
+
+vim.api.nvim_create_user_command("TracePR", trace_pr, {})
+vim.keymap.set("n", "<leader>gp", trace_pr, { desc = "Open PR that last changed current line" })
+
 -- jj -> esc
 -- for vscode add ↓ keybindings.json
 --     {
