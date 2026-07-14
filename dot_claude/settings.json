@@ -42,7 +42,8 @@
     "command": "~/.claude/statusline.sh"
   },
   "enabledPlugins": {
-    "codex@openai-codex": true
+    "codex@openai-codex": true,
+    "example-skills@anthropic-agent-skills": true
   },
   "extraKnownMarketplaces": {
     "openai-codex": {
