@@ -64,6 +64,25 @@ vim.keymap.set("v", "<leader>go", function()
   vim.fn.system('gh browse "' .. file .. ":" .. line_range .. '"')
 end, { desc = "Open selected range in GitHub" })
 
+-- 選択範囲を @ファイル名#L行番号 形式でクリップボードにコピーする
+-- '<,'> はビジュアルモードを抜けるまで更新されないため、選択中でも正しい範囲が
+-- 取れる line("v") / line(".") を使う
+vim.keymap.set("v", "<leader>cls", function()
+  local file = vim.fn.expand("%:.")
+  local start_line = vim.fn.line("v")
+  local end_line = vim.fn.line(".")
+  if start_line > end_line then
+    start_line, end_line = end_line, start_line
+  end
+  local ref = "@" .. file .. "#L" .. start_line
+  if end_line ~= start_line then
+    ref = ref .. "-L" .. end_line
+  end
+  vim.fn.setreg("+", ref)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
+  vim.notify("copied: " .. ref)
+end, { desc = "Copy @file#Lline reference", noremap = true, silent = true })
+
 -- 現在行を最後に変更したPRをブラウザで開く
 -- git blameでコミットを特定し、GitHub APIでそのコミットに紐づくPRを取得する
 local function trace_pr()

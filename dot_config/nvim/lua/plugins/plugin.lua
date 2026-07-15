@@ -69,7 +69,6 @@ return {
 		},
 		keys = {
 			{ "<leader>cl", "<cmd>ClaudeCode<cr>", mode = "n", desc = "Open Claude Code" },
-			{ "<leader>cls", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
 		},
 	},
 	{
