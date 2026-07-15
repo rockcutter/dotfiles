@@ -7,12 +7,10 @@ INPUT=$(cat)
   echo ""
 } >> "$LOG"
 
-# background agent のセッションでは通知しない
-# (親セッション側の agent_completed / agent_needs_input 通知と二重になるため)
-AGENT_TYPE=$(echo "$INPUT" | jq -r '.agent_type // ""')
-if [[ -n "$AGENT_TYPE" ]]; then
-  exit 0
-fi
+# background agent のセッション (agent_type あり) でも通知する。
+# 親セッション側の agent_completed 通知は agent view を表示するまで
+# 発火が遅延することがあり、実完了時に鳴らせるのはこの Stop hook のみ。
+# 二重通知は notification.sh 側で親の中継通知をスキップして防ぐ
 
 if [[ "$(uname)" == "Darwin" ]]; then
   osascript -e 'display notification "Claude Codeが入力を待っています" with title "Claude Code" sound name "Glass"'

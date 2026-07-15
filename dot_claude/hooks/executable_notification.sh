@@ -7,16 +7,18 @@ INPUT=$(cat)
   echo ""
 } >> "$LOG"
 
-# background agent のセッションでは通知しない
-# (親セッション側の agent_completed / agent_needs_input 通知と二重になるため)
-AGENT_TYPE=$(echo "$INPUT" | jq -r '.agent_type // ""')
-if [[ -n "$AGENT_TYPE" ]]; then
+NOTIFICATION_TYPE=$(echo "$INPUT" | jq -r '.notification_type // ""')
+
+# idle_prompt は Stop hook と重複するためスキップ
+if [[ "$NOTIFICATION_TYPE" == "idle_prompt" ]]; then
   exit 0
 fi
 
-# idle_prompt は Stop hook と重複するためスキップ
-NOTIFICATION_TYPE=$(echo "$INPUT" | jq -r '.notification_type // ""')
-if [[ "$NOTIFICATION_TYPE" == "idle_prompt" ]]; then
+# agent_completed / agent_needs_input は親セッション側の中継通知で、
+# agent view を表示するまで発火が遅延することがあるためスキップ。
+# 実際の完了・入力待ちの時点では agent 側セッションの Stop hook と
+# permission_prompt 通知が発火するので、そちらで通知する
+if [[ "$NOTIFICATION_TYPE" == "agent_completed" || "$NOTIFICATION_TYPE" == "agent_needs_input" ]]; then
   exit 0
 fi
 
