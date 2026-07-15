@@ -49,20 +49,22 @@ end, { desc = "Toggle window zoom", noremap = true, silent = true })
 -- 補完を enter で確定する
 vim.api.nvim_set_keymap("i", "<CR>", 'pumvisible() ? "\\<C-y>" : "\\<CR>"', { noremap = true, expr = true })
 
--- 現在のファイルと行番号をGitHubで開く
-vim.keymap.set("n", "<leader>go", function()
+-- 現在行（ビジュアルモードでは選択範囲）をGitHubで開く
+-- '<,'> はビジュアルモードを抜けるまで更新されないため、選択中でも正しい範囲が
+-- 取れる line("v") / line(".") を使う
+vim.keymap.set({ "n", "v" }, "<leader>go", function()
   local file = vim.fn.expand("%:.")
-  local line = vim.fn.line(".")
-  vim.fn.system('gh browse "' .. file .. ":" .. line .. '"')
-end, { desc = "Open current line in GitHub" })
-
-vim.keymap.set("v", "<leader>go", function()
-  local file = vim.fn.expand("%:.")
-  local start_line = vim.fn.line("'<")
-  local end_line = vim.fn.line("'>")
+  local start_line = vim.fn.line(".")
+  local end_line = start_line
+  if vim.fn.mode():match("[vV\22]") then
+    start_line = vim.fn.line("v")
+    if start_line > end_line then
+      start_line, end_line = end_line, start_line
+    end
+  end
   local line_range = start_line == end_line and tostring(start_line) or (start_line .. "-" .. end_line)
   vim.fn.system('gh browse "' .. file .. ":" .. line_range .. '"')
-end, { desc = "Open selected range in GitHub" })
+end, { desc = "Open current line or selected range in GitHub" })
 
 -- 選択範囲を @ファイル名#L行番号 形式でクリップボードにコピーする
 -- '<,'> はビジュアルモードを抜けるまで更新されないため、選択中でも正しい範囲が
