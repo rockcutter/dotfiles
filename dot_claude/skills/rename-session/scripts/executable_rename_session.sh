@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
-# カレントセッション（CLAUDE_CODE_SESSION_ID で特定）の表示名を書き換える。
-# 対象: $CLAUDE_JOB_DIR/state.json（bgジョブのみ）と ~/.claude/sessions/<pid>.json。
-# どちらも Claude Code の非公開内部ファイルのため、構造変更で動かなくなったら要追従。
+# セッションの表示名を書き換える。対象セッションは第2引数の session-id、
+# 省略時は環境変数 CLAUDE_CODE_SESSION_ID（= カレントセッション）で特定する。
+# 書き換え対象:
+#   ~/.claude/jobs/<jobId>/state.json  bgジョブの永続ストア。agent view のbgジョブ行の表示元
+#   ~/.claude/sessions/<pid>.json      実行中セッションのレジストリ。claude agents --json の表示元
+# どちらも Claude Code の非公開の内部ファイルのため、構造変更で動かなくなったら要追従。
 set -euo pipefail
 
-NEW_NAME="${1:?usage: rename_session.sh <new-name>}"
+NEW_NAME="${1:?usage: rename_session.sh <new-name> [session-id]}"
+SID="${2:-${CLAUDE_CODE_SESSION_ID:-}}"
 SESSIONS_DIR="${HOME}/.claude/sessions"
-SID="${CLAUDE_CODE_SESSION_ID:-}"
+JOBS_DIR="${HOME}/.claude/jobs"
 
 if ! command -v jq >/dev/null 2>&1; then
     echo "error: jq is required" >&2
@@ -14,7 +18,7 @@ if ! command -v jq >/dev/null 2>&1; then
 fi
 
 if [[ -z "$SID" ]]; then
-    echo "error: CLAUDE_CODE_SESSION_ID is not set (run from inside a Claude Code session)" >&2
+    echo "error: session id is unknown (pass it as the 2nd arg, or run inside a Claude Code session)" >&2
     exit 1
 fi
 
@@ -30,11 +34,16 @@ rewrite_name() {
 
 updated=0
 
-if [[ -n "${CLAUDE_JOB_DIR:-}" && -f "${CLAUDE_JOB_DIR}/state.json" ]]; then
-    rewrite_name "${CLAUDE_JOB_DIR}/state.json"
-    updated=1
-fi
+# bgジョブの永続ストア: sessionId が一致する state.json を探す
+for f in "$JOBS_DIR"/*/state.json; do
+    [[ -e "$f" ]] || continue
+    if [[ "$(jq -r '.sessionId // empty' "$f")" == "$SID" ]]; then
+        rewrite_name "$f"
+        updated=1
+    fi
+done
 
+# 実行中セッションのレジストリ: sessionId が一致するファイルを探す
 for f in "$SESSIONS_DIR"/*.json; do
     [[ -e "$f" ]] || continue
     if [[ "$(jq -r '.sessionId // empty' "$f")" == "$SID" ]]; then
@@ -48,4 +57,4 @@ if [[ "$updated" -eq 0 ]]; then
     exit 1
 fi
 
-echo "renamed current session to: $NEW_NAME"
+echo "renamed session to: $NEW_NAME"
