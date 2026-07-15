@@ -7,6 +7,13 @@ INPUT=$(cat)
   echo ""
 } >> "$LOG"
 
+# background agent のセッションでは通知しない
+# (親セッション側の agent_completed / agent_needs_input 通知と二重になるため)
+AGENT_TYPE=$(echo "$INPUT" | jq -r '.agent_type // ""')
+if [[ -n "$AGENT_TYPE" ]]; then
+  exit 0
+fi
+
 if [[ "$(uname)" == "Darwin" ]]; then
   osascript -e 'display notification "Claude Codeが入力を待っています" with title "Claude Code" sound name "Glass"'
 else

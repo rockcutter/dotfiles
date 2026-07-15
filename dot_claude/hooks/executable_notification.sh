@@ -7,6 +7,13 @@ INPUT=$(cat)
   echo ""
 } >> "$LOG"
 
+# background agent のセッションでは通知しない
+# (親セッション側の agent_completed / agent_needs_input 通知と二重になるため)
+AGENT_TYPE=$(echo "$INPUT" | jq -r '.agent_type // ""')
+if [[ -n "$AGENT_TYPE" ]]; then
+  exit 0
+fi
+
 # idle_prompt は Stop hook と重複するためスキップ
 NOTIFICATION_TYPE=$(echo "$INPUT" | jq -r '.notification_type // ""')
 if [[ "$NOTIFICATION_TYPE" == "idle_prompt" ]]; then
