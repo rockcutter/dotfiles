@@ -13,7 +13,6 @@ if [[ "$NOTIFICATION_TYPE" == "idle_prompt" ]]; then
   exit 0
 fi
 
-tmux select-window -t "$TMUX_PANE"
 if [[ "$(uname)" == "Darwin" ]]; then
   osascript -e 'display notification "Claude Codeが入力を待っています" with title "Claude Code" sound name "Glass"'
 else
