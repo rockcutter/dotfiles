@@ -10,11 +10,26 @@
 - 地の文で選択肢を列挙してユーザに引用回答させない
 - ツールが使えない/4択を超える場合は、各質問と選択肢に番号・記号を振り、ユーザが「1a, 2-全部, 3 yes」のように最小文字数で答えられる形式にする
 
+## 一時対応: AskUserQuestion 表示バグ回避
+
+このセクションは Claude Code の既知バグ（anthropics/claude-code#75182, #77410。v2.1.210 時点で未修正）への一時対応。バグが修正されたらセクションごと削除する。
+
+- AskUserQuestion を呼ぶターンでは、その前に本文テキストを出力しない
+  - 理由: 同一ターンに text ブロックと AskUserQuestion が並ぶと、text が表示もセッション保存もされないため
+- 説明・報告が必要な場合は、まずテキストのみでターンを終えてユーザーの応答を待ち、次のターンで AskUserQuestion を呼ぶ
+- 軽い文脈であれば、質問文と選択肢の description に判断材料を全て含める形でもよい
+
 ## Git/GitHub
 - commit/push前に許可必須
 - ブランチ状態確認必須（master/mainへの直push禁止）
 - ブランチにはissue番号を含める（例：issue-123-description）
   - issue番号がわからない場合、事前にユーザに確認する
+
+## Git worktree
+- `git worktree add` でworktreeを作成する際は、リポジトリの親ディレクトリに `<repo_name>_worktrees/` を作り、その配下に配置する
+  - 例: リポジトリが `/path/to/myrepo` なら、worktreeは `/path/to/myrepo_worktrees/<branch-name>/` に作成する
+  - `<repo_name>_worktrees/` が存在しない場合は作成する
+  - リポジトリ内部や無関係な場所（/tmpなど）にworktreeを作らない
 
 ## 語彙・文体
 - PR本文・commitメッセージ・issue・ドキュメント・コードコメントでは、口語スラング・比喩表現を避け、平易な標準語で書く
