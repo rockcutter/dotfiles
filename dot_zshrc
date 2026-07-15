@@ -46,7 +46,7 @@ alias m='make'
 alias lg='lazygit'
 alias n='nvim'
 alias nn='nvim .'
-alias neovim_lightweight='nvim --clean -u ~/.config/nvim-minimal/init.lua'
+alias neovim_lightweight='NVIM_APPNAME=nvim-minimal nvim'
 alias nlw=neovim_lightweight
 alias g='git'
 alias mv="mv -i"
@@ -101,7 +101,7 @@ bindkey ' ' expand-alias-and-self-insert
 export EDITOR=nvim
 
 ## fc
-export FCEDIT="nvim --clean -u ~/.config/nvim-minimal/init.lua"
+export FCEDIT="env NVIM_APPNAME=nvim-minimal nvim"
 
 ## brew
 ### coreutils
