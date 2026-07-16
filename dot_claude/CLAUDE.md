@@ -30,6 +30,12 @@
   - 例: リポジトリが `/path/to/myrepo` なら、worktreeは `/path/to/myrepo_worktrees/<branch-name>/` に作成する
   - `<repo_name>_worktrees/` が存在しない場合は作成する
   - リポジトリ内部や無関係な場所（/tmpなど）にworktreeを作らない
+- background session等でworktreeによるisolationが要求される場合も、EnterWorktreeツールの`name`引数（`.claude/worktrees/`配下に固定される）は使わない
+  - 代わりに、先に`git worktree add`で上記規約の場所にworktreeを作成し、そのpathを`EnterWorktree(path: ...)`で渡して入る
+  - 手順例:
+    1. `git worktree add /path/to/myrepo_worktrees/<branch-name> -b <branch-name>`
+    2. `EnterWorktree(path: "/path/to/myrepo_worktrees/<branch-name>")`
+  - 注意: `path`で入ったworktreeはExitWorktreeの自動削除対象にならない（不要になったら`git worktree remove`で手動削除）
 
 ## 語彙・文体
 - PR本文・commitメッセージ・issue・ドキュメント・コードコメントでは、口語スラング・比喩表現を避け、平易な標準語で書く
