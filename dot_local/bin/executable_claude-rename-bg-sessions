@@ -28,12 +28,24 @@ extract_conversation() {
     ' "$1" 2>/dev/null || true
 }
 
-instructions="以下は Claude Code のあるセッションの会話ログ。このセッションの表示名を考えること。
+# 生成された名前の妥当性チェック。会話ログへの返答や説明文が
+# そのまま名前として適用される事故を防ぐ
+valid_name() {
+    local n="$1"
+    [[ -n "$n" ]] || return 1
+    (( ${#n} <= 30 )) || return 1
+    [[ "$n" == *_* ]] || return 1
+    [[ ! "$n" =~ [。、．！？!?/\"\'\`] ]] || return 1
+}
+
+# 命名指示は system prompt に置き、stdin は会話ログ専用にする（ログ中の文章への
+# 応答を防ぐ）。--setting-sources "" で CLAUDE.md 等の設定を読み込ませない
+system_prompt="入力として Claude Code セッションの会話ログが与えられる。そのセッションの表示名を考え、名前そのもの1行だけを出力すること。
 - 形式は「<タスク名>_<状況>」（日本語、アンダースコア区切り）
 - タスク名: 主タスクを表す短い名詞句
 - 状況: 会話の進み具合から判断した短い語（例: 作業中 / 調査中 / レビュー待ち / 完了）
-- 全体で30文字以内。改行・スラッシュ・引用符・空白は使わない
-- 出力は名前そのもの1行のみ。説明・装飾は一切付けない"
+- 全体で30文字以内。改行・スラッシュ・引用符・空白・句読点は使わない
+- 挨拶・説明・装飾・コードブロックは一切出力しない"
 
 found=0 fail=0
 for f in "$dir"/jobs/*/state.json; do
@@ -55,10 +67,11 @@ for f in "$dir"/jobs/*/state.json; do
     [[ -n "$conv" ]] || { echo "failed (no material): $sid" >&2; fail=1; continue; }
 
     # claude の失敗（API エラー等）はこのセッションだけ failed 扱いにして続行する
-    name="$(printf '%s\n（参考: このジョブの実行状態は %s）\n\n%s\n' "$instructions" "$state" "$conv" \
-        | claude --no-session-persistence --model haiku -p \
+    name="$(printf '（ジョブの実行状態: %s）\n%s\n' "$state" "$conv" \
+        | claude --no-session-persistence --setting-sources "" --model haiku \
+            --system-prompt "$system_prompt" -p \
         | head -n 1 | tr -d '[:space:]' || true)"
-    [[ -n "$name" ]] || { echo "failed (empty name): $sid" >&2; fail=1; continue; }
+    valid_name "$name" || { echo "failed (invalid name): $sid -> ${name:0:60}" >&2; fail=1; continue; }
 
     claude-rename "$sid" "$name" || fail=1
 done
