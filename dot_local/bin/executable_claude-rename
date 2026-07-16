@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Claude Code セッションの表示名を書き換える。
+# 対象は sessionId が一致する ~/.claude/jobs/*/state.json（bgジョブ、agent view の表示元）と
+# ~/.claude/sessions/<pid>.json（実行中セッションのレジストリ）。nameSource を user に
+# することで自動命名による上書きを防ぐ。いずれも Claude Code の非公開内部ファイルの
+# ため、構造変更で動かなくなったら要追従。CLAUDE_DIR で ~/.claude を差し替え可能。
+#
+# usage: claude-rename <session-id> <name>
+# session_id の列挙には claude-bg-session-ids を使う。
+set -euo pipefail
+
+sid="${1:?usage: claude-rename <session-id> <name>}"
+name="${2:?usage: claude-rename <session-id> <name>}"
+dir="${CLAUDE_DIR:-$HOME/.claude}"
+
+command -v jq >/dev/null || { echo "error: jq is required" >&2; exit 1; }
+
+found=0
+for f in "$dir"/jobs/*/state.json "$dir"/sessions/*.json; do
+    [[ -e "$f" && "$(jq -r '.sessionId // empty' "$f")" == "$sid" ]] || continue
+    # cp -p で元ファイルのパーミッションを引き継ぎ、同一ディレクトリ内の mv で置き換える
+    tmp="$f.tmp.$$"
+    cp -p "$f" "$tmp"
+    jq --arg n "$name" '.name = $n | .nameSource = "user"' "$f" > "$tmp" || { rm -f "$tmp"; exit 1; }
+    mv "$tmp" "$f"
+    echo "updated: $f"
+    found=1
+done
+
+[[ $found == 1 ]] || { echo "error: session not found: $sid" >&2; exit 1; }

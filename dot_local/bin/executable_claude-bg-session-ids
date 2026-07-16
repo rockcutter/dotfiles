@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# bgセッション（~/.claude/jobs/ 配下）の session id を1行1件で出力する。
+# name や intent 等の付随情報が必要な場合は、各 jobs/*/state.json を直接読む。
+# state.json は Claude Code の非公開内部ファイルのため、構造変更で動かなくなったら要追従。
+# CLAUDE_DIR で ~/.claude を差し替え可能。
+set -euo pipefail
+
+dir="${CLAUDE_DIR:-$HOME/.claude}"
+
+command -v jq >/dev/null || { echo "error: jq is required" >&2; exit 1; }
+
+for f in "$dir"/jobs/*/state.json; do
+    [[ -e "$f" ]] || continue
+    jq -r '.sessionId // empty' "$f"
+done

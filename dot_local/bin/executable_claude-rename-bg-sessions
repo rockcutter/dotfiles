@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+# 全 bg セッション（~/.claude/jobs/ 配下）の表示名を headless Claude で自動命名して付け直す。
+# セッションごとに transcript（~/.claude/projects/ 配下の jsonl）から user/assistant の
+# 会話テキストを抽出して claude -p に渡し、「<タスク名>_<状況>」形式の名前を1件ずつ
+# 生成・適用する。手動命名済みかどうかに関わらず全件対象。
+# CLAUDE_DIR で ~/.claude を差し替え可能。
+set -euo pipefail
+
+dir="${CLAUDE_DIR:-$HOME/.claude}"
+# haiku のコンテキスト上限に収めるための会話テキストのサイズ上限（超過分は古い方から捨てる）
+max_bytes=300000
+
+command -v jq >/dev/null || { echo "error: jq is required" >&2; exit 1; }
+command -v claude >/dev/null || { echo "error: claude CLI is required" >&2; exit 1; }
+command -v claude-rename >/dev/null || { echo "error: claude-rename is required" >&2; exit 1; }
+
+# transcript jsonl から user/assistant のテキスト部分だけを取り出す
+# （ツール呼び出し・ツール結果・メタデータ行は捨てる）
+extract_conversation() {
+    jq -r '
+        select((.type == "user" or .type == "assistant") and .message != null)
+        | .message as $m
+        | (if ($m.content | type) == "string" then $m.content
+           else [$m.content[]? | select(.type? == "text") | .text] | join("\n")
+           end) as $text
+        | select($text != "")
+        | "[\(.type)] \($text)"
+    ' "$1" 2>/dev/null || true
+}
+
+instructions="以下は Claude Code のあるセッションの会話ログ。このセッションの表示名を考えること。
+- 形式は「<タスク名>_<状況>」（日本語、アンダースコア区切り）
+- タスク名: 主タスクを表す短い名詞句
+- 状況: 会話の進み具合から判断した短い語（例: 作業中 / 調査中 / レビュー待ち / 完了）
+- 全体で30文字以内。改行・スラッシュ・引用符・空白は使わない
+- 出力は名前そのもの1行のみ。説明・装飾は一切付けない"
+
+found=0 fail=0
+for f in "$dir"/jobs/*/state.json; do
+    [[ -e "$f" ]] || continue
+    sid="$(jq -r '.sessionId // empty' "$f")"
+    [[ -n "$sid" ]] || continue
+    found=1
+    state="$(jq -r '.state // "unknown"' "$f")"
+
+    conv=""
+    for t in "$dir"/projects/*/"$sid".jsonl; do
+        if [[ -e "$t" ]]; then
+            conv="$(extract_conversation "$t" | tail -c "$max_bytes")"
+            break
+        fi
+    done
+    # transcript が見つからない/空なら state.json の intent（最初の指示の冒頭）で代用
+    [[ -n "$conv" ]] || conv="$(jq -r '.intent // empty' "$f")"
+    [[ -n "$conv" ]] || { echo "failed (no material): $sid" >&2; fail=1; continue; }
+
+    # claude の失敗（API エラー等）はこのセッションだけ failed 扱いにして続行する
+    name="$(printf '%s\n（参考: このジョブの実行状態は %s）\n\n%s\n' "$instructions" "$state" "$conv" \
+        | claude --no-session-persistence --model haiku -p \
+        | head -n 1 | tr -d '[:space:]' || true)"
+    [[ -n "$name" ]] || { echo "failed (empty name): $sid" >&2; fail=1; continue; }
+
+    claude-rename "$sid" "$name" || fail=1
+done
+
+[[ "$found" == 1 ]] || echo "no bg sessions found"
+exit "$fail"
