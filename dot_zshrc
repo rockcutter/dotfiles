@@ -45,7 +45,7 @@ alias ztail='gunzip | tail'
 alias m='make'
 alias lg='lazygit'
 alias n='nvim'
-alias nn='nvim .'
+alias nn="nvim . +'botright vsplit | terminal claude agents'"
 alias neovim_lightweight='NVIM_APPNAME=nvim-minimal nvim'
 alias nlw=neovim_lightweight
 alias g='git'

@@ -5,6 +5,7 @@ vim.api.nvim_set_keymap("i", "jj", "<Esc>", {})
 vim.api.nvim_create_user_command("Q", "qa!", {})
 vim.api.nvim_create_user_command("CLAUDE", "term claude", {})
 vim.api.nvim_create_user_command("CL", "term claude", {})
+vim.api.nvim_create_user_command("VCL", "vsplit | term claude", {})
 vim.api.nvim_set_keymap("n", "<leader>n", ":bnext<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>N", ":bprevious<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "vv", "<C-v>", {})
@@ -69,7 +70,7 @@ end, { desc = "Open current line or selected range in GitHub" })
 -- 選択範囲を @ファイル名#L行番号 形式でクリップボードにコピーする
 -- '<,'> はビジュアルモードを抜けるまで更新されないため、選択中でも正しい範囲が
 -- 取れる line("v") / line(".") を使う
-vim.keymap.set("v", "<leader>cls", function()
+vim.keymap.set({ "n", "v" }, "<leader>cls", function()
   local file = vim.fn.expand("%:.")
   local start_line = vim.fn.line("v")
   local end_line = vim.fn.line(".")
@@ -116,7 +117,10 @@ local function trace_pr()
         vim.schedule(function()
           if pr.code ~= 0 or url == "" or url == "null" then
             -- PRが見つからない場合はコミットページを開く
-            vim.notify("PRが見つからないためコミットを開きます: " .. sha:sub(1, 7), vim.log.levels.WARN)
+            vim.notify(
+              "PRが見つからないためコミットを開きます: " .. sha:sub(1, 7),
+              vim.log.levels.WARN
+            )
             vim.system({ "gh", "browse", sha }, { cwd = cwd })
             return
           end
