@@ -1,7 +1,6 @@
 ---
 name: rename-session
-description: カレントセッション（このスキルを呼んだセッション自身）の表示名を「<タスク名>_<現在の状況>」形式の日本語に変更する。ユーザーが /rename-session を実行したときだけ使う手動発動専用スキル。
-disable-model-invocation: true
+description: カレントセッション（このスキルを呼んだセッション自身）の表示名を「<タスク名>_<現在の状況>」形式の日本語に変更する。
 allowed-tools:
   - Bash
 ---
