@@ -7,13 +7,13 @@
 # - stop_hook_active=true のイベントは無視
 # - last_assistant_message のハッシュが前回と同じならスキップ（内容が変わったターンだけ命名）
 # - セッション単位の flock で多重実行を防止
-# 状態ファイル（ハッシュ・ロック）は /tmp/claude-rename-auto/ に置く。再起動で消えても
-# 余分な命名が1回走るだけで実害はない
+# 状態ファイル（ハッシュ・ロック）と実行ログは /tmp/claude-rename-auto/ に置く。
+# 再起動で消えても余分な命名が1回走るだけで実害はない
 set -uo pipefail
 
 INPUT=$(cat)
-LOG="$HOME/.claude/hooks/rename_on_stop.log"
 STATE_DIR=/tmp/claude-rename-auto
+LOG="$STATE_DIR/rename.log"
 RENAMER="${CLAUDE_RENAME_AUTO:-$HOME/.local/bin/claude-rename-auto}"
 
 command -v jq >/dev/null || exit 0
