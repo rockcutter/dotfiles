@@ -6,7 +6,8 @@
 # ガード:
 # - stop_hook_active=true のイベントは無視
 # - last_assistant_message のハッシュが前回と同じならスキップ（内容が変わったターンだけ命名）
-# - セッション単位の flock で多重実行を防止
+# - セッション単位の flock で直列化。実行中に新イベントが来た場合は切り離した子の中で
+#   順番待ちし、実行時点の最新の会話で命名し直す（最終ターンの取りこぼし防止）
 # 状態ファイル（ハッシュ・ロック）と実行ログは /tmp/claude-rename-auto/ に置く。
 # 再起動で消えても余分な命名が1回走るだけで実害はない
 set -uo pipefail
@@ -32,17 +33,16 @@ hash="$(printf '%s' "$last" | sha256sum | cut -d' ' -f1)"
 hash_file="$STATE_DIR/$sid.hash"
 [[ -f "$hash_file" && "$(cat "$hash_file")" == "$hash" ]] && exit 0
 
-export RENAMER sid cwd hash hash_file LOG
+export RENAMER sid cwd hash hash_file
 setsid bash -c '
-    exec </dev/null >>"$LOG" 2>&1
     exec 9>>"'"$STATE_DIR"'/$sid.lock"
-    flock -n 9 || exit 0
+    flock -w 240 9 || exit 0
     if "$RENAMER" "$sid" "$cwd"; then
         printf "%s" "$hash" > "$hash_file"
         echo "$(date "+%F %T") renamed sid=$sid"
     else
         echo "$(date "+%F %T") failed sid=$sid"
     fi
-' &
+' </dev/null >>"$LOG" 2>&1 &
 
 exit 0
