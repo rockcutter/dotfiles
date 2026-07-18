@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+# 指定セッションの表示名を、会話コンテキストから自動生成して付け直す。
+# claude -p --resume --fork-session でセッションを複製し、haiku に
+# 「タスク名_状況」形式の名前を生成させ、claude-rename で適用する。
+# 複製は --no-session-persistence 付きなので元セッションには何も書かない。
+#
+# usage: claude-rename-auto <session-id> [cwd]
+#   cwd: セッションのプロジェクトディレクトリ。--resume の解決はプロジェクト
+#        ディレクトリ単位のため、別ディレクトリから呼ぶ場合は指定が必要
+set -euo pipefail
+
+sid="${1:?usage: claude-rename-auto <session-id> [cwd]}"
+cwd="${2:-}"
+
+export PATH="$HOME/.local/bin:$PATH"
+command -v jq >/dev/null || { echo "error: jq is required" >&2; exit 1; }
+command -v claude >/dev/null || { echo "error: claude CLI is required" >&2; exit 1; }
+command -v claude-rename >/dev/null || { echo "error: claude-rename is required" >&2; exit 1; }
+
+# 生成された名前の妥当性チェック。会話への返答や説明文が
+# そのまま名前として適用される事故を防ぐ（claude-rename-bg-sessions と同一基準）
+valid_name() {
+    local n="$1"
+    [[ -n "$n" ]] || return 1
+    (( ${#n} <= 30 )) || return 1
+    [[ "$n" == *_* ]] || return 1
+    [[ ! "$n" =~ [。、．！？!?/\"\'\`] ]] || return 1
+}
+
+system_prompt="与えられているのは Claude Code セッションの会話である。この会話全体を表す表示名を考え、名前そのもの1行だけを出力すること。
+- 形式は「<タスク名>_<現在の状況>」（日本語、アンダースコア区切り）
+- タスク名: 主タスクを表す短い名詞句
+- 現在の状況: いま具体的に何をしているか・どこで止まっているかを、会話の実態に合わせて自由な短い句で表す（例: スキーマ調査中 / テスト失敗の修正中 / レビュー待ち）
+- 直近のアシスタント応答に「result:」の行があれば完了として、「needs input:」があれば何を待っているかを、「failed:」があれば何に失敗したかを状況に反映する
+- 全体で30文字以内。改行・スラッシュ・引用符・空白・句読点は使わない
+- 挨拶・説明・装飾・コードブロックは一切出力しない"
+
+if [[ -n "$cwd" ]]; then
+    cd "$cwd" || { echo "error: cannot cd to $cwd" >&2; exit 1; }
+fi
+
+# --setting-sources "" で CLAUDE.md や hooks を読み込ませない
+# （命名口調の汚染と hook の再帰発火を防ぐ）
+name="$(timeout 180 claude -p --resume "$sid" --fork-session \
+        --no-session-persistence --setting-sources "" \
+        --model haiku --effort low \
+        --system-prompt "$system_prompt" \
+        "このセッションの表示名を1行だけ出力して" \
+    | head -n 1 | tr -d '[:space:]')" || {
+    echo "failed (claude error): $sid" >&2
+    exit 1
+}
+
+valid_name "$name" || { echo "failed (invalid name): $sid -> ${name:0:60}" >&2; exit 1; }
+
+claude-rename "$sid" "$name"
