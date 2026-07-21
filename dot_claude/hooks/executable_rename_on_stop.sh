@@ -12,6 +12,10 @@
 # 再起動で消えても余分な命名が1回走るだけで実害はない
 set -uo pipefail
 
+# macOSではflock/setsidがkeg-onlyのutil-linuxにしかなく、daemon経由（background session）の
+# 環境では.zshrcのPATH追加が反映されないため、ここで明示的に通す（Linuxでは存在せず無害）
+PATH="/opt/homebrew/opt/util-linux/bin:$PATH"
+
 INPUT=$(cat)
 STATE_DIR=/tmp/claude-rename-auto
 LOG="$STATE_DIR/rename.log"
@@ -19,6 +23,7 @@ RENAMER="${CLAUDE_RENAME_AUTO:-$HOME/.local/bin/claude-rename-auto}"
 
 command -v jq >/dev/null || exit 0
 command -v flock >/dev/null || exit 0
+command -v setsid >/dev/null || exit 0
 
 sid="$(jq -r '.session_id // empty' <<<"$INPUT")"
 active="$(jq -r '.stop_hook_active // false' <<<"$INPUT")"

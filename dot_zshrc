@@ -154,6 +154,10 @@ export PATH=$PATH:$HOME/.config/composer/vendor/bin
 ## vcpkg
 export PATH=$PATH:$HOME/.local/share/vcpkg
 
+## util-linux
+export PATH="/opt/homebrew/opt/util-linux/bin:$PATH"
+export PATH="/opt/homebrew/opt/util-linux/sbin:$PATH"
+
 ## history configuration -------------------------------------------------
 
 # export HISTTIMEFORMAT='%y-%m-%dT%H:%M:%S '
