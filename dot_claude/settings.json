@@ -57,7 +57,7 @@
       }
     }
   },
-  "effortLevel": "xhigh",
+  "effortLevel": "medium",
   "skipAutoPermissionPrompt": true,
   "tui": "fullscreen",
   "language": "Japanese",
