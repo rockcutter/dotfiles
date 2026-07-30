@@ -9,7 +9,8 @@
       "Bash(go build *)",
       "Bash(git checkout -b *)",
       "Bash(gh pr diff *)",
-      "mcp__snowflake__snowflake-docs-search"
+      "mcp__snowflake__snowflake-docs-search",
+      "EnterWorktree"
     ]
   },
   "model": "claude-fable-5[1m]",
