@@ -58,6 +58,9 @@
       }
     }
   },
+  "worktree": {
+    "bgIsolation": "none"
+  },
   "effortLevel": "medium",
   "skipAutoPermissionPrompt": true,
   "tui": "fullscreen",
