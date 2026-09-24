@@ -62,6 +62,9 @@
     "bgIsolation": "none"
   },
   "effortLevel": "medium",
+  "env": {
+    "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet"
+  },
   "skipAutoPermissionPrompt": true,
   "tui": "fullscreen",
   "language": "Japanese",

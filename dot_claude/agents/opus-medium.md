@@ -1,6 +1,6 @@
 ---
 name: opus-medium
-description: モデルをOpus（最新）、reasoning effortをmediumに固定した汎用の下請けエージェント。タスク内容は問わず、深い思考が不要な作業を中コストで委譲したいときに使う。ユーザーまたはオーケストレータが明示的にこのエージェントやOpus(medium)への委譲を指定したときのみ使うこと。Use ONLY when explicitly requested by the user or orchestrator; do NOT use proactively.
+description: モデルをOpus（最新）、reasoning effortをmediumに固定した汎用の下請けエージェント。Fableで作業中、Sonnetでは不安だが深い思考は不要な作業（複数ファイルにまたがる実装、コードレビュー、中程度のデバッグ）を委譲するときに使う。指示がなくても使ってよい。Use PROACTIVELY when the task needs more judgment than sonnet-xhigh but not the parent model.
 model: opus
 effort: medium
 ---
