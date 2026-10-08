@@ -11,10 +11,32 @@ local function find_claude_terminal_win()
 	return nil
 end
 
--- ウィンドウ移動時にサイズを均等化
+local last_equalized_layout
+
+local function window_layout_signature()
+	local layout = { vim.api.nvim_get_current_tabpage(), vim.o.columns, vim.o.lines }
+	for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+		if vim.api.nvim_win_get_config(win).relative == "" then
+			layout[#layout + 1] = {
+				win,
+				vim.api.nvim_win_get_position(win),
+				vim.api.nvim_win_get_width(win),
+				vim.api.nvim_win_get_height(win),
+			}
+		end
+	end
+	return vim.json.encode(layout)
+end
+
+-- 配置やサイズが変わった場合に均等化する。
+-- 同じ配置でのペイン移動では、端末の不要なサイズ変更を避ける。
 vim.api.nvim_create_autocmd("WinEnter", {
 	callback = function()
+		if window_layout_signature() == last_equalized_layout then
+			return
+		end
 		vim.cmd("wincmd =")
+		last_equalized_layout = window_layout_signature()
 	end,
 })
 
