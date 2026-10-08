@@ -11,6 +11,8 @@ vim.api.nvim_set_keymap("n", "<leader>N", ":bprevious<CR>", { noremap = true, si
 vim.api.nvim_set_keymap("n", "vv", "<C-v>", {})
 -- vim.api.nvim_set_keymap("t", "hj", "<C-\\><C-n>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("t", "JJ", "<C-\\><C-n>", { noremap = true, silent = true })
+vim.keymap.set("t", "<M-k>", "<PageUp>", { noremap = true, silent = true, desc = "Send PageUp to terminal" })
+vim.keymap.set("t", "<M-j>", "<PageDown>", { noremap = true, silent = true, desc = "Send PageDown to terminal" })
 
 -- bracket
 vim.api.nvim_set_keymap("i", "{", "{}<Left>", {})

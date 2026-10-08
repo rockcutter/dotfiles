@@ -1,7 +1,10 @@
-notify = ["bash", "-lc", "$HOME/.codex/hooks/notification.sh"]
+approval_policy = "on-request"
+approvals_reviewer = "auto_review"
+
+# 完了通知は Stop hook に統一し、notify との二重通知を避ける。
 
 [features]
-codex_hooks = true
+hooks = true
 
 [projects."/Users/rockcutter/.local/share/chezmoi"]
 trust_level = "trusted"
@@ -18,6 +21,9 @@ trust_level = "trusted"
 [projects."/Users/rockcutter/ghq/github.com/voyagegroup/fluct_ms"]
 trust_level = "trusted"
 
+[tui]
+fullscreen_transcript = false
+
 [tui.model_availability_nux]
 "gpt-5.5" = 4
 
@@ -25,6 +31,29 @@ trust_level = "trusted"
 
 [[hooks.Stop.hooks]]
 type = "command"
-command = "$HOME/.codex/hooks/stop.sh"
+command = 'bash "$HOME/.codex/hooks/stop.sh"'
 timeout = 30
 statusMessage = "Notifying"
+
+[[hooks.PermissionRequest]]
+
+[[hooks.PermissionRequest.hooks]]
+type = "command"
+command = 'bash "$HOME/.codex/hooks/notification.sh"'
+timeout = 10
+statusMessage = "Notifying"
+
+[[hooks.SubagentStop]]
+
+[[hooks.SubagentStop.hooks]]
+type = "command"
+command = 'bash "$HOME/.codex/hooks/subagent-stop.sh"'
+timeout = 10
+statusMessage = "Notifying"
+
+[tui.keymap.global]
+open_transcript = "ctrl-o"
+copy = "alt-o"
+
+[tui.keymap.pager]
+close_transcript = "ctrl-o"
