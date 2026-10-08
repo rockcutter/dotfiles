@@ -1,6 +1,8 @@
 {
+  "env": {
+    "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet"
+  },
   "permissions": {
-    "defaultMode": "auto",
     "allow": [
       "Bash(git add *)",
       "Bash(git commit *)",
@@ -11,9 +13,10 @@
       "Bash(gh pr diff *)",
       "mcp__snowflake__snowflake-docs-search",
       "EnterWorktree"
-    ]
+    ],
+    "defaultMode": "auto"
   },
-  "model": "claude-fable-5[1m]",
+  "model": "opus",
   "hooks": {
     "Notification": [
       {
@@ -42,6 +45,9 @@
       }
     ]
   },
+  "worktree": {
+    "bgIsolation": "none"
+  },
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.sh"
@@ -58,12 +64,15 @@
       }
     }
   },
-  "worktree": {
-    "bgIsolation": "none"
-  },
-  "effortLevel": "medium",
-  "skipAutoPermissionPrompt": true,
-  "tui": "fullscreen",
   "language": "Japanese",
-  "autoMemoryEnabled": false
+  "effortLevel": "medium",
+  "advisorModel": "fable",
+  "tui": "fullscreen",
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
+  "autoMemoryEnabled": false,
+  "skipAutoPermissionPrompt": true,
+  "voiceEnabled": true
 }

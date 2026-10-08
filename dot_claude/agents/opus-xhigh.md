@@ -1,6 +1,6 @@
 ---
 name: opus-xhigh
-description: モデルをOpus（最新）、reasoning effortをxhighに固定した汎用の下請けエージェント。タスク内容は問わず、難度の高い作業を高い思考力で委譲したいときに使う。ユーザーまたはオーケストレータが明示的にこのエージェントやOpus(xhigh)への委譲を指定したときのみ使うこと。Use ONLY when explicitly requested by the user or orchestrator; do NOT use proactively.
+description: モデルをOpus（最新）、reasoning effortをxhighに固定した汎用の下請けエージェント。難度の高い調査・デバッグ・設計検討を、親のコンテキストを汚さずに切り出したいときに使う。指示がなくても使ってよいが、結果を親が検証し直す必要がある作業は親が直接行う。Use PROACTIVELY for hard, self-contained subtasks; keep work the parent must re-verify in the parent.
 model: opus
 effort: xhigh
 ---

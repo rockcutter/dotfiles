@@ -1,6 +1,6 @@
 ---
 name: sonnet-xhigh
-description: モデルをSonnet（最新）、reasoning effortをxhighに固定した汎用の下請けエージェント。タスク内容は問わず、上位モデル利用中にコストの安いモデルへ作業を委譲したいときに使う。ユーザーまたはオーケストレータが明示的にこのエージェントやSonnetへの委譲を指定したときのみ使うこと。Use ONLY when explicitly requested by the user or orchestrator; do NOT use proactively.
+description: モデルをSonnet（最新）、reasoning effortをxhighに固定した、全ツール（MCP含む）を持つ汎用の下請けエージェント。上位モデル（Fable/Opus）で作業中、MCP（Datadog等）から大きな結果が返る調査や、複数のMCPクエリを組み合わせる作業を隔離して要約だけ受け取りたいときに使う。ローカルのファイルとシェルだけで完結する作業は sonnet-minimal を優先する。指示がなくても積極的に使うこと。Use PROACTIVELY for MCP-heavy investigation whose raw results should stay out of the parent context; prefer sonnet-minimal for local-only work.
 model: sonnet
 effort: xhigh
 ---
