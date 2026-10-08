@@ -22,6 +22,7 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [tui]
+status_line = ["five-hour-limit", "weekly-limit", "model-with-reasoning", "context-used", "estimated-thread-cost", "used-tokens", "total-input-tokens", "total-output-tokens"]
 fullscreen_transcript = false
 
 [tui.model_availability_nux]
