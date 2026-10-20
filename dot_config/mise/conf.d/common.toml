@@ -11,4 +11,4 @@ ripgrep = "latest"
 atuin = "latest"
 "go:github.com/d-kuro/gwq/cmd/gwq" = "latest"
 "npm:difit" = "latest"
-
+"github:ctxrs/ctx" = { version = "latest", bin = "ctx" }
