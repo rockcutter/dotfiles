@@ -18,5 +18,5 @@ else
   notify-send "Claude Code" "Claude Codeが入力を待っています"
   paplay /usr/share/sounds/freedesktop/stereo/complete.oga
 fi
-tmux display-popup -w 60% -h 20% -E "figlet -c 'claude is calling'; sleep 0.5"
+# tmux display-popup -w 60% -h 20% -E "figlet -c 'claude is calling'; sleep 0.5"
 # tmux display-popup -w 60% -h 20% -E "figlet -c 'claude is calling'; sleep 30"
