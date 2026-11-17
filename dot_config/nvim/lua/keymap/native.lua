@@ -40,6 +40,11 @@ vim.keymap.set("x", "p", '"_dP', { noremap = true, silent = true })
 -- disable macro recording
 vim.api.nvim_set_keymap("n", "q", "<Nop>", { noremap = true, silent = true })
 
+-- disable K (keywordprg / LSP hover)
+-- グローバルに K が定義されていると Neovim は LSP attach 時の既定 K (hover) も設定しない
+-- hover は <leader>k を使う
+vim.keymap.set({ "n", "x" }, "K", "<Nop>", { noremap = true, silent = true })
+
 -- window zoom toggle
 vim.keymap.set("n", "<leader>z", function()
   if vim.fn.winnr("$") == 1 then

@@ -33,6 +33,8 @@ return {
     init = function()
       -- vim-goのデフォルトキーマッピングを無効化
       vim.g.go_def_mapping_enabled = 0
+      -- Goバッファで K が :GoDoc に割り当てられるのを無効化
+      vim.g.go_doc_keywordprg_enabled = 0
     end,
   },
   {
