@@ -11,32 +11,16 @@ local function find_claude_terminal_win()
 	return nil
 end
 
-local last_equalized_layout
-
-local function window_layout_signature()
-	local layout = { vim.api.nvim_get_current_tabpage(), vim.o.columns, vim.o.lines }
-	for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
-		if vim.api.nvim_win_get_config(win).relative == "" then
-			layout[#layout + 1] = {
-				win,
-				vim.api.nvim_win_get_position(win),
-				vim.api.nvim_win_get_width(win),
-				vim.api.nvim_win_get_height(win),
-			}
-		end
-	end
-	return vim.json.encode(layout)
-end
-
--- 配置やサイズが変わった場合に均等化する。
--- 同じ配置でのペイン移動では、端末の不要なサイズ変更を避ける。
+-- 常に左上のウィンドウを基準に均等化し、余りの列・行の割り当てを固定する。
 vim.api.nvim_create_autocmd("WinEnter", {
 	callback = function()
-		if window_layout_signature() == last_equalized_layout then
-			return
+		local layout = vim.fn.winlayout()
+		while layout[1] ~= "leaf" do
+			layout = layout[2][1]
 		end
-		vim.cmd("wincmd =")
-		last_equalized_layout = window_layout_signature()
+		vim.api.nvim_win_call(layout[2], function()
+			vim.cmd("wincmd =")
+		end)
 	end,
 })
 

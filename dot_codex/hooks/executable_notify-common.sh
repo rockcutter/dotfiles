@@ -1,12 +1,17 @@
 #!/usr/bin/env bash
 # 通知機能が使えない環境でも、Codex の処理を妨げずに終了する。
 message="${1:-Codexが入力を待っています}"
+silent="${2:-}"
 
 if [[ "$(uname)" == "Darwin" ]]; then
   if command -v osascript >/dev/null 2>&1; then
-    osascript - "$message" >/dev/null 2>&1 <<'APPLESCRIPT' || true
+    osascript - "$message" "$silent" >/dev/null 2>&1 <<'APPLESCRIPT' || true
 on run argv
-  display notification (item 1 of argv) with title "Codex" sound name "Glass"
+  if (item 2 of argv) is "--silent" then
+    display notification (item 1 of argv) with title "Codex"
+  else
+    display notification (item 1 of argv) with title "Codex" sound name "Glass"
+  end if
 end run
 APPLESCRIPT
   fi
@@ -14,7 +19,7 @@ else
   if command -v notify-send >/dev/null 2>&1; then
     notify-send "Codex" "$message" >/dev/null 2>&1 || true
   fi
-  if command -v paplay >/dev/null 2>&1 && [[ -r /usr/share/sounds/freedesktop/stereo/complete.oga ]]; then
+  if [[ "$silent" != "--silent" ]] && command -v paplay >/dev/null 2>&1 && [[ -r /usr/share/sounds/freedesktop/stereo/complete.oga ]]; then
     paplay /usr/share/sounds/freedesktop/stereo/complete.oga >/dev/null 2>&1 || true
   fi
 fi
